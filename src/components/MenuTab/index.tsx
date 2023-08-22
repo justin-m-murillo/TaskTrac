@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import styles from './styles'
 import { useRouter } from 'next/navigation'
 import { IconType } from 'react-icons/lib'
@@ -21,7 +20,6 @@ type Props = {
 const MenuTab = ({ title, Icon, href, openTabState, isLeft, isRight }: Props) => {
   const router = useRouter()
   const { openTab, setOpenTab } = openTabState
-  console.log(href, openTab === href)
   const handleClick = () => {
     setOpenTab(href)
     router.push(href)

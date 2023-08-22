@@ -8,7 +8,7 @@ import DisplayEmptyList from '@/components/DisplayEmptyList'
 const CompletedTodos = () => {
   const { todos } = useTodoListContext()
   const completed = todos.filter(todo => todo.completed)
-
+  console.log(completed[0])
   const displayList = () => {
     return (
       <ul>
