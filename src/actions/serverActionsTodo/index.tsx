@@ -34,13 +34,18 @@ export const serverCompleteTodo = async (
 
 export const serverCreateTodo = async (data: FormData) => {
   const title = data.get('title')?.valueOf()
-  if (typeof title !== 'string' || title.length === 0) {
+  const description = data.get('description')?.valueOf()
+  if (typeof title !== 'string') {
     throw new Error('Invalid Title')
+  }
+  if (typeof description !== 'string') {
+    throw new Error('Invalid Description')
   }
 
   return await prisma.todo.create({ 
     data: {
       title,
+      description,
       completed: false, 
       deleted: false 
   }})

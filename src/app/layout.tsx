@@ -18,15 +18,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${styles.layout}`}>
-        <TodoNav />
-        <AppServer>
-          {children}
-        </AppServer>
+        <div className={styles.root}>
+          <TodoNav />
+          <AppServer>
+            {children}
+          </AppServer>
+        </div>
       </body>
     </html>
   )
 }
 
 const styles = {
-  layout: 'w-screen items-center flex-col mx-auto my-4 xs:w-5/6 sm:w-1/2',
+  layout: 'w-screen flex flex-col w-screen items-center flex-col my-4',
+  root: 'w-2/5'
 }

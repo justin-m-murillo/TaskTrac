@@ -1,23 +1,23 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 import { useTodoListContext } from '@/context/TodoListContext'
 import styles from './styles'
 
 import { actionCreateTodo } from '@/actions/actionsTodo'
-import Link from 'next/link'
 
 const PageAddTodo = () => {
   const { todos, setTodos } = useTodoListContext()
+  const [ textAreaValue, setTextAreaValue ] = useState<string>('')
   
   return (
     <form action={data => actionCreateTodo(data, {todos, setTodos})} className={styles.root}>
-      <label>Title</label>
+      <label className={styles.label}>Title</label>
       <input type='text' name='title' className={styles.input} />
+      <label className={styles.label}>Description</label>
+      <textarea name='description' value={textAreaValue} onChange={e => setTextAreaValue(e.target.value)} className={styles.input} />
       <div className='flex gap-1 justify-end'>
-        <Link href='/'>
-          Cancel
-        </Link>
         <button
+          className={styles.button}
           type='submit'
         >
           Submit

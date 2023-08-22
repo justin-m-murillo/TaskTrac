@@ -1,8 +1,11 @@
 const styles = {
   buttonRow: 'flex',
-  listItemContainer: 'flex mx-2 my-4 items-center justify-between ',
-  listItemText: 'text-black text-lg font-semibold',
-  listItemTime: 'text-gray-500 text-sm'
+  listItemContainer: 'flex flex-row px-4 py-4 items-center justify-between border-b border-x shadow-inner',
+  listItemHead: 'w-5/6',
+  listItemText: 'mb-2 text-black text-xl font-semibold',
+  listItemDesc: 'mb-2 truncate ...',
+  listItemTime: 'text-gray-500 text-sm italic',
+  time: 'font-semibold'
 }
 
 export default styles

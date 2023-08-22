@@ -2,21 +2,23 @@
 import React, { ReactNode, useState } from 'react'
 import { TodoListContext } from '@/context/TodoListContext'
 import { Todo } from '@/types/Todo'
-import { DateTime } from 'ts-luxon'
+import styles from './styles'
 
 type Props = {
   data: Todo[],
   children: ReactNode
 }
 
-const App = ({ data, children }: Props) => {
+const ClientApp = ({ data, children }: Props) => {
   const [ todos, setTodos ] = useState<Todo[]>(data)
 
   return (
     <TodoListContext.Provider value={{ todos, setTodos }}>
-      {children}
+      <div className={styles.root}>
+        {children}
+      </div>
     </TodoListContext.Provider>
   )
 }
 
-export default App
+export default ClientApp

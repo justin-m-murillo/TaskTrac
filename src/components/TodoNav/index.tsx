@@ -1,19 +1,41 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './styles'
 import MenuTab from '../MenuTab'
 
-type Props = {}
+import { MdHome, MdChecklist, MdDeleteOutline, MdAdd } from 'react-icons/md'
 
-const TodoNav = (props: Props) => {
+const TodoNav = () => {
+  const [ openTab, setOpenTab ] = useState<string>('/')
+
   return (
     <div className={styles.root}>
-      <div className={styles.menuContainer}>
-        <MenuTab title='Home' href='/' />
-        <MenuTab title='Completed' href='/completed-todos' />
-        <MenuTab title='Deleted' href='/deleted-todos' />
-        <MenuTab title='Add' href='/add-todo' />
-      </div>
+      <MenuTab 
+        title='Home' 
+        Icon={MdHome} 
+        href='/' 
+        openTabState={{ openTab, setOpenTab }} 
+        isLeft 
+      />
+      <MenuTab 
+        title='Completed' 
+        Icon={MdChecklist} 
+        href='/completed-todos' 
+        openTabState={{ openTab, setOpenTab }}
+      />
+      <MenuTab 
+        title='Deleted'
+        Icon={MdDeleteOutline} 
+        href='/deleted-todos' 
+        openTabState={{ openTab, setOpenTab }} 
+      />
+      <MenuTab 
+        title='Add'
+        Icon={MdAdd}
+        href='/add-todo' 
+        openTabState={{ openTab, setOpenTab }} 
+        isRight 
+      />
     </div>
   )
 }

@@ -24,7 +24,7 @@ const Button = ({ Icon, hover, onClick, buttonType }: ButtonProps) => {
     <button 
       type={btnType}
       onClick={onClick}
-      className={`text-gray-400 transition duration-500 ${hover}`}
+      className={`text-gray-400 transition duration-300 ${hover}`}
     >
       <Icon size={48} />
     </button>
