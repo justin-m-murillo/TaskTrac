@@ -18,7 +18,7 @@ const TodoItem = ({ title, description, timePrefix, time, buttons }: TodoItemPro
           {title}
         </p>
         <p className={styles.listItemDesc}>
-          {/* {description} */} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. A lacus vestibulum sed arcu non odio euismod. Nisi lacus sed viverra tellus. Lectus quam id leo in. Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat. Ut pharetra sit amet aliquam id diam.
+          {description}
         </p>
         <p className={styles.listItemTime}>
           {timePrefix} <span className={styles.time}>{time}</span>
