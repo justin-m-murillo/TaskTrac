@@ -10,7 +10,7 @@ const TodoNav = (props: Props) => {
     <div className={styles.root}>
       <div className={styles.menuContainer}>
         <MenuTab title='Home' href='/' />
-        <MenuTab title='Completed' href='..' />
+        <MenuTab title='Completed' href='/completed-todos' />
         <MenuTab title='Deleted' href='/deleted-todos' />
         <MenuTab title='Add' href='/add-todo' />
       </div>

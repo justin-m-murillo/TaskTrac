@@ -1,14 +1,14 @@
 import React from 'react'
 import { IconType } from 'react-icons/lib/esm/iconBase';
 
-type Props = {
+export type ButtonProps = {
   Icon: IconType,
   hover: string,
   onClick?: React.MouseEventHandler,
   buttonType?: string,
 }
 
-const Button = ({ Icon, hover, onClick, buttonType }: Props) => {
+const Button = ({ Icon, hover, onClick, buttonType }: ButtonProps) => {
   const btnType = (() => {
     switch (buttonType) {
       case 'submit':

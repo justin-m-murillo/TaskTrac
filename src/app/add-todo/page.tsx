@@ -1,15 +1,16 @@
 'use client'
-import React from 'react'
+import React, { useRef } from 'react'
+import { useTodoListContext } from '@/context/TodoListContext'
 import styles from './styles'
 
-import crudTodo from '@/actions/crudTodo'
+import { actionCreateTodo } from '@/actions/actionsTodo'
 import Link from 'next/link'
 
-type Props = {}
-
-const PageAddTodo = (props: Props) => {
+const PageAddTodo = () => {
+  const { todos, setTodos } = useTodoListContext()
+  
   return (
-    <form action={crudTodo.create} className={styles.root}>
+    <form action={data => actionCreateTodo(data, {todos, setTodos})} className={styles.root}>
       <label>Title</label>
       <input type='text' name='title' className={styles.input} />
       <div className='flex gap-1 justify-end'>

@@ -1,17 +1,44 @@
+'use client'
 import React from 'react'
-import { prisma } from './db'
+import { useTodoListContext } from '@/context/TodoListContext'
 
-import TodoActiveDisplay from '@/components/TodoActiveDisplay/indes'
+import TodoItem from '@/components/TodoItem'
+import { MdCheckBox, MdDisabledByDefault } from 'react-icons/md'
+import Button from '@/components/Button'
 
-const PageHome = async () => {
-  const todos = await prisma.todo.findMany({
-    where: {
-      completed: false,
-      deleted: false,
-  }})
+import { actionCompleteTodo, actionDeleteTodo } from '@/actions/actionsTodo'
+
+const PageHome = () => {
+  const { todos, setTodos } = useTodoListContext()
 
   return (
-    <TodoActiveDisplay data={todos} />
+    <ul>
+      {todos
+        .filter(todo => !todo.completed && !todo.deleted)
+        .map(todo => (
+          <TodoItem key={todo.id} {...todo}>
+            <>
+              <Button 
+                Icon={MdCheckBox} 
+                hover='hover:text-green-700' 
+                onClick={() => actionCompleteTodo(
+                  todo.id, 
+                  todo.title, 
+                  { todos, setTodos }
+                )}
+              />
+              <Button 
+                Icon={MdDisabledByDefault} 
+                hover='hover:text-red-700'
+                onClick={() => actionDeleteTodo(
+                  todo.id,
+                  { todos, setTodos }
+                )}
+              />
+            </>
+          </TodoItem>
+      ))}
+    </ul>
   )
 }
 

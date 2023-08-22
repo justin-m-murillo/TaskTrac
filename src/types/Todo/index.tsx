@@ -1,8 +1,12 @@
 export type Todo = {
-  id: string,
-  title: string,
-  createdAt: Date,
-  updatedAt: Date,
+  id:          string,
+  title:       string,
+  completed:   boolean,
+  completedAt: Date | null,
+  deleted:     boolean,
+  deletedAt:   Date | null,
+  createdAt:   Date,
+  updatedAt:   Date,
 }
 
 export type TodosState = {

@@ -1,4 +1,5 @@
 import TodoNav from '@/components/TodoNav'
+import AppServer from '@/components/AppServer'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} ${styles.layout}`}>
         <TodoNav />
+        <AppServer>
           {children}
+        </AppServer>
       </body>
     </html>
   )
