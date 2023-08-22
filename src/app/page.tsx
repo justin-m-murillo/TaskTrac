@@ -6,6 +6,7 @@ import TodoItem from '@/components/TodoItem'
 import { MdCheckBox, MdDisabledByDefault } from 'react-icons/md'
 import Button from '@/components/Button'
 
+import useDateTime from '@/hooks/useDateTime'
 import { actionCompleteTodo, actionDeleteTodo } from '@/actions/actionsTodo'
 
 const PageHome = () => {
@@ -16,8 +17,11 @@ const PageHome = () => {
       {todos
         .filter(todo => !todo.completed && !todo.deleted)
         .map(todo => (
-          <TodoItem key={todo.id} {...todo}>
-            <>
+          <TodoItem 
+            key={todo.id} 
+            title={todo.title}
+            timeDisplay={`created on ${useDateTime(todo.createdAt)}`}
+            buttons={[
               <Button 
                 Icon={MdCheckBox} 
                 hover='hover:text-green-700' 
@@ -26,7 +30,7 @@ const PageHome = () => {
                   todo.title, 
                   { todos, setTodos }
                 )}
-              />
+              />,
               <Button 
                 Icon={MdDisabledByDefault} 
                 hover='hover:text-red-700'
@@ -35,8 +39,8 @@ const PageHome = () => {
                   { todos, setTodos }
                 )}
               />
-            </>
-          </TodoItem>
+            ]}
+          />
       ))}
     </ul>
   )

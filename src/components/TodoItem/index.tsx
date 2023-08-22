@@ -2,17 +2,13 @@
 import React, { ReactNode } from 'react'
 import styles from './styles'
 
-import useDateTime from '@/hooks/useDateTime'
-
 type TodoItemProps = {
   title: string,
-  createdAt: Date,
-  children?: ReactNode,
+  timeDisplay: string,
+  buttons?: ReactNode[],
 }
 
-const TodoItem = ({ title, createdAt, children }: TodoItemProps) => {
-  const date = useDateTime(createdAt)
-
+const TodoItem = ({ title, timeDisplay, buttons }: TodoItemProps) => {
   return (
     <li className={styles.listItemContainer}>
       <div>
@@ -20,11 +16,15 @@ const TodoItem = ({ title, createdAt, children }: TodoItemProps) => {
           {title}
         </p>
         <p className={styles.listItemTime}>
-          created on {date}
-        </p>  
+          {timeDisplay}
+        </p>
       </div>
       <div className={styles.buttonRow}>
-        {children}
+        {buttons?.map((Btn, index) => (
+          <span key={index}>
+            {Btn}
+          </span>
+        ))}
       </div>
     </li>
   )

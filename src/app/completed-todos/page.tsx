@@ -2,9 +2,9 @@
 import React from 'react'
 import { useTodoListContext } from '@/context/TodoListContext'
 import TodoItem from '@/components/TodoItem'
-//import TodoCompletedDisplay from '@/components/TodoCompletedDisplay'
+import useDateTime from '@/hooks/useDateTime'
 
-const CompletedTodos = async () => {
+const CompletedTodos = () => {
   const { todos } = useTodoListContext()
   
   return (
@@ -12,7 +12,11 @@ const CompletedTodos = async () => {
       {todos
         .filter(todo => todo.completed)
         .map(todo => (
-          <TodoItem key={todo.id} {...todo} />
+          <TodoItem 
+            key={todo.id} 
+            title={todo.title} 
+            timeDisplay={`completed on ${todo.completedAt ? useDateTime(todo.completedAt) : 'n/a'}`}
+          />
         ))}
     </ul>
   )

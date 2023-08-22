@@ -28,5 +28,5 @@ export default function RootLayout({
 }
 
 const styles = {
-  layout: 'w-screen items-center flex-col mx-auto xs:w-5/6 sm:w-1/2',
+  layout: 'w-screen items-center flex-col mx-auto my-4 xs:w-5/6 sm:w-1/2',
 }

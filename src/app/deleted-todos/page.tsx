@@ -1,14 +1,13 @@
 'use client'
-import React, { useState, useEffect } from 'react'
-import { Todo } from '@/types/Todo'
+import React from 'react'
 import { useTodoListContext } from '@/context/TodoListContext'
 
 import TodoItem from '@/components/TodoItem'
 import Button from '@/components/Button'
 import { actionActivateTodo } from '@/actions/actionsTodo'
 
+import useDateTime from '@/hooks/useDateTime'
 import { MdRestoreFromTrash } from 'react-icons/md'
-//import TodoDeletedDisplay from '@/components/TodoDeletedDisplay'
 
 
 const DeletedTodos = () => {
@@ -19,13 +18,20 @@ const DeletedTodos = () => {
       {todos
         .filter(todo => todo.deleted)
         .map(todo => (
-          <TodoItem key={todo.id} {...todo}>
-            <Button 
-              Icon={MdRestoreFromTrash} 
-              hover='hover:text-blue-500' 
-              onClick={() => actionActivateTodo(todo.id, { todos, setTodos })}
-            />
-          </TodoItem>
+          <TodoItem 
+            key={todo.id} 
+            title={todo.title}
+            timeDisplay={
+              `deleted on ${todo.deletedAt ? useDateTime(todo.deletedAt) : 'n/a'}`
+            }
+            buttons={[
+              <Button 
+                Icon={MdRestoreFromTrash} 
+                hover='hover:text-blue-500' 
+                onClick={() => actionActivateTodo(todo.id, { todos, setTodos })}
+              />
+            ]}
+          />
       ))}
     </ul>
   )
