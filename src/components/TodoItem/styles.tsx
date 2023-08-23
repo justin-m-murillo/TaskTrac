@@ -1,11 +1,15 @@
 const styles = {
   buttonRow: 'flex',
-  listItemContainer: 'flex flex-row px-4 py-4 items-center justify-between border-b border-x shadow-inner',
+  root: 'flex flex-col px-4 pt-2 border-b border-x shadow-inner',
+  listItemMain: 'flex flex-row py-2 justify-between',
   listItemHead: 'w-3/4',
-  listItemText: 'mb-2 text-black text-xl font-semibold',
-  listItemDesc: 'mb-2 truncate ...',
+  listItemTitle: 'mb-2 text-black text-xl font-semibold',
+  listItemDesc: 'truncate ...',
   listItemTime: 'text-gray-500 text-sm italic',
-  time: 'font-semibold'
+  time: 'font-semibold',
+  showMoreButton: 'text-gray-300 hover:text-gray-500',
+  showMoreButtonWrapper: 'mx-auto',
+  detailsContainer: 'pb-4'
 }
 
 export default styles

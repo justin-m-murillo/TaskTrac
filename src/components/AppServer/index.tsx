@@ -1,7 +1,7 @@
 'use server'
 import React, { ReactNode } from 'react'
 import { prisma } from '@/app/db'
-import ClientApp from '@/components/ClientApp'
+import AppClient from '@/components/AppClient'
 
 type Props = {
   children: ReactNode
@@ -10,9 +10,9 @@ type Props = {
 const AppServer = async ({ children }: Props) => {
   const data = await prisma.todo.findMany()
   return (
-    <ClientApp data={data}>
+    <AppClient data={data}>
       { children }
-    </ClientApp>
+    </AppClient>
   )
 }
 

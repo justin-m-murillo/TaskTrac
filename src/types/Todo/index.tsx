@@ -14,3 +14,8 @@ export type TodosState = {
   todos: Todo[],
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
 }
+
+export type TodoListProps = {
+  todos: Todo[],
+  todosContext: TodosState,
+}

@@ -2,15 +2,20 @@ import { TodosState } from '../../types/Todo'
 import { serverActivateTodo, serverCreateTodo, serverCompleteTodo, serverDeleteTodo } from '@/actions/serverActionsTodo'
 import { redirect } from 'next/navigation'
 
-export const actionCreateTodo = (data: FormData, todosState: TodosState) => {
+export const actionCreateTodo = (
+  data: FormData, 
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>, 
+  todosState: TodosState,) => 
+{
   const { todos, setTodos } = todosState
   // create new todo item
   serverCreateTodo(data)
     .then(created => {
       setTodos([...todos, created])
+      setActiveTab('/home')
     })
-    .then( redirect('/') )
     .catch(error => console.warn('Error in create todo', error))
+    redirect('/home')
 }
 
 export const actionDeleteTodo = (
@@ -24,6 +29,7 @@ export const actionDeleteTodo = (
       const newTodos = [...todos]
       const index = newTodos.findIndex(todo => todo.id === deleted.id)
       newTodos[index].deleted = true
+      newTodos[index].deletedAt = new Date()
       setTodos(newTodos)
 })}
 
@@ -40,6 +46,7 @@ export const actionCompleteTodo = (
       const newTodos = [...todos]
       const index = newTodos.findIndex(todo => todo.id === completed.id)
       newTodos[index].completed = true
+      newTodos[index].completedAt = new Date()
       setTodos(newTodos)
 })}
 

@@ -6,7 +6,7 @@ type DisplayEmptyListProps = {
   showAdd?: boolean,
 }
 
-const DisplayEmptyList = ({ listName, showAdd }: DisplayEmptyListProps) => {
+const TodoListEmpty = ({ listName, showAdd }: DisplayEmptyListProps) => {
   return (
     <div className={styles.root}>
       <p>
@@ -21,4 +21,4 @@ const DisplayEmptyList = ({ listName, showAdd }: DisplayEmptyListProps) => {
   )
 }
 
-export default DisplayEmptyList
+export default TodoListEmpty

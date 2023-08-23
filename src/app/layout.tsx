@@ -1,4 +1,3 @@
-import TodoNav from '@/components/TodoNav'
 import AppServer from '@/components/AppServer'
 import './globals.css'
 import type { Metadata } from 'next'
@@ -18,18 +17,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${styles.layout}`}>
-        <div className={styles.root}>
-          <TodoNav />
           <AppServer>
             {children}
           </AppServer>
-        </div>
       </body>
     </html>
   )
 }
 
 const styles = {
-  layout: 'w-screen flex flex-col w-screen items-center flex-col my-4',
-  root: 'w-2/5'
+  layout: 'w-auto my-4',
 }
