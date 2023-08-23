@@ -12,7 +12,8 @@ const TodoListDeleted = ({ todos: deletedTodos, todosContext }: TodoListProps) =
       {deletedTodos.map(todo => (
         <TodoItem
           key={todo.id}
-          {...todo}
+          todo={todo}
+          timePrefix='Deleted:'
           buttons={[
             <Button 
               Icon={MdRestoreFromTrash} 

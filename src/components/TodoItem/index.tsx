@@ -2,62 +2,60 @@
 import React, { ReactNode, useState } from 'react'
 import styles from './styles'
 import { Todo } from '@/types/Todo'
+
+import Headline from './Headline'
+import DueDate from './DueDate'
+import Location from './Location'
+import ButtonRow from './ButtonRow'
+import Details from './Details'
+import DetailsBtn from './DetailsBtn'
 import useDateTime from '@/hooks/useDateTime'
 
-import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md'
-
-type TodoItemProps = Todo & {
+type TodoItemProps = {
+  timePrefix: string,
+  todo: Todo,
   buttons?: ReactNode[],
 }
 
 const TodoItem = ({ 
-  title, 
-  description,
-  completed,
-  completedAt,
-  deleted,
-  deletedAt,
-  createdAt,
+  todo,
+  timePrefix,
   buttons }: TodoItemProps) => 
 {
   const [ showDetails, setShowDetails ] = useState<boolean>(false)
+  const {
+    title,
+    description,
+    createdAt,
+
+  } = todo
+  
+  const DetailsDisplay = () => {
+    return showDetails
+      ? <Details 
+          description={ description }
+          fields={[
+            { 
+              key: 'Due:', 
+              value: useDateTime(createdAt) 
+            },
+            {
+              key: 'Location:', 
+              value: 'Fremont, CA'
+            }
+          ]}
+        />
+      : null
+  }
   
   return (
     <li className={styles.root}>
-      <div className={styles.listItemMain}>
-        <div className={styles.listItemHead}>
-          <p className={styles.listItemTitle}>
-            {title}
-          </p>
-          <p className={styles.listItemDesc}>
-            {description}
-          </p>
-          {/* <p className={styles.listItemTime}>
-            {timePrefix} <span className={styles.time}>{time}</span>
-          </p> */}
-        </div>
-        <div className={styles.buttonRow}>
-          {buttons?.map((Btn, index) => (
-            <span key={index}>
-              {Btn}
-            </span>
-          ))}
-        </div>
-      </div>
-      <div className={styles.showMoreButtonWrapper}>
-        <button 
-          className={styles.showMoreButton}
-          onClick={() => setShowDetails(!showDetails)}
-        >
-          {!showDetails ? <MdArrowDropDown size={28} /> : <MdArrowDropUp size={28} />}
-        </button>
-      </div>
-      {showDetails &&
-        <div className={styles.detailsContainer}>
-          <p>created: {useDateTime(createdAt)}</p>
-          {completedAt && <p>completed: {useDateTime(completedAt)}</p>}
-        </div>
-      }
+      <Headline
+        title={ title }
+        ButtonRow={ <ButtonRow buttons={buttons} /> }
+      />
+      <DetailsDisplay />
+      <DetailsBtn showDetails={showDetails} setShowDetails={setShowDetails} />
     </li>
   )
 }

@@ -10,7 +10,7 @@ const CompletedTodosPage = () => {
 
   return completed.length > 0 
     ? <TodoListCompleted todos={completed} todosContext={{ todos, setTodos }} /> 
-    : <TodoListEmpty listName='Completed to-dos' />
+    : <TodoListEmpty alertText='No completed to-dos found!' />
 }
 
 export default CompletedTodosPage

@@ -20,7 +20,8 @@ const TodoListActive = ({ activeTodos, todosContext}: TodoListActiveProps) => {
         .map(todo => (
           <TodoItem 
             key={todo.id} 
-            {...todo}
+            todo={todo}
+            timePrefix='Due:'
             // timePrefix='created:'
             // time={useDateTime(todo.createdAt)}
             buttons={[

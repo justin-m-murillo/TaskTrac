@@ -2,15 +2,15 @@ import React from 'react'
 import styles from './styles'
 
 type DisplayEmptyListProps = {
-  listName: string,
+  alertText: string,
   showAdd?: boolean,
 }
 
-const TodoListEmpty = ({ listName, showAdd }: DisplayEmptyListProps) => {
+const TodoListEmpty = ({ alertText, showAdd }: DisplayEmptyListProps) => {
   return (
     <div className={styles.root}>
       <p>
-        {listName} is empty!
+        {alertText}
       </p>
       {showAdd &&
         <p>

@@ -11,7 +11,8 @@ const TodoListCompleted = ({ todos: completed }: TodoListProps) => {
         .map(todo => (
           <TodoItem 
             key={todo.id}
-            {...todo}
+            todo={todo}
+            timePrefix='Completed:'
           />
         ))
       }

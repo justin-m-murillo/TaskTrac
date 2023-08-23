@@ -10,7 +10,7 @@ const HomePage = () => {
 
   return active.length > 0 
     ? <TodoListActive activeTodos={active} todosContext={{ todos, setTodos }} /> 
-    : <TodoListEmpty listName='To-do list' showAdd />
+    : <TodoListEmpty alertText='To-do list is empty!' showAdd />
 }
 
 export default HomePage

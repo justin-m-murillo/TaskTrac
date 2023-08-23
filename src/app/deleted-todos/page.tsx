@@ -11,7 +11,7 @@ const DeletedTodosPage = () => {
 
   return deleted.length > 0
     ? <TodoListDeleted todos={deleted} todosContext={{ todos, setTodos }} />
-    : <TodoListEmpty listName='Deleted list' />
+    : <TodoListEmpty alertText='No deleted to-dos found!' />
   }
 
 export default DeletedTodosPage
