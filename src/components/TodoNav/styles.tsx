@@ -1,6 +1,5 @@
 const styles = {
-  root: 'flex',
-  menuContainer: 'h-10',
+  root: 'flex flex-row mb-8 px-2 justify-between',
 }
 
 export default styles

@@ -2,6 +2,8 @@ export type Todo = {
   id:          string,
   title:       string,
   description: string | null,
+  location:    string | null,
+  dueDate:     Date | null,
   completed:   boolean,
   completedAt: Date | null,
   deleted:     boolean,
@@ -17,5 +19,10 @@ export type TodosState = {
 
 export type TodoListProps = {
   todos: Todo[],
+  todosContext: TodosState,
+}
+
+export interface TodoButtonProps {
+  id: string,
   todosContext: TodosState,
 }

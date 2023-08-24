@@ -1,23 +1,42 @@
 'use client'
 import React, { useState } from 'react'
+import Calendar from '@/components/Calendar'
+
 import { useTodoListContext } from '@/context/TodoListContext'
 import { useTodoNavContext } from '@/context/TodoNavContext'
 import styles from './styles'
 
 import { actionCreateTodo } from '@/actions/actionsTodo'
+import useDateTime from '@/hooks/useDateTime'
 
 
 const PageAddTodo = () => {
+  const [ dueDate, setDueDate ] = useState<Date>(new Date())
   const { todos, setTodos } = useTodoListContext()
   const { setActiveTab } = useTodoNavContext()
-  const [ textAreaValue, setTextAreaValue ] = useState<string>('')
   
   return (
-    <form action={data => actionCreateTodo(data, setActiveTab, {todos, setTodos})} className={styles.root}>
+    <form 
+      action={data => 
+        actionCreateTodo(data, dueDate, setActiveTab, {todos, setTodos})
+      } 
+      className={styles.root}
+    >
+      {/* Title */}
       <label className={styles.label}>Title</label>
       <input type='text' name='title' className={styles.input} />
+
+      {/* Location */}
+      <label className={styles.label}>Location</label>
+      <input type='text' name='location' className={styles.input} />
+      
+      {/* Description */}
       <label className={styles.label}>Description</label>
-      <textarea name='description' value={textAreaValue} onChange={e => setTextAreaValue(e.target.value)} className={styles.input} />
+      <textarea name='description' className={styles.input} />
+
+      {/* Calendar */}
+      <Calendar value={dueDate} onChange={setDueDate} />
+
       <div className='flex gap-1 justify-end'>
         <button
           className={styles.button}

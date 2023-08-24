@@ -18,10 +18,10 @@ type Props = {
   isRight?: boolean,
 }
 
-const MenuTab = ({ title, Icon, href, isLeft, isRight }: Props) => {
+const TodoNavTab = ({ title, Icon, href, isLeft, isRight }: Props) => {
   const router = useRouter()
   const { activeTab, setActiveTab } = useTodoNavContext()
-  
+
   const handleClick = () => {
     setActiveTab(href)
     router.push(href)
@@ -31,8 +31,7 @@ const MenuTab = ({ title, Icon, href, isLeft, isRight }: Props) => {
       <button 
         className={`
           ${styles.tab} 
-          ${isLeft ? styles.tabLeft : isRight ? styles.tabRight : ''} 
-          ${href === activeTab ? styles.openTabBtn : styles.notOpenTabBtn}
+          ${isLeft ? styles.tabLeft : isRight ? styles.tabRight : ''}
         `}
         onClick={handleClick}
       >
@@ -42,4 +41,4 @@ const MenuTab = ({ title, Icon, href, isLeft, isRight }: Props) => {
   )
 }
 
-export default MenuTab
+export default TodoNavTab

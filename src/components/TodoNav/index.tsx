@@ -1,7 +1,7 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './styles'
-import MenuTab from '../MenuTab'
+import TodoNavTab from '../TodoNavTab'
 
 import { MdHome, MdChecklist, MdDeleteOutline, MdAdd } from 'react-icons/md'
 
@@ -9,23 +9,23 @@ const TodoNav = () => {
 
   return (
       <div className={styles.root}>
-        <MenuTab 
+        <TodoNavTab 
           title='Home' 
           Icon={MdHome} 
           href='/home'
           isLeft 
         />
-        <MenuTab 
+        <TodoNavTab 
           title='Completed' 
           Icon={MdChecklist} 
           href='/completed-todos'
         />
-        <MenuTab 
+        <TodoNavTab 
           title='Deleted'
           Icon={MdDeleteOutline} 
           href='/deleted-todos'
         />
-        <MenuTab 
+        <TodoNavTab 
           title='Add'
           Icon={MdAdd}
           href='/add-todo'

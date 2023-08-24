@@ -2,17 +2,13 @@ import React, { ReactNode } from 'react'
 import styles from './styles'
 
 type ButtonRowProps = {
-  buttons?: ReactNode[]
+  children?: ReactNode
 }
 
-const ButtonRow = ({ buttons }: ButtonRowProps) => {
+const ButtonRow = ({ children }: ButtonRowProps) => {
   return (
     <div className={styles.root}>
-      {buttons?.map((Btn, index) => (
-        <div className='flex items-center justify-center' key={index}>
-          {Btn}
-        </div>
-      ))}
+      { children }
     </div>
   )
 }

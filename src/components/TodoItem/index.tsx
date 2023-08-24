@@ -4,58 +4,33 @@ import styles from './styles'
 import { Todo } from '@/types/Todo'
 
 import Headline from './Headline'
-import DueDate from './DueDate'
-import Location from './Location'
 import ButtonRow from './ButtonRow'
 import Details from './Details'
 import DetailsBtn from './DetailsBtn'
-import useDateTime from '@/hooks/useDateTime'
 
 type TodoItemProps = {
-  timePrefix: string,
   todo: Todo,
-  buttons?: ReactNode[],
+  children?: ReactNode,
 }
 
-const TodoItem = ({ 
-  todo,
-  timePrefix,
-  buttons }: TodoItemProps) => 
+const TodoItem = ({ todo, children }: TodoItemProps) => 
 {
   const [ showDetails, setShowDetails ] = useState<boolean>(false)
-  const {
-    title,
-    description,
-    createdAt,
 
-  } = todo
-  
   const DetailsDisplay = () => {
     return showDetails
-      ? <Details 
-          description={ description }
-          fields={[
-            { 
-              key: 'Due:', 
-              value: useDateTime(createdAt) 
-            },
-            {
-              key: 'Location:', 
-              value: 'Fremont, CA'
-            }
-          ]}
-        />
+      ? <Details todo={todo} />
       : null
   }
   
   return (
-    <li className={styles.root}>
-      <Headline
-        title={ title }
-        ButtonRow={ <ButtonRow buttons={buttons} /> }
-      />
-      <DetailsDisplay />
-      <DetailsBtn showDetails={showDetails} setShowDetails={setShowDetails} />
+    <li className={styles.root} onClick={() => setShowDetails(!showDetails)}>
+      <div className='px-4 py-2'>
+        <Headline title={ todo.title }>
+          { children }
+        </Headline>
+        <DetailsDisplay />
+      </div>
     </li>
   )
 }

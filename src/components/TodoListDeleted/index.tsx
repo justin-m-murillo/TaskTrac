@@ -1,10 +1,9 @@
 'use client'
 import React from 'react'
 import TodoItem from '../TodoItem'
-import { Todo, TodosState, TodoListProps } from '@/types/Todo'
-import Button from '../Button'
-import { MdRestoreFromTrash } from 'react-icons/md'
-import { actionActivateTodo } from '@/actions/actionsTodo'
+import { TodoListProps } from '@/types/Todo'
+import ButtonRow from '../TodoItem/ButtonRow'
+import ButtonRecover from '../ButtonRecover'
 
 const TodoListDeleted = ({ todos: deletedTodos, todosContext }: TodoListProps) => {
   return (
@@ -13,15 +12,11 @@ const TodoListDeleted = ({ todos: deletedTodos, todosContext }: TodoListProps) =
         <TodoItem
           key={todo.id}
           todo={todo}
-          timePrefix='Deleted:'
-          buttons={[
-            <Button 
-              Icon={MdRestoreFromTrash} 
-              hover='hover:text-blue-500'
-              onClick={() => actionActivateTodo(todo.id, todosContext)}
-            />
-          ]}
-        />
+        >
+          <ButtonRow>
+            <ButtonRecover id={todo.id} todosContext={todosContext} />
+          </ButtonRow>
+        </TodoItem>
       ))}
     </ul>
   )

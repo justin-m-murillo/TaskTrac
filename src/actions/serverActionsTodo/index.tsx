@@ -17,9 +17,7 @@ export const serverActivateTodo = async (
   })
 }
 
-export const serverCompleteTodo = async (
-  id: string,
-  title: string, ) => 
+export const serverCompleteTodo = async (id: string) => 
 {
   return await prisma.todo.update({
     where: {
@@ -32,28 +30,32 @@ export const serverCompleteTodo = async (
   })
 }
 
-export const serverCreateTodo = async (data: FormData) => {
+export const serverCreateTodo = async (data: FormData, dueDate: Date|null|undefined) => {
   const title = data.get('title')?.valueOf()
   const description = data.get('description')?.valueOf()
+  const location = data.get('location')?.valueOf()
   if (typeof title !== 'string') {
     throw new Error('Invalid Title')
   }
   if (typeof description !== 'string') {
     throw new Error('Invalid Description')
   }
+  if (typeof location !== 'string') {
+    throw new Error('Invalid Location')
+  }
 
   return await prisma.todo.create({ 
     data: {
       title,
       description,
+      location,
+      dueDate,
       completed: false, 
       deleted: false 
   }})
 }
 
-export const serverDeleteTodo = async (
-  id: string,) => 
-{
+export const serverDeleteTodo = async (id: string,) => {
   return await prisma.todo.update({ 
     where: {
       id: id,
@@ -64,4 +66,12 @@ export const serverDeleteTodo = async (
     }
   })
   //console.log('Deleted', id, title)
+}
+
+export const serverDeleteForever = async (id: string) => {
+  return await prisma.todo.delete({
+    where: {
+      id: id
+    },
+  })
 }

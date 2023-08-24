@@ -1,9 +1,9 @@
 import AppServer from '@/components/AppServer'
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Todo App',
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${styles.layout}`}>
+      <body className={`${montserrat.className} ${styles.layout}`}>
           <AppServer>
             {children}
           </AppServer>
@@ -26,5 +26,5 @@ export default function RootLayout({
 }
 
 const styles = {
-  layout: 'w-auto my-4',
+  layout: 'w-auto h-screen bg-gradient-to-tr from-blue-950 to-cyan-800',
 }

@@ -3,10 +3,10 @@ import styles from './styles'
 
 type HeadlineProps = {
   title: string,
-  ButtonRow: ReactNode,
+  children: ReactNode,
 }
 
-const Headline = ({ title, ButtonRow }: HeadlineProps) => {
+const Headline = ({ title, children }: HeadlineProps) => {
   return (
     <div className={styles.listItemMain}>
       <div className={styles.listItemHead}>
@@ -14,7 +14,7 @@ const Headline = ({ title, ButtonRow }: HeadlineProps) => {
           { title }
         </p>
       </div>
-      { ButtonRow }
+      { children }
     </div>
   )
 }

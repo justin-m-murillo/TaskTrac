@@ -1,6 +1,6 @@
 const styles = {
   
-  root: 'flex flex-col px-4 pt-2 border-b border-x shadow-inner',
+  root: 'flex flex-col my-4 bg-white cursor-pointer z-0',
 }
 
 export default styles

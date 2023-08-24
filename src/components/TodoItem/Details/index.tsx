@@ -1,32 +1,31 @@
-import React, { ReactNode } from 'react'
+import React, { useState } from 'react'
 import styles from './styles'
 import { Field } from '@/types/Field'
+import useFields from '@/hooks/useFields'
+import { Todo } from '@/types/Todo'
+import FieldTable from './FieldTable'
 
 type DetailsProps = {
-  description: string | null,
-  fields: Field[]
+  todo: Todo
 }
 
-const Details = ({ description, fields }: DetailsProps) => {
+const Details = ({ todo }: DetailsProps) => {
+  const fields = useFields(todo)
+  const timeFields = fields.filter(field => field.key !== 'Location')
+  const locField = fields.filter(field => field.key === 'Location')
 
   return (
     <div className={styles.detailsContainer}>
-      <div className={styles.fieldTable}>
-        <div className={styles.fieldKey}>
-          {fields.map(field => (
-            <p>{field.key}</p>
-          ))}
-        </div>
-        <div className={styles.fieldValue}>
-          {fields.map(field => (
-            <p>{field.value}</p>
-          ))}
-        </div>
+      <div className='grid grid-rows-2 sm:grid-cols-2'>
+        <FieldTable fields={timeFields} />
+        <FieldTable fields={locField} />
       </div>
-      {description &&
-        <p className={styles.listItemDesc}>
-          <span className='mr-8'/>{description}
-        </p>
+      {todo?.description &&
+        <div className={styles.listItemDesc}>
+          <p>
+            {todo.description}
+          </p>
+        </div>
       }
     </div>
   )

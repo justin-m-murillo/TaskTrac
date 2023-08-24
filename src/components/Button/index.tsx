@@ -3,14 +3,17 @@ import { IconType } from 'react-icons/lib/esm/iconBase';
 
 export type ButtonProps = {
   Icon: IconType,
-  hover: string,
+  hover?: string,
   onClick?: React.MouseEventHandler,
   buttonType?: string,
 }
 
 const Button = ({ Icon, hover, onClick, buttonType }: ButtonProps) => {
+  const iconSize = 48
   const btnType = (() => {
     switch (buttonType) {
+      case 'undefined':
+        return undefined
       case 'submit':
         return 'submit'
       case 'reset':
@@ -24,9 +27,9 @@ const Button = ({ Icon, hover, onClick, buttonType }: ButtonProps) => {
     <button 
       type={btnType}
       onClick={onClick}
-      className={`text-gray-400 transition duration-300 ${hover}`}
+      className={`text-gray-400 transition duration-300 z-10 ${hover}`}
     >
-      <Icon size={48} />
+      <Icon size={iconSize} />
     </button>
   )
 }
