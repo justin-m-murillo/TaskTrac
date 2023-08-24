@@ -10,7 +10,7 @@ const ButtonDeleteForever = ({ id, todosContext }: TodoButtonProps) => {
   return (
     <Button 
       Icon={MdDeleteForever} 
-      hover='hover:text-orange-500'
+      //hover='hover:text-orange-500'
       onClick={event => {
         event.stopPropagation()
         actionDeleteForever(id, todosContext)

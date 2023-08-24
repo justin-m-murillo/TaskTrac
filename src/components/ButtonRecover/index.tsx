@@ -9,7 +9,7 @@ const ButtonRecover = ({ id, todosContext }: TodoButtonProps) => {
   return (
     <Button 
       Icon={MdRestoreFromTrash} 
-      hover='hover:text-blue-500'
+      //hover='hover:text-blue-500'
       onClick={event => {
         event.stopPropagation()
         actionRecoverTodo(id, todosContext)

@@ -12,7 +12,7 @@ const ButtonComplete = ({ id, title, todosContext }: TodoButtonCompleteProps) =>
   return (
     <Button 
       Icon={MdCheckBox} 
-      hover='hover:text-green-700' 
+      //hover='hover:text-gray-300' 
       onClick={event => {
         event.stopPropagation()
         actionCompleteTodo(

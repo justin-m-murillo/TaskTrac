@@ -16,7 +16,7 @@ const Details = ({ todo }: DetailsProps) => {
 
   return (
     <div className={styles.detailsContainer}>
-      <div className='grid grid-rows-2 sm:grid-cols-2'>
+      <div className='grid grid-rows-1 sm:grid-cols-2'>
         <FieldTable fields={timeFields} />
         <FieldTable fields={locField} />
       </div>
