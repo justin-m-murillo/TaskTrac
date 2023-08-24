@@ -26,5 +26,5 @@ export default function RootLayout({
 }
 
 const styles = {
-  layout: 'w-auto h-screen bg-gradient-to-tr from-blue-950 to-cyan-800',
+  layout: 'w-auto h-screen bg-slate-950',
 }

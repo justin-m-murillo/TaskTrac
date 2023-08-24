@@ -1,11 +1,6 @@
 'use client'
 import React from 'react'
 import TodoItem from '@/components/TodoItem'
-import Button from '../Button'
-import { actionCompleteTodo, actionDeleteTodo } from '@/actions/actionsTodo'
-
-import { MdCheckBox, MdDisabledByDefault } from 'react-icons/md'
-import { useTodoListContext } from '@/context/TodoListContext'
 import { Todo, TodosState } from '@/types/Todo'
 import ButtonRow from '../TodoItem/ButtonRow'
 import ButtonComplete from '../ButtonComplete'
@@ -20,10 +15,11 @@ const TodoListActive = ({ activeTodos, todosContext}: TodoListActiveProps) => {
   return (
     <ul>
       {activeTodos
-        .map(todo => (
+        .map((todo, index) => (
           <TodoItem 
             key={todo.id} 
             todo={todo}
+            index={index}
           >
             <ButtonRow>
               <ButtonComplete id={todo.id} title={todo.title} todosContext={todosContext} />

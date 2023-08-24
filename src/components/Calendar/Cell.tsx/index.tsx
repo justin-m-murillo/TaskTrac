@@ -14,9 +14,9 @@ const Cell = ({ className, isActive=false, onClick, children }: Props) => {
       className={`
         ${styles.cell} 
         ${className} 
-        ${!!onClick && 'cursor-pointer'}
-        ${isActive && 'bg-sky-500 text-white font-semibold'}
-        ${!!onClick && !isActive && 'hover:bg-gray-200'}
+        ${!!onClick && styles.btn}
+        ${isActive && styles.isActive}
+        ${!!onClick && !isActive && styles.onHover}
       `}>
       {children}
     </div>
@@ -27,5 +27,7 @@ export default Cell
 
 const styles = {
   cell: 'h-12 flex select-none items-center justify-center border-b border-r',
-  btn: 'cursor-pointer hover:bg-gray-100 active:bg-sky-500',
+  btn: 'cursor-pointer',
+  isActive: 'bg-sky-600 text-white font-semibold',
+  onHover: 'hover:bg-gray-500',
 }

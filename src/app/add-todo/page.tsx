@@ -24,15 +24,15 @@ const PageAddTodo = () => {
     >
       {/* Title */}
       <label className={styles.label}>Title</label>
-      <input type='text' name='title' className={styles.input} />
+      <input type='text' name='title' className={`${styles.singleInput} ${styles.input}`} />
 
       {/* Location */}
       <label className={styles.label}>Location</label>
-      <input type='text' name='location' className={styles.input} />
+      <input type='text' name='location' className={`${styles.singleInput} ${styles.input}`} />
       
       {/* Description */}
       <label className={styles.label}>Description</label>
-      <textarea name='description' className={styles.input} />
+      <textarea name='description' className={`${styles.areaInput} ${styles.input}`} />
 
       {/* Calendar */}
       <Calendar value={dueDate} onChange={setDueDate} />
