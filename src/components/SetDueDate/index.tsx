@@ -8,9 +8,9 @@ import {
   getMonths, 
   useDaysOfMonth, 
   useYearsFromNow, 
-  useHoursFormat, 
-  getDateString} from '@/hooks/TimeSelector'
-import { FormInput } from '../FormInput'
+  useHoursFormat, } from '@/hooks/TimeSelector'
+import SetDueDateDisplay from './SetDueDateDisplay'
+import Set24Hour from './Set24Hour'
 
 type DueDateProps = {
   dueDate: TodoDateTime,
@@ -31,13 +31,10 @@ const SetDueDate = ({ dueDate, setDueDate }: DueDateProps) => {
 
   return (
     <div className='flex flex-col w-full'>
-      <div className='flex'>
-        <p>Selected Date/Time:</p>
-        <p className='ml-2 font-semibold'>{ getDateString(dueDate) }</p>
-      </div>
+      <SetDueDateDisplay dueDate={dueDate} />
+      <Set24Hour dueDate={dueDate} setDueDate={setDueDate} />
       <ScrollSelector>
-        <ItemList 
-          key={years.toString()}
+        <ItemList
           items={years.map(year => year.toString())}
           title='Year'
           currentValue={years.findIndex(year => year === dueDate.year)}
@@ -56,7 +53,7 @@ const SetDueDate = ({ dueDate, setDueDate }: DueDateProps) => {
           }}
         />
         <ItemList 
-          key={daysOfMonth}
+          key={daysOfMonth.toString()}
           items={Array.from({ length: daysOfMonth }).map((_, index) => (index+1).toString())} 
           title='Day'
           currentValue={dueDate.day - 1} 
@@ -69,7 +66,7 @@ const SetDueDate = ({ dueDate, setDueDate }: DueDateProps) => {
           key={hoursFormat.toString()} 
           items={hoursFormat} 
           title='Hour'
-          currentValue={dueDate.isAmPm ? dueDate.hours - 12 : dueDate.hours}
+          currentValue={dueDate.isAmPm ? dueDate.hours % 12 : dueDate.hours}
           onClick={(value: number) => {
             const hour = dueDate.isAmPm 
               ? evalHoursAmPm(dueDate.ampm, value) 
@@ -100,9 +97,8 @@ const SetDueDate = ({ dueDate, setDueDate }: DueDateProps) => {
                 hours: adjustHours, 
                 ampm: ampm,
               })
-            }}
-          />
-        }
+            }}/>
+          }
       </ScrollSelector>
     </div>
   )

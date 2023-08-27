@@ -13,10 +13,10 @@ const ItemList = ({ items, title, onClick, currentValue }: Props) => {
 
   useEffect(() => {
     selectedRef.current?.scrollIntoView()
-  }, [currentValue, selectedRef])
+  }, [])
 
   return (
-    <div className={styles.root} >
+    <div className={styles.root}>
       <div className={styles.title}></div>
       <div className={`${styles.itemContainer}`}>
         {items.map((item, index) => 
@@ -24,7 +24,7 @@ const ItemList = ({ items, title, onClick, currentValue }: Props) => {
             return (
               <div
                 ref={currentValue === index ? selectedRef : null}
-                key={index}
+                key={item}
                 className={`${styles.item} ${currentValue === index ? styles.isActive : styles.notActive}`}
                 onClick={() => onClick(index)}
               >

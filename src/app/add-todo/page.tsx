@@ -45,6 +45,7 @@ const minutes = [
 const PageAddTodo = () => {
   const { setActiveTab } = useTodoNavContext()
   const { todos, setTodos } = useTodoListContext()
+  const [ showDueDate, setShowDueDate ] = useState<boolean>(false)
   const [ dueDate, setDueDate ] = useState<TodoDateTime>(() => {
     const current = new Date()
     return {
@@ -83,7 +84,9 @@ const PageAddTodo = () => {
 
       {/* Select Due Date */}
       
-      <SetDueDate dueDate={dueDate} setDueDate={setDueDate} />
+      {showDueDate && 
+        <SetDueDate dueDate={dueDate} setDueDate={setDueDate} />
+      }
 
       <div className='flex mt-2 justify-end'>
         <button

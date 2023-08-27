@@ -14,6 +14,14 @@ export const FormInput = ({ name, children }: FormInputProps) => {
   )
 }
 
+export const FormBoolInput = ({ name }: FormInputProps) => {
+  return (
+    <FormInput name={name}>
+      <input type='' name={name} />
+    </FormInput>
+  )
+}
+
 export const FormTextInput = ({ name }: FormInputProps) => {
   return (
     <FormInput name={name}>

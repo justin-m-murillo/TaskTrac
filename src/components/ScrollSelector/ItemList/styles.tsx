@@ -4,7 +4,7 @@ const styles = {
     minWidth: 60 
   },
   title: 'flex justify-center mb-2',
-  itemContainer: 'flex flex-col h-24 bg-slate-600 justify-start items-center overflow-y-auto scrollbar-thin',
+  itemContainer: 'flex flex-col h-24 bg-slate-600 justify-start items-center overflow-y-auto scrollbar',
   item: 'flex px-4 w-full justify-center cursor-pointer select-none',
   isActive: 'bg-sky-600',
   notActive: 'hover:bg-slate-500',
