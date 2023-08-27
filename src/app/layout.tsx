@@ -16,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} ${styles.layout}`}>
+      <body className={`
+        ${montserrat.className} 
+        ${styles.layout} 
+        scrollbar-thin scrollbar-thumb-sky-500 scrollbar-track-slate-700
+      `}>
           <AppServer>
             {children}
           </AppServer>

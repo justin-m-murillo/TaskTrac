@@ -17,7 +17,7 @@ export type TodosState = {
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
 }
 
-export type TodoListProps = {
+export interface TodoListProps {
   todos: Todo[],
   todosContext: TodosState,
 }
@@ -25,4 +25,14 @@ export type TodoListProps = {
 export interface TodoButtonProps {
   id: string,
   todosContext: TodosState,
+}
+
+export type TodoDateTime = {
+  year: number,
+  month: number,
+  day: number,
+  hours: number,
+  minutes: number,
+  isAmPm: boolean,
+  ampm: string | null,
 }

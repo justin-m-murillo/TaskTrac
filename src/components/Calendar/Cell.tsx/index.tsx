@@ -26,8 +26,8 @@ const Cell = ({ className, isActive=false, onClick, children }: Props) => {
 export default Cell
 
 const styles = {
-  cell: 'h-12 flex select-none items-center justify-center border-b border-r',
+  cell: 'h-11 flex select-none items-center justify-center border border-slate-500',
   btn: 'cursor-pointer',
   isActive: 'bg-sky-600 text-white font-semibold',
-  onHover: 'hover:bg-gray-500',
+  onHover: 'hover:bg-slate-500',
 }

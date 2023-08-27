@@ -1,5 +1,6 @@
 import React from 'react'
 import { add, differenceInDays, endOfMonth, format, setDate, startOfMonth, sub } from 'date-fns'
+import { DateTime } from 'ts-luxon'
 import Cell from './Cell.tsx'
 
 type CalendarProps = {
@@ -17,7 +18,7 @@ const daysOfWeek = [
   'Sat',
 ]
 
-const Calendar = ({ value= new Date(), onChange }: CalendarProps) => {
+const Calendar = ({ value = new Date(), onChange }: CalendarProps) => {
   const startDate = startOfMonth(value)
   const endDate = endOfMonth(value)
   const numDays = differenceInDays(endDate, startDate) + 1;
@@ -32,18 +33,22 @@ const Calendar = ({ value= new Date(), onChange }: CalendarProps) => {
   const nextYear = () => onChange && onChange(add(value, { years: 1 }))
 
   const handleClickDate = (index: number) => {
-    const date = setDate(value, index)
-    onChange && onChange(date)
-    console.log(date)
+    const rawDate = setDate(value, index)
+    const finDate = DateTime.fromJSDate(rawDate).toISODate()
+    //onChange && onChange(date)
+    console.log(finDate)
   }
 
   return (
-    <div className='w-[400px] border'>
-      <div className='bg-slate-700 grid grid-cols-7 items-center justify-center text-center'>
+    <div className='w-[380px] rounded-lg'>
+      <p className='flex w-full mb-2 justify-center'>
+        Date
+      </p>
+      <div className='bg-slate-600 text-white grid grid-cols-7 items-center justify-center text-center'>
         <Cell onClick={prevYear}>{'<<'}</Cell>
         <Cell onClick={prevMonth}>{'<'}</Cell>
-        <Cell className='col-span-3'>
-          <span className='font-bold'>{format(value, 'LLLL yyyy')}</span>
+        <Cell className='col-span-3 font-bold'>
+          {format(value, 'LLLL yyyy')}
         </Cell>
         <Cell onClick={nextMonth}>{'>'}</Cell>
         <Cell onClick={nextYear}>{'>>'}</Cell>
