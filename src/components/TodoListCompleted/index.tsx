@@ -9,11 +9,11 @@ const TodoListCompleted = ({ todos: completed, todosContext }: TodoListProps) =>
   return (
     <ul>
       {completed.map(todo => (
-        <li className='my-4'>
-          <TodoItem 
-            key={todo.id}
-            todo={todo}
-          >
+        <li
+          key={todo.id}
+          className='my-4'
+        >
+          <TodoItem todo={todo}>
             <ButtonRow>
               <ButtonDeleteForever id={todo.id} todosContext={todosContext} />
             </ButtonRow>

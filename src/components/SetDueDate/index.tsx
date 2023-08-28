@@ -33,7 +33,9 @@ const SetDueDate = ({ dueDate, setDueDate }: DueDateProps) => {
   return (
     <div className='flex flex-col w-full'>
       <SetDueDateDisplay dueDate={dueDate} />
-      <Set24Hour dueDate={dueDate} setDueDate={setDueDate} />
+      <div className='mb-2'>
+        <Set24Hour dueDate={dueDate} setDueDate={setDueDate} />
+      </div>
       <div className='flex flex-col sm:flex-row w-full'>
         <div className='flex flex-row'>
           <ItemList

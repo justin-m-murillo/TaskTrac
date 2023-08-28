@@ -7,7 +7,7 @@ type TextRowSelectorProps = {
 
 const TextRowSelector = ({ prompt, children }: TextRowSelectorProps) => {
   return (
-    <div className='flex flex-row mb-2'>
+    <div className='flex flex-row'>
       <div className='flex flex-row text-sm'>
       {prompt && <p className='mr-2'>{prompt}</p>}
       { children }

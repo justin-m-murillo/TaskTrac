@@ -4,8 +4,9 @@ import { Todo } from '@/types/Todo'
 
 import Headline from './Headline'
 import Details from './Details'
-import { useTodoItemBG } from '@/hooks/useTodoItemBG'
 import TodoItemContainer from './TodoItemContainer'
+
+import { AnimatePresence } from 'framer-motion'
 
 type TodoItemProps = {
   todo: Todo,
@@ -15,22 +16,19 @@ type TodoItemProps = {
 const TodoItem = ({ todo, children }: TodoItemProps) => 
 {
   const [ showDetails, setShowDetails ] = useState<boolean>(false)
-
-  const DetailsDisplay = () => {
-    return showDetails
-      ? <Details todo={todo} />
-      : null
-  }
   
   return (
     <TodoItemContainer
       gradient={todo.bgGradient}
-      onClick={() => setShowDetails(!showDetails)}
+      onMouseEnter={() => setShowDetails(true)}
+      onMouseLeave={() => setShowDetails(false)}
     >
         <Headline title={ todo.title }>
           { children }
         </Headline>
-        <DetailsDisplay />
+        <AnimatePresence>
+          {showDetails && <Details todo={todo} />}
+        </AnimatePresence>
     </TodoItemContainer>
   )
 }

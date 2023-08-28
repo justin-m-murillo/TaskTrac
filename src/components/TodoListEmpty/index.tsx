@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './styles'
+import DefaultPageRoot from '../DefaultPageRoot'
 
 type DisplayEmptyListProps = {
   alertText: string,
@@ -8,17 +8,21 @@ type DisplayEmptyListProps = {
 
 const TodoListEmpty = ({ alertText, showAdd }: DisplayEmptyListProps) => {
   return (
-    <div className={styles.root}>
-      <p>
+    <DefaultPageRoot>
+      <p className={styles.text}>
         {alertText}
       </p>
       {showAdd &&
-        <p>
+        <p className={styles.text}>
           Click the 'Add' tab to create todos
         </p>
       }
-    </div>
+    </DefaultPageRoot>
   )
 }
 
 export default TodoListEmpty
+
+const styles = {
+  text: 'flex w-full items-center justify-center',
+}

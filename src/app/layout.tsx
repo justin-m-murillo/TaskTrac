@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html className='overflow-y-scroll' lang="en">
       <body className={`
         ${montserrat.className} 
         ${styles.layout}

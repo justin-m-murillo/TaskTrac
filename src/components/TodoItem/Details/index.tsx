@@ -6,7 +6,7 @@ import { Todo } from '@/types/Todo'
 import FieldTable from './FieldTable'
 
 import { motion } from 'framer-motion'
-import { detailsVariant } from '@/motion/variants'
+import { detailsVariants } from '@/motion/variants'
 
 type DetailsProps = {
   todo: Todo
@@ -18,12 +18,17 @@ const Details = ({ todo }: DetailsProps) => {
   const locField = fields.filter(field => field.key === 'Location')
 
   return (
-    <motion.div 
+    <motion.div
+      key={todo.id} 
+      variants={detailsVariants}
+      initial='hidden'
+      animate='show'
+      exit='exit'
       className={styles.detailsContainer}
     >
       <div className='ml-8 grid grid-rows-1 sm:grid-cols-2'>
-        <FieldTable fields={timeFields} />
-        <FieldTable fields={locField} />
+        {timeFields.length > 0 && <FieldTable fields={timeFields} />}
+        {locField.length > 0 &&   <FieldTable fields={locField} />}
       </div>
       {todo?.description &&
         <div className={styles.listItemDesc}>

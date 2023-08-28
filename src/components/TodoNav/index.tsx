@@ -1,38 +1,43 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './styles'
-import TodoNavTab from '../TodoNavTab'
+import { motion, useAnimate, stagger, } from 'framer-motion'
 
-import { MdHome, MdChecklist, MdDeleteOutline, MdAdd } from 'react-icons/md'
+type TodoNavProps = {
+  tabs: React.JSX.Element[]
+  isOpen: boolean
+}
 
-const TodoNav = () => {
+const staggerMenuItems = stagger(0.15);
+
+const TodoNav = ({ tabs, isOpen }: TodoNavProps) => {
+  const [ scope, animate ] = useAnimate()
+  const menuIconSize = 24
+
+  useEffect(() => {
+    animate(
+      'li', 
+      isOpen 
+        ? { opacity: 1, x: 0 } 
+        : { opacity: 0, x: -50 }, 
+      {
+        duration: 0.2,
+        delay: isOpen ? staggerMenuItems : 0
+      }  
+    )
+  }, [isOpen])
 
   return (
-      <div className={styles.root}>
-        <TodoNavTab 
-          title='Home' 
-          Icon={MdHome} 
-          href='/home'
-          isLeft 
-        />
-        <TodoNavTab 
-          title='Completed' 
-          Icon={MdChecklist} 
-          href='/completed-todos'
-        />
-        <TodoNavTab 
-          title='Deleted'
-          Icon={MdDeleteOutline} 
-          href='/deleted-todos'
-        />
-        <TodoNavTab 
-          title='Add'
-          Icon={MdAdd}
-          href='/add-todo'
-          isRight 
-        />
-    </div>
-    
+    <ul
+      ref={scope}
+      className={styles.root}
+    >
+      {tabs.map((tab, index) => (
+        <li key={index}>
+          { isOpen && tab }
+        </li>
+      ))}
+    </ul>
   )
 }
 

@@ -1,4 +1,4 @@
-export const motionListVariant = {
+export const motionListVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -8,7 +8,7 @@ export const motionListVariant = {
   }
 }
 
-export const motionListItemVariant = {
+export const motionListItemVariants = {
   hidden: { 
     opacity: 0,
     y: 100 
@@ -23,7 +23,7 @@ export const motionListItemVariant = {
   },
 }
 
-export const detailsVariant = {
+export const detailsVariants = {
   hidden: {
     opacity: 0,
   },
@@ -31,7 +31,41 @@ export const detailsVariant = {
     opacity: 1,
     transition: {
       ease: 'linear',
-      duration: 0.5,
+      duration: 0.2,
+      delay: 0.5
     }
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      ease: 'linear',
+      duration: 0.2,
+    }
+  }
+}
+
+export const tabListVariants = {
+  hidden: { opacity: 0, },
+  show: { 
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.5
+    }
+  },
+  exit: { opacity: 0, }
+}
+
+export const tabVariants = {
+  hidden: {
+    opacity: 0,
+    x: -50
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+  },
+  exit: {
+    opacity: 0,
+    x: -50,
   }
 }

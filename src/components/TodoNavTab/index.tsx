@@ -3,42 +3,44 @@ import styles from './styles'
 import { useRouter } from 'next/navigation'
 import { IconType } from 'react-icons/lib'
 
-import { useTodoNavContext } from '@/context/TodoNavContext'
-
 export type OpenTabState = {
   openTab: string,
   setOpenTab: React.Dispatch<React.SetStateAction<string>>
 }
 
 type Props = {
-  title: string,
+  title?: string,
   Icon: IconType,
-  href: string,
-  isLeft?: boolean,
-  isRight?: boolean,
+  iconSize: number,
+  href?: string,
+  activeTab?: string,
+  onClick: (href?: string) => void,
+  isStatic?: boolean
 }
 
-const TodoNavTab = ({ title, Icon, href, isLeft, isRight }: Props) => {
+const TodoNavTab = ({ title, Icon, iconSize, href, activeTab, onClick, isStatic }: Props) => {
   const router = useRouter()
-  const { activeTab, setActiveTab } = useTodoNavContext()
 
-  const handleClick = () => {
-    setActiveTab(href)
-    router.push(href)
-  }
-
-  return (
-      <button 
-        className={`
-          ${styles.tab} 
-          ${isLeft ? styles.tabLeft : isRight ? styles.tabRight : ''}
-        `}
-        onClick={handleClick}
+  if (isStatic) {
+    return (
+      <button
+        className={`${styles.tab}`}
+        onClick={() => onClick(href) }
       >
-        <Icon className={`${styles.icon} ${href === activeTab ? styles.openTabText : ''}`} size={20} />
+        <Icon className={`${styles.icon} ${href && href === activeTab ? styles.openTabText : ''}`} size={iconSize} />
         <p className={`${href === activeTab ? styles.openTabText : ''}`}>{title}</p>
       </button>
-  )
+  )}
+  else {
+    return (
+      <button
+        className={`${styles.tab}`}
+        onClick={() => onClick(href) }
+      >
+        <Icon className={`${styles.icon} ${href && href === activeTab ? styles.openTabText : ''}`} size={iconSize} />
+        <p className={`${href === activeTab ? styles.openTabText : ''}`}>{title}</p>
+      </button>
+  )} 
 }
 
 export default TodoNavTab

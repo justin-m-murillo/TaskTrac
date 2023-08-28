@@ -18,8 +18,8 @@ const SelectColor = ({ gradientList, gradient, setGradient }: SelectColorProps) 
               className={`${styles.root} ${grad === gradient ? styles.selected : null}`}
               onClick={() => { setGradient(grad) }}
             >
-              <TodoItemContainer gradient={grad}>
-                <div className='font-semibold'>Title</div>
+              <TodoItemContainer gradient={grad} isStatic>
+                <div className='font-semibold select-none'>Title</div>
               </TodoItemContainer>
             </div>
           </div>

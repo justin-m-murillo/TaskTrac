@@ -7,7 +7,7 @@ import ButtonComplete from '../ButtonComplete'
 import ButtonDelete from '../ButtonDelete'
 
 import { motion } from 'framer-motion'
-import { motionListVariant, motionListItemVariant } from '@/motion/variants'
+import { motionListVariants, motionListItemVariants } from '@/motion/variants'
 
 type TodoListActiveProps = {
   activeTodos: Todo[],
@@ -17,19 +17,17 @@ type TodoListActiveProps = {
 const TodoListActive = ({ activeTodos, todosContext}: TodoListActiveProps) => {
   return (
     <motion.ul
-      variants={motionListVariant}
+      variants={motionListVariants}
       initial={'hidden'}
       animate={'show'}
     >
       {activeTodos.map((todo) => (
         <motion.li
-          variants={motionListItemVariant}
+          key={todo.id}
+          variants={motionListItemVariants}
           className='flex my-6'
         >
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-          >
+          <TodoItem todo={todo}>
             <ButtonRow>
               <ButtonComplete id={todo.id} title={todo.title} todosContext={todosContext} />
               <ButtonDelete id={todo.id} todosContext={todosContext} />

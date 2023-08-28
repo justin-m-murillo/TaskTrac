@@ -11,6 +11,7 @@ import { FormAreaInput, FormTextInput } from '@/components/FormInput'
 import ShowDueDateSelector from './subcomponents/ShowDueDateSelector'
 import NoShowDueDateSelector from './subcomponents/NoShowDueDateSelector'
 import SelectColor from './subcomponents/SelectColor'
+import DefaultPageRoot from '@/components/DefaultPageRoot'
 
 const gradientList = [
   'from-sky-800 to-rose-500',
@@ -53,68 +54,73 @@ const PageAddTodo = () => {
   const [ gradient, setGradient ] = useState<string>(gradientList[0])
   
   return (
-    <form 
-      className={styles.root}
-      action={data => {
-        const due = new Date(
-          dueDate.year,
-          dueDate.month,
-          dueDate.day,
-          dueDate.hours,
-          dueDate.minutes,
-        )
-          actionCreateTodo(
-            data, 
-            showDueDate, 
-            due, 
-            gradient, 
-            setActiveTab, 
-            {todos, setTodos}
-          ) 
+    <DefaultPageRoot>
+      <form
+        action={data => {
+          const due = new Date(
+            dueDate.year,
+            dueDate.month,
+            dueDate.day,
+            dueDate.hours,
+            dueDate.minutes,
+          )
+            actionCreateTodo(
+              data, 
+              showDueDate, 
+              due, 
+              gradient, 
+              setActiveTab, 
+              {todos, setTodos}
+            ) 
+          }
+        } 
+      >
+        {/* Title */}
+        <FormTextInput name='title' />
+
+        {/* Location */}
+        <FormTextInput name='location' />
+        
+        {/* Description */}
+        <FormAreaInput name='description' />
+
+        {/* Select Due Date */}
+        {!showDueDate &&
+          <div className='mb-4'>
+            <NoShowDueDateSelector 
+              option='Set a due date?'
+              setDueDate={setDueDate}
+              setShowDueDate={setShowDueDate}
+            />
+          </div>
         }
-      } 
-    >
-      {/* Title */}
-      <FormTextInput name='title' />
+        {showDueDate && 
+          <div className='mb-4'>
+            <ShowDueDateSelector
+              option='Cancel?'
+              dueDate={dueDate}
+              setDueDate={setDueDate}
+              setShowDueDate={setShowDueDate}
+            />
+          </div>
+        }
 
-      {/* Location */}
-      <FormTextInput name='location' />
-      
-      {/* Description */}
-      <FormAreaInput name='description' />
-
-      {/* Select Due Date */}
-      {!showDueDate &&
-        <NoShowDueDateSelector 
-          option='Set a due date?'
-          setDueDate={setDueDate}
-          setShowDueDate={setShowDueDate}
+        <SelectColor
+          gradientList={gradientList}
+          gradient={gradient}
+          setGradient={setGradient}
         />
-      }
-      {showDueDate && 
-        <ShowDueDateSelector
-          option='Cancel?'
-          dueDate={dueDate}
-          setDueDate={setDueDate}
-          setShowDueDate={setShowDueDate}
-        />
-      }
 
-      <SelectColor
-        gradientList={gradientList}
-        gradient={gradient}
-        setGradient={setGradient}
-      />
-
-      <div className='flex mt-2 justify-end'>
-        <button
-          className={styles.button}
-          type='submit'
-        >
-          Submit
-        </button>
-      </div>
-    </form>
+        <div className='flex mt-2 justify-end'>
+          <button
+            className={styles.button}
+            type='submit'
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </DefaultPageRoot>
   )
 }
 
