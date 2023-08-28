@@ -8,9 +8,8 @@ import ButtonDeleteForever from '../ButtonDeleteForver'
 const TodoListCompleted = ({ todos: completed, todosContext }: TodoListProps) => {
   return (
     <ul>
-      {completed
-        .filter(todo => todo.completed)
-        .map(todo => (
+      {completed.map(todo => (
+        <li className='my-4'>
           <TodoItem 
             key={todo.id}
             todo={todo}
@@ -19,8 +18,8 @@ const TodoListCompleted = ({ todos: completed, todosContext }: TodoListProps) =>
               <ButtonDeleteForever id={todo.id} todosContext={todosContext} />
             </ButtonRow>
           </TodoItem>
-        ))
-      }
+        </li>
+      ))}
     </ul>
   )
 }

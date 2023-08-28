@@ -30,10 +30,16 @@ export const serverCompleteTodo = async (id: string) =>
   })
 }
 
-export const serverCreateTodo = async (data: FormData, dueDate: Date|null|undefined) => {
+export const serverCreateTodo = async (
+  data: FormData, 
+  hasDueDate: boolean, 
+  dueDate: Date|null|undefined,
+  gradient: string) => 
+{
   const title = data.get('title')?.valueOf()
   const description = data.get('description')?.valueOf()
   const location = data.get('location')?.valueOf()
+  const due = hasDueDate ? dueDate : null 
   if (typeof title !== 'string') {
     throw new Error('Invalid Title')
   }
@@ -49,7 +55,8 @@ export const serverCreateTodo = async (data: FormData, dueDate: Date|null|undefi
       title,
       description,
       location,
-      dueDate,
+      dueDate: due,
+      bgGradient: gradient,
       completed: false, 
       deleted: false 
   }})

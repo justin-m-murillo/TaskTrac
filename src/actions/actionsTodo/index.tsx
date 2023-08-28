@@ -4,13 +4,15 @@ import { redirect } from 'next/navigation'
 
 export const actionCreateTodo = (
   data: FormData,
+  hasDueDate: boolean,
   dueDate: Date,
+  gradient: string,
   setActiveTab: React.Dispatch<React.SetStateAction<string>>, 
   todosState: TodosState,) => 
 {
   const { todos, setTodos } = todosState
   // create new todo item
-  serverCreateTodo(data, dueDate)
+  serverCreateTodo(data, hasDueDate, dueDate, gradient)
     .then(created => {
       setTodos([...todos, created])
       setActiveTab('/home')

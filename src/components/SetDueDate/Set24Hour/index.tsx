@@ -1,3 +1,6 @@
+import TextRowSelector from '@/components/TextRowSelector'
+import TextRowOption from '@/components/TextRowSelector/TextRowOption'
+import { useTodo24HourContext } from '@/context/Todo24HourTime'
 import { TodoDateTime } from '@/types/Todo'
 import React, { useState } from 'react'
 
@@ -7,46 +10,34 @@ type Set24HourProps = {
 }
 
 const Set24Hour = ({ dueDate, setDueDate }: Set24HourProps) => {
-  const [ isAmPm, setIsAmPm ] = useState<boolean>(dueDate.isAmPm)
+  const { is24HourTime, setIs24HourTime } = useTodo24HourContext()
 
   return (
-    <div className='flex flex-row mb-2'>
-      <div className='flex flex-row text-sm'>
-        <p className='mr-2'>Use 24-hour time?</p>
-        <div 
-          className={`${styles.option} ${!isAmPm && styles.isActive}`}
-          onClick={() => {
-            setDueDate({
-              ...dueDate,
-              isAmPm: false,
-              hours: dueDate.hours % 24
-            })
-            setIsAmPm(false)
-          }}
-        >
-          <p>Yes</p>
-        </div>
-        <div 
-          className={`${styles.option} ${isAmPm && styles.isActive}`}
-          onClick={() => {
-            setDueDate({
-              ...dueDate,
-              isAmPm: true,
-              hours: dueDate.hours % 12
-            })
-            setIsAmPm(true)
-          }}
-        >
-          <p>No</p>
-        </div>
-      </div>
-    </div>
+    <TextRowSelector prompt='Use 24-hour time?'>
+      <TextRowOption 
+        option='Yes' 
+        isActive={is24HourTime} 
+        onClick={() => {
+          setDueDate({
+            ...dueDate,
+            hours: dueDate.hours % 24
+          })
+          setIs24HourTime(true)
+        }}
+      />
+      <TextRowOption
+        option='No'
+        isActive={!is24HourTime}
+        onClick={() => {
+          setDueDate({
+            ...dueDate,
+            ampm: dueDate.hours > 11 ? 'PM' : 'AM',
+          })
+          setIs24HourTime(false)
+        }}
+      />
+    </TextRowSelector>
   )
 }
 
 export default Set24Hour
-
-const styles = {
-  option: 'mr-2 cursor-pointer select-none hover:text-sky-500',
-  isActive: 'text-sky-500'
-}

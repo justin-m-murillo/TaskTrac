@@ -9,14 +9,16 @@ const TodoListDeleted = ({ todos: deletedTodos, todosContext }: TodoListProps) =
   return (
     <ul>
       {deletedTodos.map(todo => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-        >
-          <ButtonRow>
-            <ButtonRecover id={todo.id} todosContext={todosContext} />
-          </ButtonRow>
-        </TodoItem>
+        <li className='my-4'>
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+          >
+            <ButtonRow>
+              <ButtonRecover id={todo.id} todosContext={todosContext} />
+            </ButtonRow>
+          </TodoItem>
+        </li>
       ))}
     </ul>
   )

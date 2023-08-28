@@ -4,6 +4,7 @@ export type Todo = {
   description: string | null,
   location:    string | null,
   dueDate:     Date | null,
+  bgGradient:  string,
   completed:   boolean,
   completedAt: Date | null,
   deleted:     boolean,
@@ -33,6 +34,5 @@ export type TodoDateTime = {
   day: number,
   hours: number,
   minutes: number,
-  isAmPm: boolean,
-  ampm: string | null,
+  ampm: string,
 }

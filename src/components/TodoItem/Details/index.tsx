@@ -5,6 +5,9 @@ import useFields from '@/hooks/useFields'
 import { Todo } from '@/types/Todo'
 import FieldTable from './FieldTable'
 
+import { motion } from 'framer-motion'
+import { detailsVariant } from '@/motion/variants'
+
 type DetailsProps = {
   todo: Todo
 }
@@ -15,7 +18,9 @@ const Details = ({ todo }: DetailsProps) => {
   const locField = fields.filter(field => field.key === 'Location')
 
   return (
-    <div className={styles.detailsContainer}>
+    <motion.div 
+      className={styles.detailsContainer}
+    >
       <div className='ml-8 grid grid-rows-1 sm:grid-cols-2'>
         <FieldTable fields={timeFields} />
         <FieldTable fields={locField} />
@@ -27,7 +32,7 @@ const Details = ({ todo }: DetailsProps) => {
           </p>
         </div>
       }
-    </div>
+    </motion.div>
   )
 }
 

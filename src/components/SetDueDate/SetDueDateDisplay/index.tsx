@@ -1,3 +1,4 @@
+import { useTodo24HourContext } from '@/context/Todo24HourTime'
 import { getDateString } from '@/hooks/TimeSelector'
 import { TodoDateTime } from '@/types/Todo'
 import React from 'react'
@@ -7,10 +8,11 @@ type SetDueDateDisplayProps = {
 }
 
 const SetDueDateDisplay = ({ dueDate }: SetDueDateDisplayProps) => {
+  const { is24HourTime } = useTodo24HourContext()
   return (
-    <div className='flex flex-row mb-2'>
-      <p>Selected Date/Time:</p>
-      <p className='ml-2 font-semibold'>{ getDateString(dueDate) }</p>
+    <div className='flex flex-col sm:flex-row mb-2'>
+      <p className='mr-2'>Selected Date/Time:</p>
+      <p className='font-semibold'>{ getDateString(dueDate, is24HourTime) }</p>
     </div>
   )
 }

@@ -16,6 +16,7 @@ model Todo {
   description String?
   location    String?
   dueDate     DateTime?
+  bgGradient  String
   completed   Boolean
   completedAt DateTime?
   deleted     Boolean

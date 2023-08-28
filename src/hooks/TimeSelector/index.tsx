@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { differenceInDays, endOfMonth, getDaysInMonth, setYear, startOfMonth } from 'date-fns'
+import { getDaysInMonth } from 'date-fns'
 import { TodoDateTime } from '@/types/Todo'
+import { DateTime } from 'ts-luxon'
 
 export const evalHoursAmPm = (ampm: string|null, hours: number) => {
   if (!ampm) 
@@ -14,15 +15,11 @@ export const evalHoursAmPm = (ampm: string|null, hours: number) => {
   else return hours
 }
 
-export const getDateString = (date: TodoDateTime) => {
-  let dateStr = `${getMonths()[date.month].value} ${date.day}, ${date.year}`
-  if (date.isAmPm && date.ampm) {
-    const hours = date.hours % 12
-    return dateStr + ` - ${hours}:${date.minutes} ${date.ampm}`
-  }
-  else {
-    return dateStr + ` - ${date.hours}:${date.minutes}`
-  }
+export const getDateString = (date: TodoDateTime, is24HourTime: boolean) => {
+  const dateS = new Date(date.year, date.month, date.day, date.hours, date.minutes)
+  return is24HourTime 
+    ? DateTime.fromJSDate(dateS).toFormat('DD - T')
+    : DateTime.fromJSDate(dateS).toFormat('DD - t')
 }
 
 export const getMinutes = () => {
@@ -64,7 +61,7 @@ export const useDaysOfMonth = (date: Date) => {
   return daysOfMonth
 }
 
-export const useHoursFormat = (isAmPm: boolean) => {
+export const useHoursFormat = (is24HourTime: boolean) => {
   const [ hoursFormat, setHoursFormat ] = useState<string[]>([])
 
   const hoursAmPm = [
@@ -76,11 +73,11 @@ export const useHoursFormat = (isAmPm: boolean) => {
   ]
 
   useEffect(() => {
-    if (isAmPm)
-      setHoursFormat(hoursAmPm)
-    else
+    if (is24HourTime)
       setHoursFormat(hoursFull)
-  }, [isAmPm])
+    else
+      setHoursFormat(hoursAmPm)
+  }, [is24HourTime])
 
   return hoursFormat
 }
