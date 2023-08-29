@@ -75,6 +75,7 @@ export const actionRecoverTodo = (
   serverActivateTodo(id)
     .then(activated => {
       // update context
+      console.log('Activated',activated)
       const newTodos = [...todos]
       const index = newTodos.findIndex(todo => todo.id === activated.id)
       newTodos[index].completed = false

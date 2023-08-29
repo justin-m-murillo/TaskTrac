@@ -5,12 +5,21 @@ import { TodoListProps } from '@/types/Todo'
 import ButtonRow from '../TodoItem/ButtonRow'
 import ButtonDeleteForever from '../ButtonDeleteForver'
 
+import { motion } from 'framer-motion'
+import { motionListVariants, motionListItemVariants } from '@/motion/variants'
+
+
 const TodoListCompleted = ({ todos: completed, todosContext }: TodoListProps) => {
   return (
-    <ul>
+    <motion.ul
+      variants={motionListVariants}
+      initial={'hidden'}
+      animate={'show'}
+    >
       {completed.map(todo => (
-        <li
+        <motion.li
           key={todo.id}
+          variants={motionListItemVariants}
           className='my-4'
         >
           <TodoItem todo={todo}>
@@ -18,9 +27,9 @@ const TodoListCompleted = ({ todos: completed, todosContext }: TodoListProps) =>
               <ButtonDeleteForever id={todo.id} todosContext={todosContext} />
             </ButtonRow>
           </TodoItem>
-        </li>
+        </motion.li>
       ))}
-    </ul>
+    </motion.ul>
   )
 }
 

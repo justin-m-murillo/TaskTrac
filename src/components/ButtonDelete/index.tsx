@@ -9,7 +9,6 @@ const ButtonDelete = ({ id, todosContext }: TodoButtonProps) => {
   return (
     <Button
       Icon={MdDisabledByDefault}
-      //hover='hover:text-red-700'
       onClick={event => {
         event.stopPropagation()
         actionDeleteTodo(id, todosContext)

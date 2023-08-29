@@ -21,6 +21,13 @@ export const motionListItemVariants = {
       stiffness: 100,
     }
   },
+  exit: {
+    opacity: 0,
+    transition: {
+      ease: 'linear',
+      duration: 0.5,
+    }
+  }
 }
 
 export const detailsVariants = {
@@ -44,28 +51,13 @@ export const detailsVariants = {
   }
 }
 
-export const tabListVariants = {
-  hidden: { opacity: 0, },
+export const tabControlsVariants = {
+  hidden: { opacity: 0 },
   show: { 
     opacity: 1,
     transition: {
-      staggerChildren: 0.5
-    }
+      ease: 'linear',
+      duration: 0.5,
+    } 
   },
-  exit: { opacity: 0, }
-}
-
-export const tabVariants = {
-  hidden: {
-    opacity: 0,
-    x: -50
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-  },
-  exit: {
-    opacity: 0,
-    x: -50,
-  }
 }

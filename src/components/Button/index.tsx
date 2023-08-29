@@ -27,6 +27,9 @@ const Button = ({ Icon, onClick, buttonType }: ButtonProps) => {
     <button 
       type={btnType}
       onClick={onClick}
+      onMouseEnter={event => {
+        event.stopPropagation()
+      }}
       className={`text-white hover:text-gray-200 transition duration-300`}
     >
       <Icon size={iconSize} />
