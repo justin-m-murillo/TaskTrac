@@ -50,14 +50,3 @@ export const detailsVariants = {
     }
   }
 }
-
-export const tabControlsVariants = {
-  hidden: { opacity: 0 },
-  show: { 
-    opacity: 1,
-    transition: {
-      ease: 'linear',
-      duration: 0.5,
-    } 
-  },
-}

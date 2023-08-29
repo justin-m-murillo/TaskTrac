@@ -5,31 +5,26 @@ import { TodoListProps } from '@/types/Todo'
 import ButtonRow from '../TodoItem/ButtonRow'
 import ButtonDeleteForever from '../ButtonDeleteForver'
 
-import { motion } from 'framer-motion'
-import { motionListVariants, motionListItemVariants } from '@/motion/variants'
+import { motion, AnimatePresence } from 'framer-motion'
+import Delay from '../Delay'
+import { MotionListItemProps } from '@/motion/props'
 
 
-const TodoListCompleted = ({ todos: completed, todosContext }: TodoListProps) => {
+const TodoListCompleted = ({ todos: completedTodos, todosContext }: TodoListProps) => {
   return (
-    <motion.ul
-      variants={motionListVariants}
-      initial={'hidden'}
-      animate={'show'}
-    >
-      {completed.map(todo => (
-        <motion.li
-          key={todo.id}
-          variants={motionListItemVariants}
-          className='my-4'
-        >
-          <TodoItem todo={todo}>
-            <ButtonRow>
-              <ButtonDeleteForever id={todo.id} todosContext={todosContext} />
-            </ButtonRow>
-          </TodoItem>
-        </motion.li>
+    <AnimatePresence>
+      {completedTodos.map((todo, index) => (
+        <Delay key={todo.id} delay={index * 200}>
+          <motion.div className='my-4' {...MotionListItemProps}>
+            <TodoItem todo={todo}>
+              <ButtonRow>
+                <ButtonDeleteForever id={todo.id} todosContext={todosContext} />
+              </ButtonRow>
+            </TodoItem>
+          </motion.div>
+        </Delay>
       ))}
-    </motion.ul>
+    </AnimatePresence>
   )
 }
 

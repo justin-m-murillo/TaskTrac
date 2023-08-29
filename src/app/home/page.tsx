@@ -9,7 +9,7 @@ const HomePage = () => {
   const active = todos.filter(todo => !todo.completed && !todo.deleted)
 
   return active.length > 0 
-    ? <TodoListActive activeTodos={active} todosContext={{ todos, setTodos }} /> 
+    ? <TodoListActive todos={active} todosContext={{ todos, setTodos }} /> 
     : <TodoListEmpty alertText='To-do list is empty!' showAdd />
 }
 

@@ -12,6 +12,9 @@ import styles from './styles'
 import TodoNav from '../TodoNav'
 import TodoNavTab from '../TodoNavTab'
 
+import { motion } from 'framer-motion'
+import { MotionTabControlsProps } from '@/motion/props'
+
 type Props = {
   data: Todo[],
   children: ReactNode
@@ -27,7 +30,8 @@ const AppClient = ({ data, children }: Props) => {
   const [ activeTab, setActiveTab ] = useState<string>(pathname)
   const [ todos, setTodos ] = useState<Todo[]>(data)
   const [ is24HourTime, setIs24HourTime ] = useState<boolean>(false)
-
+  //const motionTabControlsProps = useMotionTabControls(menuOpen)
+  
   // MENU TABS & CONTROLS
 
   const handleTabClick = (href?: string) => {
@@ -37,29 +41,35 @@ const AppClient = ({ data, children }: Props) => {
     }
   }
 
-  const menuTabControls = {
-    open: 
-      <div>
+  const NavTabControls = {
+    closed: 
+      <motion.div
+        {...MotionTabControlsProps}
+        className='mr-8'
+      >
         <TodoNavTab
           Icon={MdMenu}
           iconSize={menuIconSize}
           onClick={() => {
-            setMenuOpen(true)
+            setMenuOpen(!menuOpen)
           }}
           isStatic
         />
-      </div>,
-    close:
-      <div className='mr-8'>
+      </motion.div>,
+    opened:
+      <motion.div
+        {...MotionTabControlsProps}
+        className='mr-8'
+      >
         <TodoNavTab
           Icon={MdMenuOpen}
           iconSize={menuIconSize}
           onClick={() => {
-            setMenuOpen(false)
+            setMenuOpen(!menuOpen)
           }}
           isStatic
         />
-      </div>, 
+      </motion.div>
   }
 
   const menuTabList = [
@@ -104,7 +114,7 @@ const AppClient = ({ data, children }: Props) => {
         <Todo24HourContext.Provider value={{ is24HourTime, setIs24HourTime }}>
           <div className={styles.root}>
             <div className='flex flex-row mb-4 w-full justify-between'>
-              {menuOpen ? menuTabControls.close : menuTabControls.open}
+              { menuOpen ? NavTabControls.opened : NavTabControls.closed }
               <TodoNav tabs={menuTabList} isOpen={menuOpen} />
               {/* <TodoNav tabs={settingsTabList} isOpen={settingsOpen} /> */}
             </div>
