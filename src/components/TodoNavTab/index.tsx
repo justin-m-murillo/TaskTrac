@@ -19,8 +19,6 @@ type Props = {
 }
 
 const TodoNavTab = ({ title, Icon, iconSize, href, activeTab, onClick, isStatic }: Props) => {
-  const router = useRouter()
-
   if (isStatic) {
     return (
       <button

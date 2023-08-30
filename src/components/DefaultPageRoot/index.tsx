@@ -1,14 +1,21 @@
 import React, { ReactNode } from 'react'
+import { motion } from 'framer-motion'
+
 
 type DefaultPageRootProps = {
-  children: ReactNode,
+  minHeight?: number
+  children: ReactNode
 }
 
-const DefaultPageRoot = ({ children }: DefaultPageRootProps) => {
+const DefaultPageRoot = ({ minHeight, children }: DefaultPageRootProps) => {
   return (
-    <div className={styles.root}>
+    <motion.div 
+      className={`${styles.root}`} style={{ minHeight: minHeight }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       { children }
-    </div>
+    </motion.div>
   )
 }
 

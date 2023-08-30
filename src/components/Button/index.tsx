@@ -1,15 +1,16 @@
 import React from 'react'
 import { IconType } from 'react-icons/lib/esm/iconBase';
+import { motion } from 'framer-motion'
 
 export type ButtonProps = {
-  Icon: IconType,
-  //hover?: string,
-  onClick?: React.MouseEventHandler,
-  buttonType?: string,
+  Icon: IconType
+  size?: number
+  onClick?: React.MouseEventHandler
+  buttonType?: string
 }
 
-const Button = ({ Icon, onClick, buttonType }: ButtonProps) => {
-  const iconSize = 48
+const Button = ({ Icon, onClick, size, buttonType }: ButtonProps) => {
+  const iconSize = 32
   const btnType = (() => {
     switch (buttonType) {
       case 'undefined':
@@ -24,16 +25,19 @@ const Button = ({ Icon, onClick, buttonType }: ButtonProps) => {
   })();
 
   return (
-    <button 
+    <motion.button 
       type={btnType}
       onClick={onClick}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      whileHover={{ scale: 1.5 }}
       onMouseEnter={event => {
         event.stopPropagation()
       }}
-      className={`text-white hover:text-gray-200 transition duration-300`}
+      className={`text-white`}
     >
-      <Icon size={iconSize} />
-    </button>
+      <Icon size={size ?? iconSize} />
+    </motion.button>
   )
 }
 

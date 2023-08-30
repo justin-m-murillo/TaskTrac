@@ -16,11 +16,12 @@ const TodoListCompleted = ({ todos: completedTodos, todosContext }: TodoListProp
       {completedTodos.map((todo, index) => (
         <Delay key={todo.id} delay={index * 200}>
           <motion.div className='my-4' {...MotionListItemProps}>
-            <TodoItem todo={todo}>
-              <ButtonRow>
+            <TodoItem 
+              todo={todo}
+              buttons={[
                 <ButtonDeleteForever id={todo.id} todosContext={todosContext} />
-              </ButtonRow>
-            </TodoItem>
+              ]}
+            />
           </motion.div>
         </Delay>
       ))}

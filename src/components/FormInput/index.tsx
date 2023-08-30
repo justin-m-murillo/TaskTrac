@@ -1,39 +1,59 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 
-type FormInputProps = {
-  name: string,
-  children?: ReactNode,
+interface FormInputProps {
+  name: string
+  maxLength: number
 }
 
-export const FormInput = ({ name, children }: FormInputProps) => {
+interface FormInputBaseProps extends FormInputProps {
+  charCount: number
+  children: ReactNode
+}
+
+export const FormInput = ({ name, charCount, maxLength, children }: FormInputBaseProps) => {
   return (
     <div className='flex flex-col'>
-      <label className={styles.label}>{ name }</label>
+      <label className={styles.label}>
+        { name } 
+        {charCount > maxLength*.75 && 
+          <span className='ml-4 font-normal'>
+            {charCount}/{maxLength}
+          </span>
+        }
+      </label>
       { children }
     </div>
   )
 }
 
-export const FormBoolInput = ({ name }: FormInputProps) => {
+export const FormTextInput = ({ name, maxLength }: FormInputProps) => {
+  const [ charCount, setCharCount ] = useState<number>(0)
+  
+
   return (
-    <FormInput name={name}>
-      <input type='' name={name} />
+    <FormInput name={name} charCount={charCount} maxLength={maxLength}>
+      <input 
+        type='text' 
+        name={name}
+        className={`${styles.singleInput} ${styles.input}`}
+        maxLength={maxLength} 
+        onChange={e => setCharCount(e.target.value.length)}
+      />
     </FormInput>
   )
 }
 
-export const FormTextInput = ({ name }: FormInputProps) => {
-  return (
-    <FormInput name={name}>
-      <input type='text' name={name} className={`${styles.singleInput} ${styles.input}`} />
-    </FormInput>
-  )
-}
+export const FormAreaInput = ({ name, maxLength }: FormInputProps) => {
+  const [ charCount, setCharCount ] = useState<number>(0)
 
-export const FormAreaInput = ({ name }: FormInputProps) => {
   return (
-    <FormInput name={name}>
-      <textarea name={name} className={`${styles.areaInput} ${styles.input}`} />
+    <FormInput name={name} charCount={charCount} maxLength={maxLength}>
+      <textarea 
+        name={name} 
+        className={`${styles.areaInput} ${styles.input}`} 
+        maxLength={maxLength}
+        onChange={e => setCharCount(e.target.value.length)}
+      />
     </FormInput>
   )
 }

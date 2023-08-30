@@ -15,11 +15,12 @@ const TodoListDeleted = ({ todos: deletedTodos, todosContext }: TodoListProps) =
       {deletedTodos.map((todo, index) => (
         <Delay key={todo.id} delay={index * 200}>
           <motion.div className='my-4' {...MotionListItemProps}>
-            <TodoItem todo={todo}>
-              <ButtonRow>
-                <ButtonRecover id={todo.id} todosContext={todosContext} />
-              </ButtonRow>
-            </TodoItem>
+            <TodoItem 
+              todo={todo}
+              buttons={[
+                <ButtonRecover id={todo.id} todosContext={todosContext} />,
+              ]}
+            />
           </motion.div>
         </Delay>
       ))}

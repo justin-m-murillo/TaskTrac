@@ -17,12 +17,17 @@ const TodoListActive = ({ todos: activeTodos, todosContext}: TodoListProps) => {
       {activeTodos.map((todo, index) => (
         <Delay key={todo.id} delay={index * 200}>
           <motion.div className='my-4' {...MotionListItemProps}>
-            <TodoItem todo={todo}>
-              <ButtonRow>
+            <TodoItem 
+              todo={todo}
+              buttons={[
+                <ButtonComplete id={todo.id} title={todo.title} todosContext={todosContext} />,
+                <ButtonDelete id={todo.id} todosContext={todosContext} />
+              ]}
+            />
+              {/* <ButtonRow>
                 <ButtonComplete id={todo.id} title={todo.title} todosContext={todosContext} />
                 <ButtonDelete id={todo.id} todosContext={todosContext} />
-              </ButtonRow>
-            </TodoItem>
+              </ButtonRow> */}
           </motion.div>
         </Delay>
       ))}

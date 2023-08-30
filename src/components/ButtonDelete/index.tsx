@@ -9,6 +9,7 @@ const ButtonDelete = ({ id, todosContext }: TodoButtonProps) => {
   return (
     <Button
       Icon={MdDisabledByDefault}
+      size={28}
       onClick={event => {
         event.stopPropagation()
         actionDeleteTodo(id, todosContext)

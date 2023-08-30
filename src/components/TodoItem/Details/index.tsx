@@ -26,7 +26,7 @@ const Details = ({ todo }: DetailsProps) => {
       exit='exit'
       className={styles.detailsContainer}
     >
-      <div className='ml-8 grid grid-rows-1 sm:grid-cols-2'>
+      <div className='grid grid-rows-1 sm:grid-cols-2'>
         {timeFields.length > 0 && <FieldTable fields={timeFields} />}
         {locField.length > 0 &&   <FieldTable fields={locField} />}
       </div>

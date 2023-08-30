@@ -1,5 +1,5 @@
 const styles = {
-  root: 'flex flex-row items-center justify-center',
+  root: 'flex flex-row w-full justify-end',
 }
 
 export default styles

@@ -21,7 +21,7 @@ const TodoItemContainer = ({ gradient, children, onMouseEnter, onMouseLeave, isS
   else 
     return (
       <motion.div
-        initial={{ height: 80 }}
+        initial={{ height: 60 }}
         whileHover={itemContainerWhileHover}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave} 
@@ -35,6 +35,6 @@ const TodoItemContainer = ({ gradient, children, onMouseEnter, onMouseLeave, isS
 export default TodoItemContainer
 
 const styles = {
-  root: 'flex flex-col w-full rounded-xl px-4 py-2 bg-gradient-to-r',
+  root: 'flex flex-col w-full h-full rounded-xl px-4 py-2 bg-gradient-to-r',
   gradientHover: 'bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%] transition-all duration-500',
 }

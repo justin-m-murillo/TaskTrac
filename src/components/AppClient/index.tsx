@@ -104,7 +104,9 @@ const AppClient = ({ data, children }: Props) => {
     <TodoNavTab 
       Icon={MdSettings}
       iconSize={menuIconSize}
-      onClick={() => {}}
+      href='/settings'
+      activeTab={activeTab}
+      onClick={handleTabClick}
     />
   ]
 

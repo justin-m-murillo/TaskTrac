@@ -1,9 +1,12 @@
 import React, { ReactNode } from 'react'
 import styles from './styles'
 
+import { MdEditSquare } from 'react-icons/md'
+import Button from '@/components/Button'
+
 type HeadlineProps = {
-  title: string,
-  children: ReactNode,
+  title: string
+  children: ReactNode
 }
 
 const Headline = ({ title, children }: HeadlineProps) => {
@@ -11,7 +14,7 @@ const Headline = ({ title, children }: HeadlineProps) => {
     <div className={styles.listItemMain}>
       <div className={styles.listItemHead}>
         <p className={styles.listItemTitle}>
-          { title }
+          { title } 
         </p>
       </div>
       { children }

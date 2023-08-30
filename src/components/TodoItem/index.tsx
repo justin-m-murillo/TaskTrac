@@ -5,15 +5,16 @@ import { Todo } from '@/types/Todo'
 import Headline from './Headline'
 import Details from './Details'
 import TodoItemContainer from './TodoItemContainer'
+import ButtonRow from './ButtonRow'
 
 import { AnimatePresence } from 'framer-motion'
 
 type TodoItemProps = {
-  todo: Todo,
-  children?: ReactNode,
+  todo: Todo
+  buttons?: React.JSX.Element[]
 }
 
-const TodoItem = ({ todo, children }: TodoItemProps) => 
+const TodoItem = ({ todo, buttons }: TodoItemProps) => 
 {
   const [ showDetails, setShowDetails ] = useState<boolean>(false)
   
@@ -23,8 +24,12 @@ const TodoItem = ({ todo, children }: TodoItemProps) =>
       onMouseEnter={() => setShowDetails(true)}
       onMouseLeave={() => setShowDetails(false)}
     >
-        <Headline title={ todo.title }>
-          { children }
+        <Headline title={todo.title}>
+          {showDetails && buttons && 
+            <ButtonRow>
+              { buttons }
+            </ButtonRow>
+          }
         </Headline>
         <AnimatePresence>
           {showDetails && <Details todo={todo} />}
