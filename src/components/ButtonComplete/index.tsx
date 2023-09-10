@@ -11,8 +11,7 @@ interface TodoButtonCompleteProps extends TodoButtonProps {
 const ButtonComplete = ({ id, title, todosContext }: TodoButtonCompleteProps) => {
   return (
     <Button 
-      Icon={MdCheckBox} 
-      size={28} 
+      Icon={MdCheckBox}
       onClick={event => {
         event.stopPropagation()
         actionCompleteTodo(

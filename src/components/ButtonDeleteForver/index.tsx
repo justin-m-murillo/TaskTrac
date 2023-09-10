@@ -9,8 +9,7 @@ import { actionDeleteForever } from '@/actions/actionsTodo'
 const ButtonDeleteForever = ({ id, todosContext }: TodoButtonProps) => {
   return (
     <Button 
-      Icon={MdDeleteForever} 
-      size={28}
+      Icon={MdDeleteForever}
       onClick={event => {
         event.stopPropagation()
         actionDeleteForever(id, todosContext)

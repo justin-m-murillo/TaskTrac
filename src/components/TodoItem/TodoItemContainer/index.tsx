@@ -1,17 +1,29 @@
 import React, { ReactNode } from 'react'
 
 import { motion } from 'framer-motion'
-import { itemContainerWhileHover } from '@/motion/gestures'
+import { MotionItemWhileHover } from '@/motion/gestures'
+import useItemContainerHover from '@/hooks/useItemContainerHover'
+import { Todo } from '@/types/Todo'
 
 type TodoItemContainerProps = {
-  gradient?: string,
-  children: ReactNode,
-  onMouseEnter?: React.MouseEventHandler,
-  onMouseLeave?: React.MouseEventHandler,
-  isStatic?: boolean,
+  todo: Todo
+  gradient?: string
+  children: ReactNode
+  onMouseEnter?: React.MouseEventHandler
+  onMouseLeave?: React.MouseEventHandler
+  isStatic?: boolean
 }
 
-const TodoItemContainer = ({ gradient, children, onMouseEnter, onMouseLeave, isStatic }: TodoItemContainerProps) => {
+const TodoItemContainer = ({
+  todo,
+  gradient, 
+  children, 
+  onMouseEnter, 
+  onMouseLeave, 
+  isStatic }: TodoItemContainerProps) =>
+{
+  const motionObj = useItemContainerHover(todo)
+
   if (isStatic)
     return (
       <div className={`${styles.root} ${gradient} ${styles.gradientHover} cursor-pointer`}>
@@ -22,7 +34,7 @@ const TodoItemContainer = ({ gradient, children, onMouseEnter, onMouseLeave, isS
     return (
       <motion.div
         initial={{ height: 60 }}
-        whileHover={itemContainerWhileHover}
+        whileHover={motionObj ?? undefined}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave} 
         className={`${styles.root} ${gradient} ${styles.gradientHover}`}
@@ -35,6 +47,6 @@ const TodoItemContainer = ({ gradient, children, onMouseEnter, onMouseLeave, isS
 export default TodoItemContainer
 
 const styles = {
-  root: 'flex flex-col w-full h-full rounded-xl px-4 py-2 bg-gradient-to-r',
+  root: 'w-full rounded-xl px-4 py-2 bg-gradient-to-r',
   gradientHover: 'bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%] transition-all duration-500',
 }

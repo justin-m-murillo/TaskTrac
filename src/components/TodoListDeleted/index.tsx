@@ -2,12 +2,12 @@
 import React from 'react'
 import TodoItem from '../TodoItem'
 import { TodoListProps } from '@/types/Todo'
-import ButtonRow from '../TodoItem/ButtonRow'
 import ButtonRecover from '../ButtonRecover'
 
 import { motion, AnimatePresence } from 'framer-motion'
 import Delay from '../Delay'
 import { MotionListItemProps } from '@/motion/props'
+import ButtonDeleteForever from '../ButtonDeleteForver'
 
 const TodoListDeleted = ({ todos: deletedTodos, todosContext }: TodoListProps) => {
   return (
@@ -19,6 +19,7 @@ const TodoListDeleted = ({ todos: deletedTodos, todosContext }: TodoListProps) =
               todo={todo}
               buttons={[
                 <ButtonRecover id={todo.id} todosContext={todosContext} />,
+                <ButtonDeleteForever id={todo.id} todosContext={todosContext} />,
               ]}
             />
           </motion.div>

@@ -58,7 +58,7 @@ const PageAddTodo = () => {
   const [ gradient, setGradient ] = useState<string>(gradientList[0])
   const maxTitleInputLength = 50
   const maxLocationInputLength = 55
-  const maxAreaInputLength = 250
+  const maxAreaInputLength = 260
   
   return (
     <DefaultPageRoot minHeight={730}>

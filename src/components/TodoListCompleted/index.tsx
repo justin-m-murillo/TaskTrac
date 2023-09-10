@@ -2,7 +2,6 @@
 import React from 'react'
 import TodoItem from '@/components/TodoItem'
 import { TodoListProps } from '@/types/Todo'
-import ButtonRow from '../TodoItem/ButtonRow'
 import ButtonDeleteForever from '../ButtonDeleteForver'
 
 import { motion, AnimatePresence } from 'framer-motion'

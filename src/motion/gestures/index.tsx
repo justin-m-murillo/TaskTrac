@@ -1,7 +1,11 @@
-export const itemContainerWhileHover = {
-  height: 280,
+export const MotionItemWhileHover = {
+  height: 140, // low: 120 hi: 240
   transition: {
-    ease: 'linear',
+    type: 'tween',
     duration: 0.1,
   }
+}
+
+export const MotionButtonWhileHover = {
+  scale: 1.5,
 }

@@ -10,13 +10,13 @@ const FieldTable = ({ fields }: Props) => {
   return (
     <div className={styles.fieldTable}>
       <div className={styles.fieldKey}>
-        {fields.map(field => (
-          <p key={field.key}>{field.key}:</p>
+        {fields.map((field, index) => (
+          <p key={index}>{field.key}:</p>
         ))}
       </div>
       <div className={styles.fieldValue}>
-        {fields.map(field => (
-          <p key={field.value}>{field.value}</p>
+        {fields.map((field, index) => (
+          <p key={index}>{field.value}</p>
         ))}
       </div>
     </div>

@@ -12,23 +12,24 @@ const useFields = (todo: Todo) => {
     const temp:Field[] = []
     if (todo.deletedAt) {
       temp.push({ 
-        key: 'Deleted', 
+        key: 'Deleted:', 
         value: useDateTime(todo.deletedAt, is24HourTime) 
     })}
     if (todo.completedAt) {
       temp.push({ 
-        key: 'Completed', 
+        key: 'Completed:', 
         value: useDateTime(todo.completedAt, is24HourTime)
     })}
     if (todo.dueDate) {
       temp.push({ 
-        key: 'Due', 
+        key: 'Due:', 
         value: useDateTime(todo.dueDate, is24HourTime)
     })}
     
-    if (todo.location) temp.push({
-      key: 'Location',
-      value: todo.location
+    if (todo.location) 
+      temp.push({
+        key: 'Location:',
+        value: todo.location
     })
     setFields(temp)
   }, [todo])

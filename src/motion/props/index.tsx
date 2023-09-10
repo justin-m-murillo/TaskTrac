@@ -10,7 +10,8 @@ export const MotionListItemProps = {
   animate: { opacity: 1, y: 0 },
   transition: {
     type: 'spring',
-    stiffness: 100,
+    stiffness: 80,
+    damping: 12,
   }
 }
 
@@ -20,5 +21,17 @@ export const MotionFormInputProps = {
   transition: {
     type: 'tween',
     duration: 0.8
+  }
+}
+
+export const MotionButtonProps = {
+  initial: { opacity: 0 },
+  animate: { 
+    opacity: 1,
+    transition: { 
+      type: 'tween', 
+      delay: 0.3, 
+      duration: 0.5 
+    }
   }
 }

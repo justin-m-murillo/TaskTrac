@@ -1,6 +1,8 @@
 import React from 'react'
 import { IconType } from 'react-icons/lib/esm/iconBase';
 import { motion } from 'framer-motion'
+import { MotionButtonProps } from '@/motion/props';
+import { MotionButtonWhileHover } from '@/motion/gestures';
 
 export type ButtonProps = {
   Icon: IconType
@@ -10,7 +12,7 @@ export type ButtonProps = {
 }
 
 const Button = ({ Icon, onClick, size, buttonType }: ButtonProps) => {
-  const iconSize = 32
+  const iconSize = 24
   const btnType = (() => {
     switch (buttonType) {
       case 'undefined':
@@ -28,8 +30,7 @@ const Button = ({ Icon, onClick, size, buttonType }: ButtonProps) => {
     <motion.button 
       type={btnType}
       onClick={onClick}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      {...MotionButtonProps}
       whileHover={{ scale: 1.5 }}
       onMouseEnter={event => {
         event.stopPropagation()

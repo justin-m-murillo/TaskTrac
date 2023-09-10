@@ -26,9 +26,9 @@ const SetDueDate = ({ dueDate, setDueDate }: DueDateProps) => {
   const minutes = getMinutes()
   const ampm = ['AM', 'PM']
 
-  useEffect(() => {
-    console.log('Due Date:', dueDate)
-  }, [dueDate])
+  // useEffect(() => {
+  //   console.log('Due Date:', dueDate)
+  // }, [dueDate])
 
   return (
     <div className='flex flex-col w-full'>

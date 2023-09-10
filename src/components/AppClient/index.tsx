@@ -26,7 +26,7 @@ const menuIconSize = 24
 const AppClient = ({ data, children }: Props) => {
   const pathname = usePathname()
   const router = useRouter()
-  const [ menuOpen, setMenuOpen ] = useState<boolean>(false)
+  // const [ menuOpen, setMenuOpen ] = useState<boolean>(false)
   const [ activeTab, setActiveTab ] = useState<string>(pathname)
   const [ todos, setTodos ] = useState<Todo[]>(data)
   const [ is24HourTime, setIs24HourTime ] = useState<boolean>(false)
@@ -41,36 +41,36 @@ const AppClient = ({ data, children }: Props) => {
     }
   }
 
-  const NavTabControls = {
-    closed: 
-      <motion.div
-        {...MotionTabControlsProps}
-        className='mr-8'
-      >
-        <TodoNavTab
-          Icon={MdMenu}
-          iconSize={menuIconSize}
-          onClick={() => {
-            setMenuOpen(!menuOpen)
-          }}
-          isStatic
-        />
-      </motion.div>,
-    opened:
-      <motion.div
-        {...MotionTabControlsProps}
-        className='mr-8'
-      >
-        <TodoNavTab
-          Icon={MdMenuOpen}
-          iconSize={menuIconSize}
-          onClick={() => {
-            setMenuOpen(!menuOpen)
-          }}
-          isStatic
-        />
-      </motion.div>
-  }
+  // const NavTabControls = {
+  //   closed: 
+  //     <motion.div
+  //       {...MotionTabControlsProps}
+  //       className='mr-8'
+  //     >
+  //       <TodoNavTab
+  //         Icon={MdMenu}
+  //         iconSize={menuIconSize}
+  //         onClick={() => {
+  //           setMenuOpen(!menuOpen)
+  //         }}
+  //         isStatic
+  //       />
+  //     </motion.div>,
+  //   opened:
+  //     <motion.div
+  //       {...MotionTabControlsProps}
+  //       className='mr-8'
+  //     >
+  //       <TodoNavTab
+  //         Icon={MdMenuOpen}
+  //         iconSize={menuIconSize}
+  //         onClick={() => {
+  //           setMenuOpen(!menuOpen)
+  //         }}
+  //         isStatic
+  //       />
+  //     </motion.div>
+  // }
 
   const menuTabList = [
     <TodoNavTab 
@@ -116,8 +116,8 @@ const AppClient = ({ data, children }: Props) => {
         <Todo24HourContext.Provider value={{ is24HourTime, setIs24HourTime }}>
           <div className={styles.root}>
             <div className='flex flex-row mb-4 w-full justify-between'>
-              { menuOpen ? NavTabControls.opened : NavTabControls.closed }
-              <TodoNav tabs={menuTabList} isOpen={menuOpen} />
+              {/* { menuOpen ? NavTabControls.opened : NavTabControls.closed } */}
+              <TodoNav tabs={menuTabList} />
               {/* <TodoNav tabs={settingsTabList} isOpen={settingsOpen} /> */}
             </div>
             { children }

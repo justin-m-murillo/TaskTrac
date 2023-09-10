@@ -2,7 +2,6 @@
 import React from 'react'
 import TodoItem from '@/components/TodoItem'
 import { TodoListProps } from '@/types/Todo'
-import ButtonRow from '../TodoItem/ButtonRow'
 import ButtonComplete from '../ButtonComplete'
 import ButtonDelete from '../ButtonDelete'
 
@@ -24,10 +23,6 @@ const TodoListActive = ({ todos: activeTodos, todosContext}: TodoListProps) => {
                 <ButtonDelete id={todo.id} todosContext={todosContext} />
               ]}
             />
-              {/* <ButtonRow>
-                <ButtonComplete id={todo.id} title={todo.title} todosContext={todosContext} />
-                <ButtonDelete id={todo.id} todosContext={todosContext} />
-              </ButtonRow> */}
           </motion.div>
         </Delay>
       ))}
