@@ -29,9 +29,9 @@ const TodoNav = ({ tabs }: TodoNavProps) => {
       ref={scope}
       className={styles.root}
     >
-      {tabs.map((tab, index) => (
+      {tabs.map(tab => (
         <motion.li 
-          key={index}
+          key={tab.key}
           initial={{ x: -50, opacity: 0 }}
         >
           { tab }

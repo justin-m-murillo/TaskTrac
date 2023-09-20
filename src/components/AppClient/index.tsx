@@ -41,43 +41,14 @@ const AppClient = ({ data, children }: Props) => {
     }
   }
 
-  // const NavTabControls = {
-  //   closed: 
-  //     <motion.div
-  //       {...MotionTabControlsProps}
-  //       className='mr-8'
-  //     >
-  //       <TodoNavTab
-  //         Icon={MdMenu}
-  //         iconSize={menuIconSize}
-  //         onClick={() => {
-  //           setMenuOpen(!menuOpen)
-  //         }}
-  //         isStatic
-  //       />
-  //     </motion.div>,
-  //   opened:
-  //     <motion.div
-  //       {...MotionTabControlsProps}
-  //       className='mr-8'
-  //     >
-  //       <TodoNavTab
-  //         Icon={MdMenuOpen}
-  //         iconSize={menuIconSize}
-  //         onClick={() => {
-  //           setMenuOpen(!menuOpen)
-  //         }}
-  //         isStatic
-  //       />
-  //     </motion.div>
-  // }
-
   const menuTabList = [
-    <TodoNavTab 
+    <TodoNavTab
+      key='home'
       title='Home' Icon={MdHome} iconSize={tabIconSize}
       href='/home' activeTab={activeTab} onClick={handleTabClick}
     />,
     <TodoNavTab
+      key='completed'
       title='Completed' 
       Icon={MdChecklist}
       iconSize={tabIconSize} 
@@ -86,6 +57,7 @@ const AppClient = ({ data, children }: Props) => {
       onClick={handleTabClick}
     />,
     <TodoNavTab 
+      key='deleted'
       title='Deleted'
       Icon={MdDeleteOutline}
       iconSize={tabIconSize} 
@@ -94,6 +66,7 @@ const AppClient = ({ data, children }: Props) => {
       onClick={handleTabClick}
     />,
     <TodoNavTab
+      key='add'
       title='Add'
       Icon={MdAdd}
       iconSize={tabIconSize}
@@ -101,7 +74,8 @@ const AppClient = ({ data, children }: Props) => {
       activeTab={activeTab}
       onClick={handleTabClick}
     />,
-    <TodoNavTab 
+    <TodoNavTab
+      key='menu' 
       Icon={MdSettings}
       iconSize={menuIconSize}
       href='/settings'
@@ -116,9 +90,7 @@ const AppClient = ({ data, children }: Props) => {
         <Todo24HourContext.Provider value={{ is24HourTime, setIs24HourTime }}>
           <div className={styles.root}>
             <div className='flex flex-row mb-4 w-full justify-between'>
-              {/* { menuOpen ? NavTabControls.opened : NavTabControls.closed } */}
               <TodoNav tabs={menuTabList} />
-              {/* <TodoNav tabs={settingsTabList} isOpen={settingsOpen} /> */}
             </div>
             { children }
           </div>
