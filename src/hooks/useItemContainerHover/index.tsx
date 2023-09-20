@@ -19,7 +19,7 @@ const useItemContainerHover = (todo: Todo) => {
   const [ motion, setMotion ] = useState<MotionProps|null>(base)
 
   useEffect(() => {
-    let finHeight = 60
+    let finHeight = 80
     if (todo?.location || todo?.dueDate || todo?.completed || todo?.deleted) {
       finHeight += 60
     }
