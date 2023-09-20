@@ -11,7 +11,7 @@ const Delay = ({ delay, children }: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => setIsDone(true), delay)
     return () => clearTimeout(timer)
-  }, [])
+  }, [delay])
 
   return isDone && <>{children}</>
 }
