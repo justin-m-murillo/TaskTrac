@@ -15,13 +15,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const overflowY = 'overflow-y-scroll'
-  const scollbar = 'scrollbar-thin scrollbar-thumb-sky-500 scrollbar-track-slate-700'
+  const scrollbar = 'scrollbar-thin scrollbar-thumb-sky-500 scrollbar-track-slate-700'
   return (
-    <html className='' lang="en">
+    <html className={`${overflowY}`} lang="en">
       <body className={`
         ${montserrat.className} 
         ${styles.layout}
-        
+        ${scrollbar}
       `}>
           <AppServer>
             {children}
