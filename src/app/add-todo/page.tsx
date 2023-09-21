@@ -23,7 +23,7 @@ const gradientList = [
   'from-rose-800 to-orange-500',
   'from-fuchsia-900 to-green-600',
   'from-violet-950 to-sky-500',
-  'from-sky-800 to-rose-400',
+  'from-sky-900 to-violet-500',
   'from-blue-900 to-green-600',
   'from-emerald-600 to-purple-400',
   'from-orange-600 to-purple-600',

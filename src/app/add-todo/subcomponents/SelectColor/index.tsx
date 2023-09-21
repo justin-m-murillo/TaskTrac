@@ -1,4 +1,5 @@
 import TodoItemContainer from '@/components/TodoItem/TodoItemContainer'
+import { Todo } from '@/types/Todo'
 import React from 'react'
 
 type SelectColorProps = {
@@ -8,6 +9,21 @@ type SelectColorProps = {
 }
 
 const SelectColor = ({ gradientList, gradient, setGradient }: SelectColorProps) => {
+  const templateTodo: Todo = {
+    id: 'templateTodo',
+    title: 'TemplateTodo',
+    description: null,
+    location: null,
+    dueDate: null,
+    bgGradient: gradient,
+    completed: false,
+    completedAt: null,
+    deleted: false,
+    deletedAt: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }
+  
   return (
     <div>
       <p className='text-sm'>Choose a color</p>
@@ -18,7 +34,7 @@ const SelectColor = ({ gradientList, gradient, setGradient }: SelectColorProps) 
               className={`${styles.root} ${grad === gradient ? styles.selected : null}`}
               onClick={() => { setGradient(grad) }}
             >
-              <TodoItemContainer gradient={grad} isStatic>
+              <TodoItemContainer todo={templateTodo} gradient={grad} isStatic>
                 <div className='font-semibold select-none'>Title</div>
               </TodoItemContainer>
             </div>

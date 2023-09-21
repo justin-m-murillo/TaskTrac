@@ -14,12 +14,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const overflowY = 'overflow-y-scroll'
+  const scollbar = 'scrollbar-thin scrollbar-thumb-sky-500 scrollbar-track-slate-700'
   return (
-    <html className='overflow-y-scroll' lang="en">
+    <html className='' lang="en">
       <body className={`
         ${montserrat.className} 
         ${styles.layout}
-        scrollbar-thin scrollbar-thumb-sky-500 scrollbar-track-slate-700
+        
       `}>
           <AppServer>
             {children}
