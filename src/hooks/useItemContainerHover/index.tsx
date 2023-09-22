@@ -37,7 +37,7 @@ const useItemContainerHover = (todo: Todo) => {
       }}
       setMotion(newMotion)
     }
-  }, [todo])
+  })
  
   return motion
 }
