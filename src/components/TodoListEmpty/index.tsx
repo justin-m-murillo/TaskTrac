@@ -14,7 +14,7 @@ const TodoListEmpty = ({ alertText, showAdd }: DisplayEmptyListProps) => {
       </p>
       {showAdd &&
         <p className={styles.text}>
-          Click the 'Add' tab to create todos
+          Click the &apos;Add&apos; tab to create todos
         </p>
       }
     </DefaultPageRoot>

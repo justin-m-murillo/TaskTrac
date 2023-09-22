@@ -18,8 +18,8 @@ const TodoListDeleted = ({ todos: deletedTodos, todosContext }: TodoListProps) =
             <TodoItem 
               todo={todo}
               buttons={[
-                <ButtonRecover id={todo.id} todosContext={todosContext} />,
-                <ButtonDeleteForever id={todo.id} todosContext={todosContext} />,
+                <ButtonRecover key={`btn-recover-${todo.id}`} id={todo.id} todosContext={todosContext} />,
+                <ButtonDeleteForever key={`btn-deleteforever-${todo.id}`} id={todo.id} todosContext={todosContext} />,
               ]}
             />
           </motion.div>

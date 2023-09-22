@@ -19,8 +19,8 @@ const TodoListActive = ({ todos: activeTodos, todosContext}: TodoListProps) => {
             <TodoItem 
               todo={todo}
               buttons={[
-                <ButtonComplete id={todo.id} title={todo.title} todosContext={todosContext} />,
-                <ButtonDelete id={todo.id} todosContext={todosContext} />
+                <ButtonComplete key={`btn-complete-${todo.id}`} id={todo.id} title={todo.title} todosContext={todosContext} />,
+                <ButtonDelete key={`btn-delete-${todo.id}`} id={todo.id} todosContext={todosContext} />
               ]}
             />
           </motion.div>

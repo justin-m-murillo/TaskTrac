@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Todo } from "@/types/Todo"
 import { Field } from "@/types/Field"
-import useDateTime from '../useDateTime'
+import getDateTime from '../../utils/getDateTime'
 import { useTodo24HourContext } from '@/context/Todo24HourTime'
 
 const useFields = (todo: Todo) => {
@@ -13,17 +13,17 @@ const useFields = (todo: Todo) => {
     if (todo.deletedAt) {
       temp.push({ 
         key: 'Deleted:', 
-        value: useDateTime(todo.deletedAt, is24HourTime) 
+        value: getDateTime(todo.deletedAt, is24HourTime) 
     })}
     if (todo.completedAt) {
       temp.push({ 
         key: 'Completed:', 
-        value: useDateTime(todo.completedAt, is24HourTime)
+        value: getDateTime(todo.completedAt, is24HourTime)
     })}
     if (todo.dueDate) {
       temp.push({ 
         key: 'Due:', 
-        value: useDateTime(todo.dueDate, is24HourTime)
+        value: getDateTime(todo.dueDate, is24HourTime)
     })}
     
     if (todo.location) 
@@ -32,7 +32,7 @@ const useFields = (todo: Todo) => {
         value: todo.location
     })
     setFields(temp)
-  }, [todo])
+  }, [todo, is24HourTime])
 
   return fields
 }

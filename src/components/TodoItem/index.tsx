@@ -8,7 +8,7 @@ import TodoItemContainer from './TodoItemContainer'
 import ButtonRow from './ButtonRow'
 
 import { AnimatePresence } from 'framer-motion'
-import useDateTime from '@/hooks/useDateTime'
+import getDateTime from '@/utils/getDateTime'
 import { useTodo24HourContext } from '@/context/Todo24HourTime'
 
 type TodoItemProps = {

@@ -18,7 +18,7 @@ const TodoListCompleted = ({ todos: completedTodos, todosContext }: TodoListProp
             <TodoItem 
               todo={todo}
               buttons={[
-                <ButtonDeleteForever id={todo.id} todosContext={todosContext} />
+                <ButtonDeleteForever key={`btn-deleteforever-${todo.id}`} id={todo.id} todosContext={todosContext} />
               ]}
             />
           </motion.div>
