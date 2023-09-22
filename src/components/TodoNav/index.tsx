@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styles from './styles'
 import { motion, useAnimate, stagger, } from 'framer-motion'
 
@@ -11,7 +11,6 @@ const staggerMenuItems = stagger(0.15);
 
 const TodoNav = ({ tabs }: TodoNavProps) => {
   const [ scope, animate ] = useAnimate()
-  const menuIconSize = 24
 
   useEffect(() => {
     animate(
@@ -22,7 +21,7 @@ const TodoNav = ({ tabs }: TodoNavProps) => {
       },
       { duration: 0.5, delay: staggerMenuItems }  
     )
-  }, [scope])
+  }, [scope, animate])
 
   return (
     <ul

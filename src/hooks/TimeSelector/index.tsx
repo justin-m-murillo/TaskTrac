@@ -77,7 +77,7 @@ export const useHoursFormat = (is24HourTime: boolean) => {
       setHoursFormat(hoursFull)
     else
       setHoursFormat(hoursAmPm)
-  }, [is24HourTime])
+  }, [is24HourTime, hoursFull, hoursAmPm])
 
   return hoursFormat
 }
