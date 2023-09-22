@@ -1,7 +1,8 @@
+import AppServer from '@/components/AppServer'
 import { redirect } from 'next/navigation'
 
 const Index = () => {
-  redirect('/home')
+  return <div>INDEX</div>
 }
 
 export default Index

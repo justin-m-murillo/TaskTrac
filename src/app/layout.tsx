@@ -23,9 +23,7 @@ export default function RootLayout({
         ${styles.layout}
         ${scrollbar}
       `}>
-          <AppServer>
-            {children}
-          </AppServer>
+          {children}
       </body>
     </html>
   )
