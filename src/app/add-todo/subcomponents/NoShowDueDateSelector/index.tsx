@@ -1,7 +1,8 @@
 import React from 'react'
-import { DueDatePageProps, initDueDate } from '../../page'
 import TextRowSelector from '@/components/TextRowSelector'
 import TextRowOption from '@/components/TextRowSelector/TextRowOption'
+import initDueDate from '@/utils/initDueDate'
+import { DueDatePageProps } from '@/types/DueDatePageProps'
 
 
 const NoShowDueDateSelector = ({ option, setDueDate, setShowDueDate }: DueDatePageProps) => {

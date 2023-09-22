@@ -10,13 +10,12 @@ interface MotionProps {
 }
 
 const useItemContainerHover = (todo: Todo) => {
-  const base = {
+  const [ motion, setMotion ] = useState<MotionProps|null>({
     height: 60,
     transition: {
       type: 'tween',
       duration: 0.1,
-  }}
-  const [ motion, setMotion ] = useState<MotionProps|null>(base)
+  }})
 
   useEffect(() => {
     let finHeight = 80
@@ -26,17 +25,19 @@ const useItemContainerHover = (todo: Todo) => {
     if (todo?.description) {
       finHeight += getHeightWithDesc(todo.description)
     }
-    if (finHeight === base.height) {
+    if (finHeight === motion?.height) {
       setMotion(null)
     }
     else {
-      const newMotion = {
-        ...base,
-        height: finHeight
-      }
+      const newMotion:MotionProps = {
+        height: finHeight,
+        transition: {
+          type: 'tween',
+          duration: 0.1,
+      }}
       setMotion(newMotion)
     }
-  }, [todo, base])
+  }, [todo])
  
   return motion
 }

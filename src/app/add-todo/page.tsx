@@ -31,13 +31,6 @@ const gradientList = [
   'from-pink-600 to-indigo-400',
 ]
 
-export type DueDatePageProps = {
-  option: string,
-  dueDate?: TodoDateTime,
-  setDueDate: React.Dispatch<React.SetStateAction<TodoDateTime>>,
-  setShowDueDate: React.Dispatch<React.SetStateAction<boolean>>,
-}
-
 const PageAddTodo = () => {
   const { setActiveTab } = useTodoNavContext()
   const { todos, setTodos } = useTodoListContext()
@@ -141,5 +134,4 @@ const PageAddTodo = () => {
   )
 }
 
-export { initDueDate }
 export default PageAddTodo
