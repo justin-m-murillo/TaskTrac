@@ -16,6 +16,7 @@ import DefaultPageRoot from '@/components/DefaultPageRoot'
 import { motion } from 'framer-motion'
 import { MotionFormInputProps } from '@/motion/props'
 import Delay from '@/components/Delay'
+import initDueDate from '@/utils/initDueDate'
 
 const gradientList = [
   'from-sky-800 to-rose-500',
@@ -35,19 +36,6 @@ export type DueDatePageProps = {
   dueDate?: TodoDateTime,
   setDueDate: React.Dispatch<React.SetStateAction<TodoDateTime>>,
   setShowDueDate: React.Dispatch<React.SetStateAction<boolean>>,
-}
-
-const initDueDate = () => {
-  const current = new Date()
-    return {
-      year:    current.getFullYear(),
-      month:   current.getMonth(),
-      day:     current.getDate(),
-      hours:   current.getHours(),
-      minutes: current.getMinutes(),
-      isAmPm: true,
-      ampm: current.getHours() > 11 ? 'PM' : 'AM'
-  }
 }
 
 const PageAddTodo = () => {
