@@ -1,12 +1,15 @@
-import AppServer from '@/components/AppServer'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 
+import Providers from '@/providers/Providers'
+import AppClient from '@/components/AppClient'
+import PrismaProvider from '@/components/PrismaProvider'
+
 const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Todo App',
+  title: 'TaskTrac',
 }
 
 export default function RootLayout({
@@ -15,6 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 
+
   return (
     <html className={`${styles.overflowY}`} lang="en">
       <body className={`
@@ -22,7 +26,13 @@ export default function RootLayout({
         ${styles.layout}
         ${styles.scrollbar}
       `}>
-          {children}
+          <Providers>
+            <PrismaProvider>
+              <AppClient>
+                {children}
+              </AppClient>
+            </PrismaProvider>
+          </Providers>
       </body>
     </html>
   )

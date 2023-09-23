@@ -11,24 +11,23 @@ import styles from './styles'
 
 import TodoNav from '../TodoNav'
 import TodoNavTab from '../TodoNavTab'
-
-import { motion } from 'framer-motion'
-import { MotionTabControlsProps } from '@/motion/props'
+import { useSession } from 'next-auth/react'
 
 type Props = {
-  data: Todo[],
   children: ReactNode
 }
 
 const tabIconSize = 20
 const menuIconSize = 24
 
-const AppClient = ({ data, children }: Props) => {
+const AppClient = ({ children }: Props) => {
   const pathname = usePathname()
   const router = useRouter()
+  const { data: session } = useSession()
+
   // const [ menuOpen, setMenuOpen ] = useState<boolean>(false)
   const [ activeTab, setActiveTab ] = useState<string>(pathname)
-  const [ todos, setTodos ] = useState<Todo[]>(data)
+  const [ todos, setTodos ] = useState<Todo[]>([])
   const [ is24HourTime, setIs24HourTime ] = useState<boolean>(false)
   //const motionTabControlsProps = useMotionTabControls(menuOpen)
   
@@ -45,7 +44,7 @@ const AppClient = ({ data, children }: Props) => {
     <TodoNavTab
       key='home'
       title='Home' Icon={MdHome} iconSize={tabIconSize}
-      href='/home' activeTab={activeTab} onClick={handleTabClick}
+      href='/' activeTab={activeTab} onClick={handleTabClick}
     />,
     <TodoNavTab
       key='completed'

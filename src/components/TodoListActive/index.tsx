@@ -1,4 +1,3 @@
-'use client'
 import React from 'react'
 import TodoItem from '@/components/TodoItem'
 import { TodoListProps } from '@/types/Todo'
