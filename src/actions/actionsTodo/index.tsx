@@ -2,7 +2,7 @@ import { TodosState } from '../../types/Todo'
 import { serverActivateTodo, serverCreateTodo, serverCompleteTodo, serverDeleteTodo, serverDeleteForever } from '@/actions/serverActionsTodo'
 //import { redirect } from 'next/navigation'
 
-export const actionCreateTodo = (
+export const actionCreateTodo = async (
   data: FormData,
   hasDueDate: boolean,
   dueDate: Date,
@@ -11,6 +11,16 @@ export const actionCreateTodo = (
   todosState: TodosState,) => 
 {
   const { todos, setTodos } = todosState
+  
+  const response = await fetch('/api/todo/create', {
+    method: "POST",
+    headers: {
+      "Content-Type":"application/json",
+    },
+    body: JSON.stringify({ data })
+  })
+
+  console.log("ACTION CREATE", response);
   // create new todo item
   // serverCreateTodo(data, hasDueDate, dueDate, gradient)
   //   .then(created => {

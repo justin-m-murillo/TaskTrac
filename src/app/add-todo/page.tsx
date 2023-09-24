@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import { useTodoListContext } from '@/context/TodoListContext'
 import { useTodoNavContext } from '@/context/TodoNavContext'
@@ -37,6 +37,9 @@ const PageAddTodo = () => {
   const [ dueDate, setDueDate ] = useState<TodoDateTime>(initDueDate())
   const [ showDueDate, setShowDueDate ] = useState<boolean>(false)
   const [ gradient, setGradient ] = useState<string>(gradientList[0])
+  
+  const formRef = useRef<HTMLFormElement|null>(null)
+  
   const maxTitleInputLength = 50
   const maxLocationInputLength = 55
   const maxAreaInputLength = 260
@@ -44,7 +47,11 @@ const PageAddTodo = () => {
   return (
     <DefaultPageRoot minHeight={730}>
       <form
-        action={data => {
+        ref={formRef}
+        onSubmit={event => {
+          event.preventDefault();
+          const formData = new FormData(formRef.current as HTMLFormElement);
+          
           const due = new Date(
             dueDate.year,
             dueDate.month,
@@ -52,10 +59,11 @@ const PageAddTodo = () => {
             dueDate.hours,
             dueDate.minutes,
           )
+
             actionCreateTodo(
-              data, 
+              formData, 
               showDueDate, 
-              due, 
+              due,
               gradient, 
               setActiveTab, 
               {todos, setTodos}
