@@ -3,7 +3,6 @@ import React from 'react'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 
-import AppClient from '@/components/AppClient'
 import TodoListActive from '@/components/TodoListActive'
 import TodoListEmpty from '@/components/TodoListEmpty'
 import { useTodoListContext } from '@/context/TodoListContext'
@@ -11,7 +10,7 @@ import { useTodoListContext } from '@/context/TodoListContext'
 const Index = () => {
   const { data: session } = useSession()
   const { todos, setTodos } = useTodoListContext()
-  const active = todos.filter(todo => !todo.completed && !todo.deleted)
+  const active = todos.filter(todo => !todo.completedAt && !todo.deletedAt)
     
   return (
     <>

@@ -7,7 +7,7 @@ import TodoListDeleted from '@/components/TodoListDeleted'
 
 const DeletedTodosPage = () => {
   const { todos, setTodos } = useTodoListContext()
-  const deleted = todos.filter(todo => todo.deleted)
+  const deleted = todos.filter(todo => !!todo.deletedAt)
 
   return deleted.length > 0
     ? <TodoListDeleted todos={deleted} todosContext={{ todos, setTodos }} />

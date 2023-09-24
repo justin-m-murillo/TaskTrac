@@ -1,11 +1,11 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef, FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { useTodoListContext } from '@/context/TodoListContext'
-import { useTodoNavContext } from '@/context/TodoNavContext'
 import styles from './styles'
 
-import { actionCreateTodo } from '@/actions/actionsTodo'
+import { PreTodo, actionCreateTodo } from '@/actions/actionsTodo'
 import { TodoDateTime } from '@/types/Todo'
 import { FormAreaInput, FormTextInput } from '@/components/FormInput'
 import ShowDueDateSelector from './subcomponents/ShowDueDateSelector'
@@ -17,6 +17,7 @@ import { motion } from 'framer-motion'
 import { MotionFormInputProps } from '@/motion/props'
 import Delay from '@/components/Delay'
 import initDueDate from '@/utils/initDueDate'
+import { useSession } from 'next-auth/react'
 
 const gradientList = [
   'from-sky-800 to-rose-500',
@@ -32,36 +33,74 @@ const gradientList = [
 ]
 
 const PageAddTodo = () => {
-  const { setActiveTab } = useTodoNavContext()
+  const { data: session } = useSession()
   const { todos, setTodos } = useTodoListContext()
+  const router = useRouter()
+
   const [ dueDate, setDueDate ] = useState<TodoDateTime>(initDueDate())
   const [ showDueDate, setShowDueDate ] = useState<boolean>(false)
   const [ gradient, setGradient ] = useState<string>(gradientList[0])
+
   const maxTitleInputLength = 50
   const maxLocationInputLength = 55
   const maxAreaInputLength = 260
+
+  const formRef = useRef<HTMLFormElement|null>(null);
+
+  const handleFormSubmit = async (event:FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formElement = formRef.current as HTMLFormElement;
+    const formData = new FormData(formElement);
+    const title = formData.get('title');
+    const desc = formData.get('description');
+    const loc = formData.get('location');
+    if (typeof title === null) {
+      throw new Error('Invalid Title');
+    }
+    if (typeof desc === null) {
+      throw new Error('Invalid Description');
+    }
+    if (typeof loc === null) {
+      throw new Error('Invalid Location');
+    }
+
+    const due = !showDueDate 
+      ? null 
+      : new Date(
+        dueDate.year,
+        dueDate.month,
+        dueDate.day,
+        dueDate.hours,
+        dueDate.minutes,
+    );
+
+    const newTodo: PreTodo = {
+      title: title?.toString() as string,
+      description: desc?.toString() as string,
+      location: loc?.toString() as string,
+      dueDate: due,
+      bgGradient: gradient,
+      completedAt: null,
+      deletedAt: null,
+      userId: session?.user?.id ?? 'n/a',
+    }
+    actionCreateTodo(newTodo, { todos, setTodos });
+    // actionCreateTodo(
+    //   session,
+    //   formData, 
+    //   showDueDate, 
+    //   due, 
+    //   gradient,
+    //   {todos, setTodos}
+    // );
+    router.push('/');
+  }
   
   return (
     <DefaultPageRoot minHeight={730}>
       <form
-        action={data => {
-          const due = new Date(
-            dueDate.year,
-            dueDate.month,
-            dueDate.day,
-            dueDate.hours,
-            dueDate.minutes,
-          )
-            actionCreateTodo(
-              data, 
-              showDueDate, 
-              due, 
-              gradient, 
-              setActiveTab, 
-              {todos, setTodos}
-            ) 
-          }
-        }
+        onSubmit={handleFormSubmit}
+        ref={formRef}
       >
         {/* Title */}
         <Delay delay={100}>

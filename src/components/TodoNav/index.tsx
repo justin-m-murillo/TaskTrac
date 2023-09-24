@@ -3,14 +3,20 @@ import React, { useEffect } from 'react'
 import styles from './styles'
 import { motion, useAnimate, stagger, } from 'framer-motion'
 
-type TodoNavProps = {
-  tabs: React.JSX.Element[]
-}
+import { useRouter } from 'next/navigation'
+import getNavTabs from '@/utils/getNavTabs'
+import { useSession } from 'next-auth/react'
+import Header from '../Header'
 
 const staggerMenuItems = stagger(0.15);
 
-const TodoNav = ({ tabs }: TodoNavProps) => {
-  const [ scope, animate ] = useAnimate()
+const TodoNav = () => {
+  const [ scope, animate ] = useAnimate();
+  const { data: session } = useSession()
+  const router = useRouter();
+  const tabs = getNavTabs((href?: string) => href 
+    ? router.push(href) 
+    : router.push('/'));
 
   useEffect(() => {
     animate(
@@ -24,19 +30,24 @@ const TodoNav = ({ tabs }: TodoNavProps) => {
   }, [scope, animate])
 
   return (
-    <ul
-      ref={scope}
-      className={styles.root}
-    >
-      {tabs.map(tab => (
-        <motion.li 
-          key={tab.key}
-          initial={{ x: -50, opacity: 0 }}
+    <div className='flex flex-col'>
+      <Header title='TaskTrac' session={session} />
+      <div className='flex flex-row mb-4 w-full justify-between'>
+        <ul
+          ref={scope}
+          className={styles.root}
         >
-          { tab }
-        </motion.li>
-      ))}
-    </ul>
+          {tabs.map(tab => (
+            <motion.li 
+              key={tab.key}
+              initial={{ x: -50, opacity: 0 }}
+            >
+              { tab }
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </div>
   )
 }
 

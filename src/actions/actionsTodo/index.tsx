@@ -1,25 +1,27 @@
-import { TodosState } from '../../types/Todo'
+import { Todo, TodosState } from '../../types/Todo'
 //import { serverActivateTodo, serverCreateTodo, serverCompleteTodo, serverDeleteTodo, serverDeleteForever } from '@/actions/serverActionsTodo'
-import { redirect } from 'next/navigation'
+import { serverCreateTodo } from '../serverActionsTodo'
+import { Session } from 'next-auth'
 
-export const actionCreateTodo = (
-  data: FormData,
-  hasDueDate: boolean,
-  dueDate: Date,
-  gradient: string,
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>, 
-  todosState: TodosState,) => 
-{
-  const { todos, setTodos } = todosState
-  // create new todo item
-  // serverCreateTodo(data, hasDueDate, dueDate, gradient)
-  //   .then(created => {
-  //     setTodos([...todos, created])
-  //     setActiveTab('/home')
-  //   })
-  //   .catch(error => console.warn('Error in create todo', error))
-  //   redirect('/home')
-}
+import axios from 'axios'
+
+export type PreTodo = Omit<Todo, 'id' | 'createdAt' | 'updatedAt'>
+
+export const actionCreateTodo = async (
+  newTodo: PreTodo,
+  todosState: TodosState
+) => {
+  const response = await fetch('/api/todos/create', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ newTodo })
+  })
+  console.log('CREATE TODO', response);
+  return response;
+};
+
 
 export const actionDeleteTodo = (
   id: string,

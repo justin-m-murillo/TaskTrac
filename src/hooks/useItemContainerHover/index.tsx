@@ -19,7 +19,7 @@ const useItemContainerHover = (todo: Todo) => {
 
   useEffect(() => {
     let finHeight = 80
-    if (todo?.location || todo?.dueDate || todo?.completed || todo?.deleted) {
+    if (todo?.location || todo?.dueDate || todo?.completedAt || todo?.deletedAt) {
       finHeight += 60
     }
     if (todo?.description) {

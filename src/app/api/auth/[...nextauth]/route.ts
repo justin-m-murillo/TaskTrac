@@ -1,9 +1,7 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
+import prisma from "../../../../../db/prisma";
 
 export const nextAuthOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -15,16 +13,15 @@ export const nextAuthOptions: AuthOptions = {
   ],
   callbacks: {
     session: async ({session, user}) => {
-      const todoSession = {...session, id: user.id}
-      return Promise.resolve(todoSession)
+      if (session && session.user) {
+        session.user.id = user.id
+      }
+      return Promise.resolve(session)
     }
   },
   session: {
-    maxAge: 30,
+    maxAge: 30 * 24 * 60 * 60,
   },
-  pages: {
-    signIn: 'login'
-  }
 }
 
 const handler = NextAuth(nextAuthOptions);

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@/prisma/prisma';
+import prisma from '../../../../../db/prisma';
 import { serverCreateTodo } from '@/actions/serverActionsTodo'; // Update the path
 
 // Define API route handler
