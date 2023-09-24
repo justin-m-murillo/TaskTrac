@@ -1,14 +1,30 @@
-import React, { ReactNode } from 'react'
+import { Session } from 'next-auth'
+import React from 'react'
+import { motion } from 'framer-motion'
 
 type Props = {
-  children: ReactNode
+  title: string;
+  session: Session | null;
 }
 
-const Header = ({ children }: Props) => {
+const Header = ({ title, session }: Props) => {
   return (
-    <header className='w-screen flex items-center mb-4 bg-gray-100 justify-center'>
-      {children}
-    </header>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className='flex flex-row mb-4 pr-4 text-gray-400 items-center justify-between'
+    >
+      <h1 className='text-2xl font-semibold'>{title}</h1>
+      {session && session.user && (
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className='text-gray-600'
+        >
+          viewing <span className='font-semibold'>{session.user.name}'s</span> tasks
+        </motion.p>
+      )}
+    </motion.div>
   )
 }
 

@@ -7,7 +7,7 @@ import { session } from "@/lib/session"
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET!
 
-const authOption: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt'
   },
@@ -55,5 +55,5 @@ const authOption: NextAuthOptions = {
   },
 }
 
-const handler = NextAuth(authOption)
+const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }
