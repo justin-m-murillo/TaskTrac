@@ -1,33 +1,33 @@
 'use server'
-import { prisma } from '@/app/db'
+// import { prisma } from '@/app/db'
 
 export const serverActivateTodo = async (
   id: string, ) =>
 {
-  return await prisma.todo.update({
-    where: {
-      id: id,
-    },
-    data: {
-      completed: false,
-      completedAt: null,
-      deleted: false,
-      deletedAt: null,
-    }
-  })
+  // return await prisma.todo.update({
+  //   where: {
+  //     id: id,
+  //   },
+  //   data: {
+  //     completed: false,
+  //     completedAt: null,
+  //     deleted: false,
+  //     deletedAt: null,
+  //   }
+  // })
 }
 
 export const serverCompleteTodo = async (id: string) => 
 {
-  return await prisma.todo.update({
-    where: {
-      id: id,
-    },
-    data: {
-      completed: true,
-      completedAt: new Date()
-    }
-  })
+  // return await prisma.todo.update({
+  //   where: {
+  //     id: id,
+  //   },
+  //   data: {
+  //     completed: true,
+  //     completedAt: new Date()
+  //   }
+  // })
 }
 
 export const serverCreateTodo = async (
@@ -50,35 +50,35 @@ export const serverCreateTodo = async (
     throw new Error('Invalid Location')
   }
 
-  return await prisma.todo.create({ 
-    data: {
-      title,
-      description,
-      location,
-      dueDate: due,
-      bgGradient: gradient,
-      completed: false, 
-      deleted: false 
-  }})
+  // return await prisma.todo.create({ 
+  //   data: {
+  //     title,
+  //     description,
+  //     location,
+  //     dueDate: due,
+  //     bgGradient: gradient,
+  //     completed: false, 
+  //     deleted: false 
+  // }})
 }
 
 export const serverDeleteTodo = async (id: string,) => {
-  return await prisma.todo.update({ 
-    where: {
-      id: id,
-    },
-    data: {
-      deleted: true,
-      deletedAt: new Date()
-    }
-  })
+  // return await prisma.todo.update({ 
+  //   where: {
+  //     id: id,
+  //   },
+  //   data: {
+  //     deleted: true,
+  //     deletedAt: new Date()
+  //   }
+  // })
   //console.log('Deleted', id, title)
 }
 
 export const serverDeleteForever = async (id: string) => {
-  return await prisma.todo.delete({
-    where: {
-      id: id
-    },
-  })
+  // return await prisma.todo.delete({
+  //   where: {
+  //     id: id
+  //   },
+  // })
 }

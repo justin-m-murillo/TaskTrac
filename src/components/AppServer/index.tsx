@@ -1,6 +1,6 @@
 'use server'
 import React, { ReactNode } from 'react'
-import { prisma } from '@/app/db'
+//import { prisma } from '@/app/db'
 import AppClient from '@/components/AppClient'
 
 type Props = {
@@ -8,9 +8,9 @@ type Props = {
 }
 
 const AppServer = async ({ children }: Props) => {
-  const data = await prisma.todo.findMany()
+  //const data = await prisma.todo.findMany()
   return (
-    <AppClient data={data}>
+    <AppClient data={[]}>
       { children }
     </AppClient>
   )
