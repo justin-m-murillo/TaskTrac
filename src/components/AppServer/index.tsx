@@ -1,4 +1,3 @@
-'use server'
 import React, { ReactNode } from 'react'
 //import { prisma } from '@/app/db'
 import AppClient from '@/components/AppClient'
