@@ -10,12 +10,20 @@ interface MotionProps {
 }
 
 const useItemContainerHover = (todo: Todo) => {
-  const [ motion, setMotion ] = useState<MotionProps|null>({
+  const [ motion, setMotion ] = useState<MotionProps>({
     height: 60,
     transition: {
       type: 'tween',
       duration: 0.1,
   }})
+
+  useEffect(() => {
+    let newMotion: MotionProps = motion;
+    if (todo?.location || todo?.due_date || todo?.completed_at || todo.deleted_at) {
+      newMotion = {...newMotion, height: 150 };
+    }
+    setMotion(newMotion);
+  }, [todo])
 
   // useEffect(() => {
   //   let finHeight = 80

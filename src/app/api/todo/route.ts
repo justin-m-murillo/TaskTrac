@@ -33,9 +33,11 @@ export type TPostTodo = {
   location:    string | null;
   due_date:    Date | null;
   bg_gradient: string;
+  created_at:  Date;
+  updated_at:  Date;
 }
 export async function POST(request: NextRequest) {
-  const { title, description, location, due_date, bg_gradient } = await request.json() as TPostTodo;
+  const todoData = await request.json() as TPostTodo;
   const session = await getServerSession(authOptions);
   const userId  = session?.user?.id ?? null;
   if (!userId) { throw new Error('POST API: USER NOT FOUND (invoked getServerSession)') }
@@ -48,13 +50,7 @@ export async function POST(request: NextRequest) {
   try {
     const todo = await prisma.todo.create({
       data: {
-        title,
-        description,
-        location,
-        due_date: due_date ? new Date(due_date) : null,
-        bg_gradient,
-        created_at: new Date(),
-        updated_at: new Date(),
+        ...todoData,
         user: {
           connect: { id: userId }
         }

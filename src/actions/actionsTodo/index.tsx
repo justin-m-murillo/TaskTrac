@@ -2,6 +2,7 @@ import axios from 'axios'
 import { TodosState } from '../../types/Todo'
 import { serverActivateTodo, serverCreateTodo, serverCompleteTodo, serverDeleteTodo, serverDeleteForever } from '@/actions/serverActionsTodo'
 import { TGetTodo, TPostTodo } from '@/app/api/todo/route';
+import { getSession } from 'next-auth/react';
 //import { redirect } from 'next/navigation'
 
 export const getTodos = async ({ user_id }: TGetTodo) => {
@@ -31,6 +32,8 @@ export const createTodo = async (
     location: data.get('location') as string | null,
     due_date: showDueDate? due : null,
     bg_gradient: gradient,
+    created_at: new Date(),
+    updated_at: new Date(),
   };
 
   try {

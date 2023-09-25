@@ -27,7 +27,9 @@ const Settings = () => {
           />
         : <TextRowOption
             option='Logout'
-            onClick={() => signOut()}
+            onClick={() => signOut({
+              callbackUrl: '/'
+            })}
           />}
       </TextRowSelector>
       <TextRowSelector prompt='Use 24-hour time?'>

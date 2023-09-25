@@ -3,8 +3,8 @@ import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 
 import SessionProviderContext from '@/context/SessionProviderContext'
-import PrismaProvider from '@/components/PrismaProvider'
 import TodoNav from '@/components/TodoNav'
+import ContextWrapper from '@/components/ContextWrapper'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -22,15 +22,15 @@ export default function RootLayout({
     <html className={`${styles.overflowY}`} lang="en">
       <body className={`
         ${montserrat.className} 
-        ${styles.layout}
-        ${styles.scrollbar}
-        ${styles.pageContainer}
+        ${styles.layout} 
+        ${styles.scrollbar} 
+        ${styles.pageContainer} 
       `}>
           <SessionProviderContext>
             <TodoNav />
-            <PrismaProvider>
+            <ContextWrapper>
               {children}
-            </PrismaProvider>  
+            </ContextWrapper>
           </SessionProviderContext>
       </body>
     </html>

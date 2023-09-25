@@ -11,17 +11,16 @@ type SelectColorProps = {
 const SelectColor = ({ gradientList, gradient, setGradient }: SelectColorProps) => {
   const templateTodo: Todo = {
     id: 'templateTodo',
+    user_id: 'templateTodo',
     title: 'TemplateTodo',
     description: null,
     location: null,
-    dueDate: null,
-    bgGradient: gradient,
-    completed: false,
-    completedAt: null,
-    deleted: false,
-    deletedAt: null,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    due_date: null,
+    bg_gradient: gradient,
+    completed_at: null,
+    deleted_at: null,
+    created_at: new Date(),
+    updated_at: new Date(),
   }
   
   return (

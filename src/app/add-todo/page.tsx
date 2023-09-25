@@ -1,8 +1,7 @@
 'use client'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, MutableRefObject } from 'react'
 
 import { useTodoListContext } from '@/context/TodoListContext'
-import { useTodoNavContext } from '@/context/TodoNavContext'
 import styles from './styles'
 
 import { createTodo } from '@/actions/actionsTodo'
@@ -18,6 +17,7 @@ import { MotionFormInputProps } from '@/motion/props'
 import Delay from '@/components/Delay'
 import initDueDate from '@/utils/initDueDate'
 import { useRouter } from 'next/navigation'
+import onSubmitForm from './onSubmitForm'
 
 const gradientList = [
   'from-sky-800 to-rose-500',
@@ -33,7 +33,6 @@ const gradientList = [
 ]
 
 const PageAddTodo = () => {
-  const { setActiveTab } = useTodoNavContext()
   const { todos, setTodos } = useTodoListContext()
   const router = useRouter();
   const [ dueDate, setDueDate ] = useState<TodoDateTime>(initDueDate())
@@ -50,24 +49,15 @@ const PageAddTodo = () => {
     <DefaultPageRoot minHeight={730}>
       <form
         ref={formRef}
-        onSubmit={event => {
-          event.preventDefault();
-          const formData = new FormData(formRef.current as HTMLFormElement);
-          const due = new Date(
-            dueDate.year,
-            dueDate.month,
-            dueDate.day,
-            dueDate.hours,
-            dueDate.minutes,
-          )
-          
-          const response = createTodo(
-            formData, 
-            showDueDate, 
-            due,
+        onSubmit={(event) => {
+          event.preventDefault(); 
+          onSubmitForm( 
+            formRef as MutableRefObject<HTMLFormElement>,
+            dueDate,
+            showDueDate,
             gradient,
-          ) 
-          console.log("ADD TODO RES", response);
+            { todos, setTodos }
+          )
           router.push('/');
         }}
       >

@@ -1,28 +1,28 @@
 'use client'
-import React, { ReactNode, useState } from 'react'
-import { TodoNavContext } from '@/context/TodoNavContext'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { TodoListContext } from '@/context/TodoListContext'
 import { Todo24HourContext } from '@/context/Todo24HourTime'
 import { Todo } from '@/types/Todo'
-import { usePathname, useRouter } from 'next/navigation'
+import useFetchTodos from '@/hooks/useFetchTodos'
+import TodoLoading from '../TodoLoading'
 
 type Props = {
-  todoFetched?: Todo[]
-  children: ReactNode
+  children: ReactNode;
 }
 
-
-
-const ContextWrapper = ({ todoFetched=[], children }: Props) => {
-  // const [ menuOpen, setMenuOpen ] = useState<boolean>(false)
-  const [ todos, setTodos ] = useState<Todo[]>(todoFetched)
+const ContextWrapper = ({ children }: Props) => {
+  const { todos: todosFetched, isLoading } = useFetchTodos();
+  const [ todos, setTodos ] = useState<Todo[]>(todosFetched);
   const [ is24HourTime, setIs24HourTime ] = useState<boolean>(false)
-  //const motionTabControlsProps = useMotionTabControls(menuOpen)
+
+  useEffect(() => {
+    setTodos(todosFetched);
+  }, [todosFetched]);
 
   return (
       <TodoListContext.Provider value={{ todos, setTodos }}>
         <Todo24HourContext.Provider value={{ is24HourTime, setIs24HourTime }}>
-          { children }
+          {isLoading ? <TodoLoading /> : children }
         </Todo24HourContext.Provider>
       </TodoListContext.Provider>
   )
