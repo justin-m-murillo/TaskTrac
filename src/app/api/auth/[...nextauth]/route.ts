@@ -1,11 +1,11 @@
 import { NextAuthOptions } from "next-auth";
-import NextAuth from "next-auth/next";
-import GoogleProvider from "next-auth/providers/google"
-import prisma from "@/lib/prisma"
-import { session } from "@/lib/session"
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import prisma from "@/lib/prisma";
+import { session } from "@/lib/session";
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET!
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET!;
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -18,9 +18,9 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async signIn({ account, profile }) {
+    signIn: async ({ account, profile }) => {
       if (!profile?.email) {
-        throw new Error('No profile');
+        throw new Error("No profile");
       }
 
       await prisma.user.upsert({
@@ -29,13 +29,15 @@ export const authOptions: NextAuthOptions = {
         },
         create: {
           email: profile.email,
-          name: profile.name,
+          name: profile.name ?? undefined,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
         update: {
           name: profile.name,
         },
-      })
-      return true
+      });
+      return Promise.resolve(true);
     },
     session,
     async jwt({ token, user, account, profile }) {
@@ -44,16 +46,16 @@ export const authOptions: NextAuthOptions = {
           where: {
             email: profile.email,
           },
-        })
+        });
         if (!user) {
-          throw new Error('No user found')
+          throw new Error("No user found");
         }
-        token.id = user.id
+        token.id = user.id;
       }
-      return token
+      return token;
     },
   },
-}
+};
 
-const handler = NextAuth(authOptions)
-export { handler as GET, handler as POST }
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

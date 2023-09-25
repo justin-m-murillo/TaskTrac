@@ -1,34 +1,31 @@
+import axios from 'axios'
 import { TodosState } from '../../types/Todo'
 import { serverActivateTodo, serverCreateTodo, serverCompleteTodo, serverDeleteTodo, serverDeleteForever } from '@/actions/serverActionsTodo'
 //import { redirect } from 'next/navigation'
 
 export const actionCreateTodo = async (
   data: FormData,
-  hasDueDate: boolean,
-  dueDate: Date,
+  showDueDate: boolean,
+  due: Date,
   gradient: string,
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>, 
-  todosState: TodosState,) => 
+  todosState: TodosState) => 
 {
-  const { todos, setTodos } = todosState
-  
-  const response = await fetch('/api/todo/create', {
-    method: "POST",
-    headers: {
-      "Content-Type":"application/json",
-    },
-    body: JSON.stringify({ data })
-  })
+  const todoData = {
+    title: data.get('title') as string,
+    description: data.get('description') as string | null,
+    location: data.get('location') as string | null,
+    due_date: showDueDate? due : null,
+    bg_gradient: gradient,
+  };
 
-  console.log("ACTION CREATE", response);
-  // create new todo item
-  // serverCreateTodo(data, hasDueDate, dueDate, gradient)
-  //   .then(created => {
-  //     setTodos([...todos, created])
-  //     setActiveTab('/home')
-  //   })
-  //   .catch(error => console.warn('Error in create todo', error))
-}
+  try {
+    const response = await axios.post('/api/todo/create', todoData);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return { message: 'POST FAILED' };
+  }
+};
 
 export const actionDeleteTodo = (
   id: string,

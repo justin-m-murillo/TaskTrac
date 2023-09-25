@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,22 +8,25 @@ datasource db {
 }
 
 model User {
-  id        String @id @default(dbgenerated("concat('usr_', replace(cast(gen_random_uuid() as text), '-', ''))")) @db.Text
-  email     String @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(dbgenerated("concat('usr_', replace((gen_random_uuid())::text, '-'::text, ''::text))"))
+  email      String   @unique
+  name       String?
+  created_at DateTime @db.Timestamptz(6)
+  updated_at DateTime @db.Timestamptz(6)
+  todos       Todo[]
 }
 
 model Todo {
-  id            String @id @default(dbgenerated("concat('usr_', replace(cast(gen_random_uuid() as text), '-', ''))")) @db.Text
-  title         String
-  description   String?
-  location      String?
-  dueDate       DateTime?
-  bgGradient    String
-  completedAt   DateTime?
-  deletedAt     DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String    @id @default(dbgenerated("concat('usr_', replace((gen_random_uuid())::text, '-'::text, ''::text))"))
+  title        String
+  description  String?
+  location     String?
+  due_date     DateTime? @db.Timestamptz(6)
+  bg_gradient  String
+  completed_at DateTime? @db.Timestamptz(6)
+  deleted_at   DateTime? @db.Timestamptz(6)
+  created_at   DateTime  @db.Timestamptz(6)
+  updated_at   DateTime  @db.Timestamptz(6)
+  user_id      String?
+  user         User?      @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }

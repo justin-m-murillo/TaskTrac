@@ -51,7 +51,6 @@ const PageAddTodo = () => {
         onSubmit={event => {
           event.preventDefault();
           const formData = new FormData(formRef.current as HTMLFormElement);
-          
           const due = new Date(
             dueDate.year,
             dueDate.month,
@@ -59,17 +58,16 @@ const PageAddTodo = () => {
             dueDate.hours,
             dueDate.minutes,
           )
-
-            actionCreateTodo(
-              formData, 
-              showDueDate, 
-              due,
-              gradient, 
-              setActiveTab, 
-              {todos, setTodos}
-            ) 
-          }
-        }
+          
+          const response = actionCreateTodo(
+            formData, 
+            showDueDate, 
+            due,
+            gradient,
+            {todos, setTodos}
+          ) 
+          console.log("ADD TODO RES", response);
+        }}
       >
         {/* Title */}
         <Delay delay={100}>
