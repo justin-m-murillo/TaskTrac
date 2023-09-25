@@ -5,7 +5,18 @@ import { TGetTodo, TPostTodo } from '@/app/api/todo/route';
 //import { redirect } from 'next/navigation'
 
 export const getTodos = async ({ user_id }: TGetTodo) => {
-  //const response = await axios.get('/api/todo', user_id);
+  //console.log('GET TODOS');
+  try {
+    const response = await axios.get('/api/todo', {
+      params: {
+        id: user_id,
+      }
+    });
+    return { message: 'GET TODOS SUCCESS', response }
+  } catch (error) {
+    return { message: 'GET TODOS FAILED', error }
+  }
+  
 }
 
 export const createTodo = async (

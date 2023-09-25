@@ -19,9 +19,9 @@ export type TGetTodo = {
   user_id: string;
 }
 export async function GET(request: NextRequest) {
-  const { user_id } = await request.json() as TGetTodo;
+  const id = request.nextUrl.searchParams.get('id');
   const todos = await prisma.todo.findMany({
-    where: { user_id: user_id }
+    where: { user_id: id }
   })
   return NextResponse.json({ message: 'GET SUCCESS', todos });
 }

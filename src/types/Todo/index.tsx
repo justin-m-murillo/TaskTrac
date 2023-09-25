@@ -5,7 +5,7 @@ export type Todo = {
   description:  string | null,
   location:     string | null,
   due_date:     Date | null,
-  bgGradient:   string,
+  bg_gradient:   string,
   completed_at: Date | null,
   deleted_at:   Date | null,
   created_at:   Date,
@@ -19,7 +19,7 @@ export type TodosState = {
 
 export interface TodoListProps {
   todos: Todo[],
-  todosContext: TodosState,
+  //todosContext: TodosState,
 }
 
 export interface TodoButtonProps {

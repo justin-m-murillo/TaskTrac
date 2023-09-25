@@ -24,7 +24,7 @@ const TodoItem = ({ todo, buttons }: TodoItemProps) => {
   return (
     <TodoItemContainer
       todo={todo}
-      gradient={todo.bgGradient}
+      gradient={todo.bg_gradient}
       onMouseEnter={() => setShowDetails(true)}
       onMouseLeave={() => setShowDetails(false)}
     >

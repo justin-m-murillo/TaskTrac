@@ -10,7 +10,7 @@ import { MotionListItemProps } from '@/motion/props'
 import Delay from '../Delay'
 
 
-const TodoListActive = ({ todos: activeTodos, todosContext}: TodoListProps) => {
+const TodoListActive = ({ todos: activeTodos}: TodoListProps) => {
   return (
     <AnimatePresence>
       {activeTodos.map((todo, index) => (
@@ -19,8 +19,8 @@ const TodoListActive = ({ todos: activeTodos, todosContext}: TodoListProps) => {
             <TodoItem 
               todo={todo}
               buttons={[
-                <ButtonComplete key={`btn-complete-${todo.id}`} id={todo.id} title={todo.title} todosContext={todosContext} />,
-                <ButtonDelete key={`btn-delete-${todo.id}`} id={todo.id} todosContext={todosContext} />
+                // <ButtonComplete key={`btn-complete-${todo.id}`} id={todo.id} title={todo.title} todosContext={todosContext} />,
+                // <ButtonDelete key={`btn-delete-${todo.id}`} id={todo.id} todosContext={todosContext} />
               ]}
             />
           </motion.div>

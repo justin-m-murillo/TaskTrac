@@ -17,27 +17,27 @@ const useItemContainerHover = (todo: Todo) => {
       duration: 0.1,
   }})
 
-  useEffect(() => {
-    let finHeight = 80
-    if (todo?.location || todo?.dueDate || todo?.completed || todo?.deleted) {
-      finHeight += 60
-    }
-    if (todo?.description) {
-      finHeight += getHeightWithDesc(todo.description)
-    }
-    if (finHeight === motion?.height) {
-      setMotion(null)
-    }
-    else {
-      const newMotion:MotionProps = {
-        height: finHeight,
-        transition: {
-          type: 'tween',
-          duration: 0.1,
-      }}
-      setMotion(newMotion)
-    }
-  }, [todo])
+  // useEffect(() => {
+  //   let finHeight = 80
+  //   if (todo?.location || todo?.due_date || !!todo?.completed_at || !!todo?.deleted_at) {
+  //     finHeight += 60
+  //   }
+  //   if (todo?.description) {
+  //     finHeight += getHeightWithDesc(todo.description)
+  //   }
+  //   if (finHeight === motion?.height) {
+  //     setMotion(null)
+  //   }
+  //   else {
+  //     const newMotion: MotionProps = {
+  //       height: finHeight,
+  //       transition: {
+  //         type: 'tween',
+  //         duration: 0.1,
+  //     }}
+  //     setMotion(newMotion)
+  //   }
+  // }, [todo])
  
   return motion
 }
