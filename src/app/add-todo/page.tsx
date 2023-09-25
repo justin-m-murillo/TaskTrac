@@ -5,7 +5,7 @@ import { useTodoListContext } from '@/context/TodoListContext'
 import { useTodoNavContext } from '@/context/TodoNavContext'
 import styles from './styles'
 
-import { actionCreateTodo } from '@/actions/actionsTodo'
+import { createTodo } from '@/actions/actionsTodo'
 import { TodoDateTime } from '@/types/Todo'
 import { FormAreaInput, FormTextInput } from '@/components/FormInput'
 import ShowDueDateSelector from './subcomponents/ShowDueDateSelector'
@@ -17,6 +17,7 @@ import { motion } from 'framer-motion'
 import { MotionFormInputProps } from '@/motion/props'
 import Delay from '@/components/Delay'
 import initDueDate from '@/utils/initDueDate'
+import { useRouter } from 'next/navigation'
 
 const gradientList = [
   'from-sky-800 to-rose-500',
@@ -34,6 +35,7 @@ const gradientList = [
 const PageAddTodo = () => {
   const { setActiveTab } = useTodoNavContext()
   const { todos, setTodos } = useTodoListContext()
+  const router = useRouter();
   const [ dueDate, setDueDate ] = useState<TodoDateTime>(initDueDate())
   const [ showDueDate, setShowDueDate ] = useState<boolean>(false)
   const [ gradient, setGradient ] = useState<string>(gradientList[0])
@@ -59,14 +61,14 @@ const PageAddTodo = () => {
             dueDate.minutes,
           )
           
-          const response = actionCreateTodo(
+          const response = createTodo(
             formData, 
             showDueDate, 
             due,
             gradient,
-            {todos, setTodos}
           ) 
           console.log("ADD TODO RES", response);
+          router.push('/');
         }}
       >
         {/* Title */}

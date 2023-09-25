@@ -1,16 +1,20 @@
 import axios from 'axios'
 import { TodosState } from '../../types/Todo'
 import { serverActivateTodo, serverCreateTodo, serverCompleteTodo, serverDeleteTodo, serverDeleteForever } from '@/actions/serverActionsTodo'
+import { TGetTodo, TPostTodo } from '@/app/api/todo/route';
 //import { redirect } from 'next/navigation'
 
-export const actionCreateTodo = async (
+export const getTodos = async ({ user_id }: TGetTodo) => {
+  //const response = await axios.get('/api/todo', user_id);
+}
+
+export const createTodo = async (
   data: FormData,
   showDueDate: boolean,
   due: Date,
-  gradient: string,
-  todosState: TodosState) => 
+  gradient: string) => 
 {
-  const todoData = {
+  const todoData: TPostTodo = {
     title: data.get('title') as string,
     description: data.get('description') as string | null,
     location: data.get('location') as string | null,
@@ -19,11 +23,11 @@ export const actionCreateTodo = async (
   };
 
   try {
-    const response = await axios.post('/api/todo/create', todoData);
-    return response.data;
+    const response = await axios.post('/api/todo', todoData);
+    console.log('ACTION CREATED', response.data);
+    return { message: 'CREATE TODO SUCCESS', response }
   } catch (error) {
-    console.error(error);
-    return { message: 'POST FAILED' };
+    return { message: 'CREATE TODO FAILED', error };
   }
 };
 

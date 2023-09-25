@@ -1,14 +1,15 @@
 export type Todo = {
-  id:          string,
-  title:       string,
-  description: string | null,
-  location:    string | null,
-  dueDate:     Date | null,
-  bgGradient:  string,
-  completedAt: Date | null,
-  deletedAt:   Date | null,
-  createdAt:   Date,
-  updatedAt:   Date,
+  id:           string,
+  user_id:      string,
+  title:        string,
+  description:  string | null,
+  location:     string | null,
+  due_date:     Date | null,
+  bgGradient:   string,
+  completed_at: Date | null,
+  deleted_at:   Date | null,
+  created_at:   Date,
+  updated_at:   Date,
 }
 
 export type TodosState = {

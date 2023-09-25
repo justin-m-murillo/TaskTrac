@@ -9,7 +9,7 @@ import { useTodoListContext } from '@/context/TodoListContext'
 const Index = () => {
   const { data: session } = useSession()
   const { todos, setTodos } = useTodoListContext()
-  const active = todos.filter(todo => !todo.completedAt && !todo.deletedAt)
+  const active = todos.filter(todo => !todo.completed_at && !todo.deleted_at)
     
   return (
     <>

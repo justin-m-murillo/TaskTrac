@@ -17,7 +17,7 @@ model User {
 }
 
 model Todo {
-  id           String    @id @default(dbgenerated("concat('usr_', replace((gen_random_uuid())::text, '-'::text, ''::text))"))
+  id           String    @id @default(dbgenerated("concat(gen_random_uuid())"))
   title        String
   description  String?
   location     String?
