@@ -1,6 +1,5 @@
 import { createTodo } from "@/actions/actionsTodo";
 import { Todo, TodoDateTime, TodosState } from "@/types/Todo";
-import { Session } from "next-auth";
 import { MutableRefObject } from "react";
 import { TPostTodo } from "../api/todo/route";
 
