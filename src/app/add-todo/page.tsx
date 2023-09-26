@@ -20,10 +20,10 @@ import { useRouter } from 'next/navigation'
 import onSubmitForm from './onSubmitForm'
 
 const gradientList = [
-  'from-sky-800 to-rose-500',
-  'from-fuchsia-900 to-green-600',
-  'from-violet-950 to-sky-500',
-  'from-emerald-600 to-purple-500',
+  'from-sky-600 to-rose-500',
+  'from-pink-900 to-blue-600',
+  'from-violet-900 to-sky-500',
+  'from-teal-600 to-purple-600',
 ]
 
 const PageAddTodo = () => {

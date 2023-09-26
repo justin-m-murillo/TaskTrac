@@ -18,34 +18,22 @@ const useItemContainerHover = (todo: Todo) => {
   }})
 
   useEffect(() => {
-    let newMotion: MotionProps = motion;
+    let height = motion.height;
     if (todo?.location || todo?.due_date || todo?.completed_at || todo.deleted_at) {
-      newMotion = {...newMotion, height: 150 };
+      if (todo?.description) {
+        height = 280;
+      } else {
+        height = 150;
+      }
     }
-    setMotion(newMotion);
+    else if (todo?.description) {
+      height = 220;
+    } else {
+      height = 60;
+    }
+    
+    setMotion({...motion, height});
   }, [todo])
-
-  // useEffect(() => {
-  //   let finHeight = 80
-  //   if (todo?.location || todo?.due_date || !!todo?.completed_at || !!todo?.deleted_at) {
-  //     finHeight += 60
-  //   }
-  //   if (todo?.description) {
-  //     finHeight += getHeightWithDesc(todo.description)
-  //   }
-  //   if (finHeight === motion?.height) {
-  //     setMotion(null)
-  //   }
-  //   else {
-  //     const newMotion: MotionProps = {
-  //       height: finHeight,
-  //       transition: {
-  //         type: 'tween',
-  //         duration: 0.1,
-  //     }}
-  //     setMotion(newMotion)
-  //   }
-  // }, [todo])
  
   return motion
 }
