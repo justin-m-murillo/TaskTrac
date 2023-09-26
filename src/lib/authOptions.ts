@@ -1,7 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "./prisma";
-import { session } from "./session";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET!;
@@ -39,7 +38,6 @@ export const authOptions: NextAuthOptions = {
       });
       return Promise.resolve(true);
     },
-    session,
     async jwt({ token, user, account, profile }) {
       if (profile) {
         const user = await prisma.user.findUnique({
