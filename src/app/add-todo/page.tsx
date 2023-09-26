@@ -18,6 +18,7 @@ import Delay from '@/components/Delay'
 import initDueDate from '@/utils/initDueDate'
 import { useRouter } from 'next/navigation'
 import onSubmitForm from './onSubmitForm'
+import { SessionUser } from '@/types/next-auth'
 
 const gradientList = [
   'from-sky-600 to-rose-500',
@@ -46,7 +47,7 @@ const PageAddTodo = () => {
         ref={formRef}
         onSubmit={(event) => {
           event.preventDefault();
-          console.log('on submit, user', session?.user?.id);
+          console.log('on submit, user', session?.user?.email);
           onSubmitForm(
             session?.user?.id,
             formRef as MutableRefObject<HTMLFormElement>,
