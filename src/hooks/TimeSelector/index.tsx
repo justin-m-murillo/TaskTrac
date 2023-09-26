@@ -65,7 +65,7 @@ export const useHoursFormat = (is24HourTime: boolean) => {
   const [ hoursFormat, setHoursFormat ] = useState<string[]>([])
 
   useEffect(() => {
-    if (is24HourTime)
+    if (!is24HourTime)
       setHoursFormat([
         '12','1','2','3','4','5','6','7','8','9','10','11',
       ])
