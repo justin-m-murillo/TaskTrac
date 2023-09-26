@@ -2,9 +2,10 @@ import { DateTime } from "ts-luxon"
 import formatISO from "date-fns/formatISO";
 
 const getDateTime = (date: Date, is24HourTime: boolean) => {
-  console.log('getDateTime Raw Date', date.toJSON());
+  const dateString = date.toString();
+  const parsedDateTime = DateTime.fromFormat(dateString, "EEE MMM dd yyyy HH:mm:ss 'GMT'ZZZ (z)", { zone: 'UTC' });
   const sliced = date.toString().slice(0, -5);
-  console.log('sliced dt', sliced);
+  console.log('sliced dt', parsedDateTime);
   return sliced;
   // return is24HourTime
   //   ? DateTime.fromISO(date.toString() as string).toFormat('DD - T')
