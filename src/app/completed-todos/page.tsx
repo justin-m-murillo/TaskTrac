@@ -6,7 +6,7 @@ import { useTodoListContext } from '@/context/TodoListContext'
 
 const CompletedTodosPage = () => {
   const { todos, setTodos } = useTodoListContext()
-  const completed = todos.filter(todo => todo.completed)
+  const completed = todos.filter(todo => todo.completed_at)
 
   return completed.length > 0 
     ? <TodoListCompleted todos={completed} todosContext={{ todos, setTodos }} /> 

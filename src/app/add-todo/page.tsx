@@ -1,10 +1,10 @@
 'use client'
 import React, { useState, useRef, MutableRefObject } from 'react'
+import { useSession } from 'next-auth/react'
 
 import { useTodoListContext } from '@/context/TodoListContext'
 import styles from './styles'
 
-import { createTodo } from '@/actions/actionsTodo'
 import { TodoDateTime } from '@/types/Todo'
 import { FormAreaInput, FormTextInput } from '@/components/FormInput'
 import ShowDueDateSelector from './subcomponents/ShowDueDateSelector'
@@ -33,7 +33,8 @@ const gradientList = [
 ]
 
 const PageAddTodo = () => {
-  const { todos, setTodos } = useTodoListContext()
+  const { todos, setTodos } = useTodoListContext();
+  const { data: session } = useSession();
   const router = useRouter();
   const [ dueDate, setDueDate ] = useState<TodoDateTime>(initDueDate())
   const [ showDueDate, setShowDueDate ] = useState<boolean>(false)
@@ -51,7 +52,8 @@ const PageAddTodo = () => {
         ref={formRef}
         onSubmit={(event) => {
           event.preventDefault(); 
-          onSubmitForm( 
+          onSubmitForm(
+            session?.user?.id,
             formRef as MutableRefObject<HTMLFormElement>,
             dueDate,
             showDueDate,

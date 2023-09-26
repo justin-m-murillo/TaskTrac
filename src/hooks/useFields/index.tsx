@@ -10,20 +10,20 @@ const useFields = (todo: Todo) => {
 
   useEffect(() => {
     const temp:Field[] = []
-    if (todo.deletedAt) {
+    if (todo.deleted_at) {
       temp.push({ 
         key: 'Deleted:', 
-        value: getDateTime(todo.deletedAt, is24HourTime) 
+        value: getDateTime(todo.deleted_at, is24HourTime) 
     })}
-    if (todo.completedAt) {
+    if (todo.completed_at) {
       temp.push({ 
         key: 'Completed:', 
-        value: getDateTime(todo.completedAt, is24HourTime)
+        value: getDateTime(todo.completed_at, is24HourTime)
     })}
-    if (todo.dueDate) {
+    if (todo.due_date) {
       temp.push({ 
         key: 'Due:', 
-        value: getDateTime(todo.dueDate, is24HourTime)
+        value: getDateTime(todo.due_date, is24HourTime)
     })}
     
     if (todo.location) 

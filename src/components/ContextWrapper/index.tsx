@@ -5,13 +5,14 @@ import { Todo24HourContext } from '@/context/Todo24HourTime'
 import { Todo } from '@/types/Todo'
 import useFetchTodos from '@/hooks/useFetchTodos'
 import TodoLoading from '../TodoLoading'
+import { useSession } from 'next-auth/react'
 
 type Props = {
   children: ReactNode;
 }
 
 const ContextWrapper = ({ children }: Props) => {
-  const { todos: todosFetched, isLoading } = useFetchTodos();
+  const { todos: todosFetched, isLoading } = useFetchTodos(useSession().data?.user);
   const [ todos, setTodos ] = useState<Todo[]>(todosFetched);
   const [ is24HourTime, setIs24HourTime ] = useState<boolean>(false)
 
@@ -22,7 +23,7 @@ const ContextWrapper = ({ children }: Props) => {
   return (
       <TodoListContext.Provider value={{ todos, setTodos }}>
         <Todo24HourContext.Provider value={{ is24HourTime, setIs24HourTime }}>
-          {isLoading ? <TodoLoading /> : children }
+          { isLoading ? <TodoLoading /> : children }
         </Todo24HourContext.Provider>
       </TodoListContext.Provider>
   )

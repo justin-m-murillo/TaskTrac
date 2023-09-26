@@ -1,24 +1,22 @@
 import { useState, useEffect } from 'react'
 import { Todo } from '@/types/Todo'
 import { getTodos } from '@/actions/actionsTodo'
-import { useSession } from 'next-auth/react'
+import { SessionUser } from '@/types/next-auth'
 
-const useFetchTodos = () => {
+const useFetchTodos = (sessionData: SessionUser | null | undefined) => {
   const [todos, setTodos] = useState<Todo[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const sessionData = useSession().data;
 
   useEffect(()=> {
-    if (sessionData && sessionData?.user) {
-      setIsLoading(true);
-      getTodos({user_id: sessionData.user.id})
+    setIsLoading(true);
+    if (sessionData) {
+      getTodos(sessionData.id)
         .then(res => {
           const data = res.response?.data.todos as Todo[];
-          setTodos(data);
+          setTodos(data ?? []);
           setIsLoading(false);
         });
     } else {
-      setTodos([]);
       setIsLoading(false);
     }
   }, [sessionData])

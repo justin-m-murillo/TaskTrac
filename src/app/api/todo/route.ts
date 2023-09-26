@@ -1,34 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { Session, getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/route';
-
-/** UTILITIES */
-type TGetSessionReturn = {
-  session: Session | null;
-  userId: string | null;
-}
-async function getSession() {
-  const session = await getServerSession(authOptions);
-  const userId  = session?.user?.id ?? null;
-  return { session, userId }
-}
 
 /** GET */
 export type TGetTodo = {
   user_id: string;
 }
 export async function GET(request: NextRequest) {
-  const id = request.nextUrl.searchParams.get('id');
-  const todos = await prisma.todo.findMany({
-    where: { user_id: id }
-  })
-  return NextResponse.json({ message: 'GET SUCCESS', todos });
+  const user_id = request.nextUrl.searchParams.get('user_id');
+  const todos = await prisma.todo.findMany({ where: { user_id } })
+  
+  return todos.length 
+    ? NextResponse.json({ message: 'GET SUCCESS', todos })
+    : NextResponse.json({ message: 'GET RETURNED EMPTY', todos });
 }
 
 /** POST */
 export type TPostTodo = {
   title:       string;
+  user_id?:    string; 
   description: string | null;
   location:    string | null;
   due_date:    Date | null;
@@ -37,22 +26,34 @@ export type TPostTodo = {
   updated_at:  Date;
 }
 export async function POST(request: NextRequest) {
-  const todoData = await request.json() as TPostTodo;
-  const session = await getServerSession(authOptions);
-  const userId  = session?.user?.id ?? null;
-  if (!userId) { throw new Error('POST API: USER NOT FOUND (invoked getServerSession)') }
+  const { 
+    user_id,
+    title,
+    description,
+    location,
+    due_date,
+    bg_gradient,
+    created_at,
+    updated_at
+  } = await request.json() as TPostTodo;
 
   const user = await prisma.user.findUnique({
-    where: { id: userId }
+    where: { id: user_id as string }
   })
   if (!user) { throw new Error('POST API: USER NOT FOUND (invoked prisma.user.findUnique {id})')}
 
   try {
     const todo = await prisma.todo.create({
       data: {
-        ...todoData,
+        title,
+        description,
+        location,
+        due_date,
+        bg_gradient,
+        created_at,
+        updated_at,
         user: {
-          connect: { id: userId }
+          connect: { id: user_id }
         }
       },
     });
@@ -60,5 +61,46 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "POST SUCCESS", todo });
   } catch (error) {
     return NextResponse.json({ message: "POST FAILED", error });
+  }
+}
+
+
+/** PUT */
+export type TPutTodo = {
+  id: string;
+  completed_at: Date | null | undefined;
+  deleted_at:   Date | null | undefined;
+}
+
+export async function PUT(request: NextRequest) {
+  const { id, completed_at, deleted_at } = await request.json() as TPutTodo;
+  try {
+    const todo = await prisma.todo.update({
+      where: { id },
+      data: { 
+        completed_at, 
+        deleted_at 
+      }
+    });
+    return NextResponse.json({ message: 'PUT SUCCESS', todo })
+  } catch (error) {
+    return NextResponse.json({ message: 'PUT FAILED', error });
+  }
+}
+
+/** DELETE */
+export async function DELETE(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get('post_id') as string;
+  try {
+    const deleted = await prisma.todo.delete({ 
+      where: { id },
+      select: {
+        id: true,
+      }
+    });
+  
+    return NextResponse.json({ message: 'DELETE SUCCESS', deleted });
+  } catch (error) {
+    return NextResponse.json({ message: 'DELETE FAILED', error });
   }
 }

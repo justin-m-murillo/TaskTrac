@@ -1,15 +1,15 @@
 export type Todo = {
-  id:           string,
-  user_id:      string,
-  title:        string,
-  description:  string | null,
-  location:     string | null,
-  due_date:     Date | null,
+  id:            string,
+  user_id?:      string,
+  title:         string,
+  description:   string | null,
+  location:      string | null,
+  due_date:      Date | null,
   bg_gradient:   string,
-  completed_at: Date | null,
-  deleted_at:   Date | null,
-  created_at:   Date,
-  updated_at:   Date,
+  completed_at?: Date | null,
+  deleted_at?:   Date | null,
+  created_at:    Date,
+  updated_at:    Date,
 }
 
 export type TodosState = {
@@ -19,12 +19,14 @@ export type TodosState = {
 
 export interface TodoListProps {
   todos: Todo[],
-  //todosContext: TodosState,
+  todosContext: TodosState,
 }
 
 export interface TodoButtonProps {
-  id: string,
-  todosContext: TodosState,
+  id: string;
+  completed_at?: Date | null | undefined;
+  deleted_at?:   Date | null | undefined;
+  todosContext: TodosState;
 }
 
 export type TodoDateTime = {

@@ -2,17 +2,30 @@ import React from 'react'
 import Button from '../Button'
 
 import { MdDeleteForever } from 'react-icons/md'
-import { TodoButtonProps } from '@/types/Todo'
+import { Todo, TodoButtonProps } from '@/types/Todo'
 
-import { actionDeleteForever } from '@/actions/actionsTodo'
+import { deleteTodo } from '@/actions/actionsTodo'
+import { useSession } from 'next-auth/react'
 
-const ButtonDeleteForever = ({ id, todosContext }: TodoButtonProps) => {
+const ButtonDeleteForever = ({ id, todosContext: { todos, setTodos } }: TodoButtonProps) => {
+  const { data: session } = useSession();
+  
   return (
     <Button 
       Icon={MdDeleteForever}
       onClick={event => {
         event.stopPropagation()
-        actionDeleteForever(id, todosContext)
+        if (session && session?.user) {
+          deleteTodo(id)
+            .then(delf => {
+              const deletedForeverId: string = delf.response?.data.deleted.id;
+              const newTodos = todos.filter(todo => todo.id !== deletedForeverId);
+              setTodos(newTodos);
+          });
+        } else {
+          const newTodos = todos.filter(todo => todo.id !== id);
+          setTodos(newTodos);
+        }
       }}
     />
   )
