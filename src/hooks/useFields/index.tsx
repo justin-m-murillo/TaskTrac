@@ -13,17 +13,17 @@ const useFields = (todo: Todo) => {
     if (todo.deleted_at) {
       temp.push({ 
         key: 'Deleted:', 
-        value: getDateTime(todo.deleted_at, is24HourTime) 
+        value: getDateTime(todo.deleted_at.toISOString(), is24HourTime) 
     })}
     if (todo.completed_at) {
       temp.push({ 
         key: 'Completed:', 
-        value: getDateTime(todo.completed_at, is24HourTime)
+        value: getDateTime(todo.completed_at.toISOString(), is24HourTime)
     })}
     if (todo.due_date) {
       temp.push({ 
         key: 'Due:', 
-        value: getDateTime(todo.due_date, is24HourTime)
+        value: getDateTime(todo.due_date.toISOString(), is24HourTime)
     })}
     
     if (todo.location) 
