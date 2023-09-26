@@ -47,7 +47,7 @@ const PageAddTodo = () => {
         ref={formRef}
         onSubmit={(event) => {
           event.preventDefault();
-          console.log('on submit, user', session?.user?.email);
+          //console.log('on submit, user', session?.user?.email);
           onSubmitForm(
             session?.user?.email,
             formRef as MutableRefObject<HTMLFormElement>,
