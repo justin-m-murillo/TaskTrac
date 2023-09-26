@@ -19,11 +19,11 @@ const ButtonDelete = ({ id, completed_at, todosContext }: TodoButtonProps) => {
           updateTodo({ id, completed_at, deleted_at: deletedTime })
             .then(del => {
               const updatedTodo: Todo = del.response?.data.todo;
-                if (!updatedTodo) throw new Error('ERROR: updated todo not found')
-                setUpdatedTodos({
-                  updatedId: updatedTodo.id,
-                  todosContext,
-                  deletedTime,
+              if (!updatedTodo) throw new Error('ERROR: updated todo not found', updatedTodo)
+              setUpdatedTodos({
+                updatedId: updatedTodo.id,
+                todosContext,
+                deletedTime,
           })});
         } else {
           setUpdatedTodos({
