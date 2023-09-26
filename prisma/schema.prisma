@@ -11,8 +11,8 @@ model User {
   id         String   @id @default(dbgenerated("concat('usr_', replace((gen_random_uuid())::text, '-'::text, ''::text))"))
   email      String   @unique
   name       String?
-  created_at DateTime @db.Timestamp(6)
-  updated_at DateTime @db.Timestamp(6)
+  created_at DateTime @db.Timestamptz(6)
+  updated_at DateTime @db.Timestamptz(6)
   todos      Todo[]
 }
 
@@ -22,11 +22,11 @@ model Todo {
   description  String?
   location     String?
   bg_gradient  String
-  completed_at DateTime? @db.Timestamp(6)
-  created_at   DateTime  @db.Timestamp(6)
-  deleted_at   DateTime? @db.Timestamp(6)
-  due_date     DateTime? @db.Timestamp(6)
-  updated_at   DateTime  @db.Timestamp(6)
+  completed_at DateTime? @db.Timestamptz(6)
+  created_at   DateTime  @db.Timestamptz(6)
+  deleted_at   DateTime? @db.Timestamptz(6)
+  due_date     DateTime? @db.Timestamptz(6)
+  updated_at   DateTime  @db.Timestamptz(6)
   user_id      String?
   user         User?     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
