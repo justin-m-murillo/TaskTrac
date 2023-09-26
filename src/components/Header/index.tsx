@@ -21,7 +21,7 @@ const Header = ({ title, session }: Props) => {
           animate={{ opacity: 1 }}
           className='text-gray-600'
         >
-          viewing <span className='font-semibold'>{session.user.name}'s</span> tasks
+          viewing <span className='font-semibold'>{session.user.name}&apos;s</span> tasks
         </motion.p>
       )}
     </motion.div>

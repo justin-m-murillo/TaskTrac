@@ -32,10 +32,10 @@ const useItemContainerHover = (todo: Todo) => {
       height = 60;
     }
     
-    setMotion({...motion, height});
+    setMotion(m => ({...m, height}));
   }, [todo])
  
-  return motion
+  return motion;
 }
 
 export default useItemContainerHover
