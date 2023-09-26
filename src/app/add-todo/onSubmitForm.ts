@@ -39,6 +39,7 @@ const onSubmitForm = (
   
   // if a user is logged in, add todo under user's todos
   if (user_id) {
+    console.log('IS REG:', user_id);
     todoData.user_id = user_id
     createTodo(todoData)
       .then(res => {
@@ -47,6 +48,7 @@ const onSubmitForm = (
     });
   // else, create todo under 'guest' user (non-persistent)
   } else {
+    console.log('IS GUEST:', user_id);
     const newTodo: Todo = {
       ...todoData,
       id: uuidv4(),
