@@ -27,6 +27,7 @@ const onSubmitForm = (
 
   // create todo object
   const todoData: TPostTodo = {
+    user_email: user_email ?? '-',
     title: formData.get('title') as string,
     description: formData.get('description') as string | null,
     location: formData.get('location') as string | null,

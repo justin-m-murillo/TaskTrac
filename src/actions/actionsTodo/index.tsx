@@ -6,7 +6,7 @@ import { getSession } from 'next-auth/react';
 //import { redirect } from 'next/navigation'
 
 export const getTodos = async (user_email: string) => {
-  //console.log('GET TODOS');
+  if (!user_email) return { message: 'EMAIL NULL' }
   try {
     const response = await axios.get('/api/todo', {
       params: {

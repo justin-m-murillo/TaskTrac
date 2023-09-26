@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 
 /** POST */
 export type TPostTodo = {
-  user_email?: string;
+  user_email: string;
   title:       string;
   description: string | null;
   location:    string | null;
