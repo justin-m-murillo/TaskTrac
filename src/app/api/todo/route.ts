@@ -104,3 +104,20 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ message: 'DELETE FAILED', error });
   }
 }
+
+export async function OPTIONS(request: NextRequest) {
+  const response = new NextResponse(null);
+
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  response.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+  response.headers.set("Access-Control-Max-Age", "86400");
+
+  return response;
+}
