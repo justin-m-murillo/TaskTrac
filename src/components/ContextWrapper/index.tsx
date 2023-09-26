@@ -12,7 +12,7 @@ type Props = {
 }
 
 const ContextWrapper = ({ children }: Props) => {
-  const { todos: todosFetched, isLoading } = useFetchTodos(useSession().data?.user);
+  const { todos: todosFetched, isLoading } = useFetchTodos(useSession().data?.user?.email);
   const [ todos, setTodos ] = useState<Todo[]>(todosFetched);
   const [ is24HourTime, setIs24HourTime ] = useState<boolean>(false)
 

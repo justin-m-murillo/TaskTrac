@@ -6,8 +6,11 @@ export type TGetTodo = {
   user_id: string;
 }
 export async function GET(request: NextRequest) {
-  const user_id = request.nextUrl.searchParams.get('user_id');
-  const todos = await prisma.todo.findMany({ where: { user_id } })
+  const user_email = request.nextUrl.searchParams.get('user_email');
+  const user = await prisma.user.findUnique({ 
+    where: { email: user_email as string }
+  })
+  const todos = await prisma.todo.findMany({ where: { user_id: user?.id as string } });
   
   return todos.length 
     ? NextResponse.json({ message: 'GET SUCCESS', todos })
@@ -16,8 +19,8 @@ export async function GET(request: NextRequest) {
 
 /** POST */
 export type TPostTodo = {
+  user_email?: string;
   title:       string;
-  user_id?:    string; 
   description: string | null;
   location:    string | null;
   due_date:    Date | null;
@@ -26,8 +29,8 @@ export type TPostTodo = {
   updated_at:  Date;
 }
 export async function POST(request: NextRequest) {
-  const { 
-    user_id,
+  const {
+    user_email,
     title,
     description,
     location,
@@ -38,7 +41,7 @@ export async function POST(request: NextRequest) {
   } = await request.json() as TPostTodo;
 
   const user = await prisma.user.findUnique({
-    where: { id: user_id as string }
+    where: { email: user_email as string }
   })
   if (!user) { throw new Error('POST API: USER NOT FOUND (invoked prisma.user.findUnique {id})')}
 
@@ -53,7 +56,7 @@ export async function POST(request: NextRequest) {
         created_at,
         updated_at,
         user: {
-          connect: { id: user_id }
+          connect: { id: user.id }
         }
       },
     });

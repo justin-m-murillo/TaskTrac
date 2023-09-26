@@ -49,7 +49,7 @@ const PageAddTodo = () => {
           event.preventDefault();
           console.log('on submit, user', session?.user?.email);
           onSubmitForm(
-            session?.user?.id,
+            session?.user?.email,
             formRef as MutableRefObject<HTMLFormElement>,
             dueDate,
             showDueDate,

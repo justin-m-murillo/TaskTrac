@@ -6,7 +6,7 @@ import { TPostTodo } from "../api/todo/route";
 const { v4: uuidv4 } = require('uuid');
 
 const onSubmitForm = (
-  user_id: string | undefined | null,
+  user_email: string | undefined | null,
   formRef: MutableRefObject<HTMLFormElement>,
   dueDate: TodoDateTime,
   showDueDate: boolean,
@@ -37,9 +37,9 @@ const onSubmitForm = (
   };
   
   // if a user is logged in, add todo under user's todos
-  if (user_id) {
-    console.log('IS REG:', user_id);
-    todoData.user_id = user_id
+  if (user_email) {
+    console.log('IS REG:', user_email);
+    todoData.user_email = user_email;
     createTodo(todoData)
       .then(res => {
         const newTodo = res.response?.data?.todo as Todo;
@@ -47,7 +47,7 @@ const onSubmitForm = (
     });
   // else, create todo under 'guest' user (non-persistent)
   } else {
-    console.log('IS GUEST:', user_id);
+    console.log('IS GUEST:', user_email);
     const newTodo: Todo = {
       ...todoData,
       id: uuidv4(),

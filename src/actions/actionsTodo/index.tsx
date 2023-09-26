@@ -5,12 +5,12 @@ import { TPostTodo, TPutTodo } from '@/app/api/todo/route';
 import { getSession } from 'next-auth/react';
 //import { redirect } from 'next/navigation'
 
-export const getTodos = async (user_id: string) => {
+export const getTodos = async (user_email: string) => {
   //console.log('GET TODOS');
   try {
     const response = await axios.get('/api/todo', {
       params: {
-        user_id,
+        user_email,
       }
     });
     return { message: 'GET TODOS SUCCESS', response }
