@@ -3,9 +3,9 @@ import formatISO from "date-fns/formatISO";
 
 const getDateTime = (date: Date, is24HourTime: boolean) => {
   console.log('Date object', date);
-  console.log('Date object to string', date.toString());
   const dateString = date.toString();
-  const parsedDateTime = DateTime.fromFormat(dateString, "EEE MMM dd yyyy HH:mm:ss 'GMT'ZZZ (z)", { zone: 'UTC' });
+  console.log('Date string', dateString);
+  const parsedDateTime = DateTime.fromFormat(dateString, "EEE MMM dd yyyy HH:mm:ss 'GMT'ZZZ (ZZZZZ)", { zone: 'UTC' });
   console.log('parsed DateTime', parsedDateTime);
   return parsedDateTime.toString() as string;
   // return is24HourTime
