@@ -5,6 +5,7 @@ import { updateTodo } from '@/actions/actionsTodo'
 import { MdDisabledByDefault } from 'react-icons/md'
 import setUpdatedTodos from '@/utils/setUpdatedTodos'
 import { useSession } from 'next-auth/react'
+import getDateTimeInit from '@/utils/getDateTimeInit'
 
 const ButtonDelete = ({ id, completed_at, todosContext }: TodoButtonProps) => {
   const { data: session } = useSession();
@@ -14,7 +15,7 @@ const ButtonDelete = ({ id, completed_at, todosContext }: TodoButtonProps) => {
       Icon={MdDisabledByDefault}
       onClick={event => {
         event.stopPropagation()
-        const deletedTime = new Date();
+        const deletedTime = getDateTimeInit();
         if (session && session?.user) {
           updateTodo({ id, completed_at, deleted_at: deletedTime })
             .then(del => {

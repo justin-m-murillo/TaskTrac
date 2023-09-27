@@ -17,16 +17,15 @@ model User {
 }
 
 model Todo {
-  id           String    @id @default(dbgenerated("concat(gen_random_uuid())"))
+  id           String  @id @default(dbgenerated("concat(gen_random_uuid())"))
   title        String
   description  String?
   location     String?
   bg_gradient  String
-  completed_at DateTime? @db.Timestamp(6)
-  created_at   DateTime  @db.Timestamp(6)
-  deleted_at   DateTime? @db.Timestamp(6)
-  due_date     DateTime? @db.Timestamp(6)
-  updated_at   DateTime  @db.Timestamp(6)
+  completed_at String?
+  created_at   String
+  deleted_at   String?
+  due_date     String?
   user_id      String?
-  user         User?     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user         User?   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }

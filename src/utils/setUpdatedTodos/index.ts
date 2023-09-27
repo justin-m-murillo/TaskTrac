@@ -2,8 +2,8 @@ import { Todo, TodosState } from "@/types/Todo";
 
 type TSetUpdatedTodos = {
   updatedId: string;
-  completedTime?: Date | null;
-  deletedTime?: Date | null;
+  completedTime?: string | null;
+  deletedTime?: string | null;
   todosContext: TodosState
 }
 

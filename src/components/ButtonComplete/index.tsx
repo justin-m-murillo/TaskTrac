@@ -5,6 +5,8 @@ import { MdCheckBox } from 'react-icons/md'
 import { updateTodo } from '@/actions/actionsTodo'
 import setUpdatedTodos from '@/utils/setUpdatedTodos'
 import { useSession } from 'next-auth/react'
+import { DateTime } from 'ts-luxon'
+import getDateTimeInit from '@/utils/getDateTimeInit'
 
 
 const ButtonComplete = ({ id, deleted_at, todosContext }: TodoButtonProps) => {
@@ -15,7 +17,7 @@ const ButtonComplete = ({ id, deleted_at, todosContext }: TodoButtonProps) => {
       Icon={MdCheckBox}
       onClick={event => {
         event.stopPropagation();
-        const completedTime = new Date();
+        const completedTime = getDateTimeInit();
         if (session && session?.user) {
           updateTodo({ id, completed_at: completedTime, deleted_at })
             .then(comp => {

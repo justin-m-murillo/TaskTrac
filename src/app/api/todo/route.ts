@@ -23,10 +23,10 @@ export type TPostTodo = {
   title:       string;
   description: string | null;
   location:    string | null;
-  due_date:    Date | null;
+  due_date:    string | null;
   bg_gradient: string;
-  created_at:  Date;
-  updated_at:  Date;
+  created_at:  string;
+  updated_at:  string;
 }
 export async function POST(request: NextRequest) {
   const {
@@ -54,7 +54,6 @@ export async function POST(request: NextRequest) {
         due_date,
         bg_gradient,
         created_at,
-        updated_at,
         user: {
           connect: { id: user.id }
         }
@@ -71,8 +70,8 @@ export async function POST(request: NextRequest) {
 /** PUT */
 export type TPutTodo = {
   id: string;
-  completed_at: Date | null | undefined;
-  deleted_at:   Date | null | undefined;
+  completed_at: string | null | undefined;
+  deleted_at:   string | null | undefined;
 }
 
 export async function PUT(request: NextRequest) {

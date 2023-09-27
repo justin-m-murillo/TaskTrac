@@ -19,8 +19,7 @@ const SelectColor = ({ gradientList, gradient, setGradient }: SelectColorProps) 
     bg_gradient: gradient,
     completed_at: null,
     deleted_at: null,
-    created_at: new Date(),
-    updated_at: new Date(),
+    created_at: "",
   }
   
   return (

@@ -2,6 +2,8 @@ import { createTodo } from "@/actions/actionsTodo";
 import { Todo, TodoDateTime, TodosState } from "@/types/Todo";
 import { MutableRefObject } from "react";
 import { TPostTodo } from "../api/todo/route";
+import { DateTime } from "ts-luxon";
+import getDateTimeInit from "@/utils/getDateTimeInit";
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -17,13 +19,13 @@ const onSubmitForm = (
 
   // gather new todo data
   const formData = new FormData(formRef.current as HTMLFormElement);
-  const due = new Date(
-    dueDate.year,
-    dueDate.month,
-    dueDate.day,
-    dueDate.hours,
-    dueDate.minutes,
-  )
+  
+  const month = dueDate.month+1 < 10 ? `0${dueDate.month+1}` : `${dueDate.month+1}`;
+  const day   = dueDate.day < 10     ? `0${dueDate.day}`     : `${dueDate.day}`;
+  const hours = dueDate.hours < 10   ? `0${dueDate.hours}`   : `${dueDate.hours}`;
+  const mins  = dueDate.minutes < 10 ? `0${dueDate.minutes}` : `${dueDate.minutes}`;
+  const dueISO = `${dueDate.year}-${month}-${day}T${hours}:${mins}`;
+  console.log('due ISO', dueISO);
 
   // create todo object
   const todoData: TPostTodo = {
@@ -31,10 +33,10 @@ const onSubmitForm = (
     title: formData.get('title') as string,
     description: formData.get('description') as string | null,
     location: formData.get('location') as string | null,
-    due_date: showDueDate? due : null,
+    due_date: showDueDate? dueISO : null,
     bg_gradient: gradient,
-    created_at: new Date(),
-    updated_at: new Date(),
+    created_at: getDateTimeInit() as string,
+    updated_at: getDateTimeInit() as string,
   };
   
   // if a user is logged in, add todo under user's todos
