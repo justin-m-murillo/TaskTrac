@@ -38,8 +38,8 @@ export default function RootLayout({
 }
 
 const styles = {
-  layout: 'w-auto h-screen bg-slate-950',
-  pageContainer: 'relative container max-w-screen-sm mx-auto py-10',
+  layout:  'w-[95%] md:w-auto h-full bg-slate-950',
+  pageContainer: 'relative container max-w-screen-sm mx-auto py-10 ',
   overflowY: 'overflow-y-scroll',
   scrollbar: 'scrollbar-thin scrollbar-thumb-sky-500 scrollbar-track-slate-700',
 }

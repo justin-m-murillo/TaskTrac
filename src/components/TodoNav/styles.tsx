@@ -1,5 +1,5 @@
 const styles = {
-  root: 'flex flex-row w-full justify-between',
+  root: 'flex flex-col md:flex-row w-full justify-between',
 }
 
 export default styles
